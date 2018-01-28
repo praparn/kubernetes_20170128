@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: TEST
+  labels:
+    app: TEST
+spec:
+  ports:
+  - port: 80
+    name: TEST
+  clusterIP: None
+  selector:
+    app: nginx
+---
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: TEST
+spec:
+  serviceName: "TEST"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: labdocker/nginx:latest
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: DB
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: DB
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

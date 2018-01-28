@@ -1,0 +1,38 @@
+Instruction for Workshop:
+
+Workshop's Resource:
+	1. Please kindly check all software on path "Software Package"
+	2. Internet download was needed during workshop
+
+1.See PDF document for detail to install
+
+2.After finished then run below command for check readiness of kubenetes's machine (Command prompt)
+	2.1 kubectl get nodes 				==> check nodes readiness
+	2.2 kubectl get cs 					==> check cluster's status
+	2.3 kubectl get pods				==> check pod avaliable
+	2.4 minikube ip 					==> check ip of kubernetes's machine
+
+3. After finished install please kindly access to minikube server for pull image preparation for next workshop
+	3.1 Mac OS X:
+		3.1.1 minikube ssh 
+		3.1.2 Pull image as below:
+			docker pull labdocker/mysql:latest
+			docker pull labdocker/redis:latest
+			docker pull labdocker/cluster:webservice
+			docker pull labdocker/cluster:webcache_kubernetes
+			docker pull labdocker/cluster:webservicelite
+			docker pull labdocker/cadvisor:latest
+			docker pull labdocker/linenotify:onetime
+
+	3.2 Windows 10 :
+		3.2.1 putty to <minikube ip address>, Username: docker, Password: tcuser
+		3.2.2 Pull image as below:
+			docker pull labdocker/mysql:latest
+			docker pull labdocker/redis:latest
+			docker pull labdocker/cluster:webservice
+			docker pull labdocker/cluster:webcache_kubernetes
+			docker pull labdocker/cluster:webservicelite
+			docker pull labdocker/cadvisor:latest
+			docker pull labdocker/linenotify:onetime
+			
+4. Open dashboard on minikube by command: minikube dashboard
