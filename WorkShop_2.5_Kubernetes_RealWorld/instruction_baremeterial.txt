@@ -16,69 +16,90 @@ Part 1: Setup Docker and Kubernetest Binary: (Apply all node)
 1. SCP script (initialsetup.sh) from local to Kubernetes Machine (/home/<user>/initialsetup.sh):
 
 2. Start setup docker and kubernetes by command:
+	sudo iptables-save > /etc/iptables.conf
 	sudo chmod +x *.sh
 	./initialsetup.sh
-	
+	sudo iptables-restore < /etc/iptables.conf
+
 3. Relogon System and Test docker command:  docker run hello-world
 
+*Skip
 4. Modify iptables by command:
 	4.1: sudo su -
 	4.2: iptables-save > /etc/iptables.conf
 	4.3: vi /etc/iptables.conf ==> change ":FORWARD DROP [0:0]" to ":FORWARD ACCEPT [0:0]"
 	4.4: iptables-restore < /etc/iptables.conf
-
+*Skip
 ===================================================
 Part 2: Initial Kubernetes Cluster
 ===================================================
 1. (kubernetes-ms) initial cluster by command:
 	sudo su -
-	kubeadm init --kubernetes-version=v1.7.0 --pod-network-cidr=10.244.0.0/16 --token 8c2350.f55343444a6ffc46
+	swapoff -a
+	kubeadm init --kubernetes-version=v1.9.2 --pod-network-cidr=10.244.0.0/16 --token 8c2350.f55343444a6ffc46
 	exit
 
 	*Remark: output of this command will generate token that need to keep:
 	-------------------------------------------------
 	Sample Output:
 	-------------------------------------------------
-	[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
-	[init] Using Kubernetes version: v1.7.0
-	[init] Using Authorization modes: [Node RBAC]
-	[preflight] Running pre-flight checks
-	[preflight] WARNING: docker version is greater than the most recently validated version. Docker version: 17.06.0-ce. Max validated version: 1.12
-	[certificates] Generated CA certificate and key.
-	[certificates] Generated API server certificate and key.
-	[certificates] API Server serving cert is signed for DNS names [kubeserve-ms kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.99.200]
-	[certificates] Generated API server kubelet client certificate and key.
-	[certificates] Generated service account token signing key and public key.
-	[certificates] Generated front-proxy CA certificate and key.
-	[certificates] Generated front-proxy client certificate and key.
-	[certificates] Valid certificates and keys now exist in "/etc/kubernetes/pki"
-	[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/admin.conf"
-	[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
-	[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/controller-manager.conf"
-	[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/scheduler.conf"
-	[apiclient] Created API client, waiting for the control plane to become ready
-	[apiclient] All control plane components are healthy after 64.501528 seconds
-	[token] Using token: b2aa8c.e6d1e0a724c3f50e
-	[apiconfig] Created RBAC rules
-	[addons] Applied essential addon: kube-proxy
-	[addons] Applied essential addon: kube-dns
+	Initializing machine ID from random generator.
+[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
+[init] Using Kubernetes version: v1.9.2
+[init] Using Authorization modes: [Node RBAC]
+[preflight] Skipping pre-flight checks
+[kubeadm] WARNING: starting in 1.8, tokens expire after 24 hours by default (if you require a non-expiring token use --token-ttl 0)
+[certificates] Generated ca certificate and key.
+[certificates] Generated apiserver certificate and key.
+[certificates] apiserver serving cert is signed for DNS names [node1 kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.0.23]
+[certificates] Generated apiserver-kubelet-client certificate and key.
+[certificates] Generated sa key and public key.
+[certificates] Generated front-proxy-ca certificate and key.
+[certificates] Generated front-proxy-client certificate and key.
+[certificates] Valid certificates and keys now exist in "/etc/kubernetes/pki"
+[kubeconfig] Wrote KubeConfig file to disk: "admin.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "kubelet.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "controller-manager.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "scheduler.conf"
+[controlplane] Wrote Static Pod manifest for component kube-apiserver to "/etc/kubernetes/manifests/kube-apiserver.yaml"
+[controlplane] Wrote Static Pod manifest for component kube-controller-manager to "/etc/kubernetes/manifests/kube-controller-manager.yaml"
+[controlplane] Wrote Static Pod manifest for component kube-scheduler to "/etc/kubernetes/manifests/kube-scheduler.yaml"
+[etcd] Wrote Static Pod manifest for a local etcd instance to "/etc/kubernetes/manifests/etcd.yaml"
+[init] Waiting for the kubelet to boot up the control plane as Static Pods from directory "/etc/kubernetes/manifests"
+[init] This often takes around a minute; or longer if the control plane images have to be pulled.
+[apiclient] All control plane components are healthy after 30.501959 seconds
+[uploadconfig] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[markmaster] Will mark node node1 as master by adding a label and a taint
+[markmaster] Master node1 tainted and labelled with key/value: node-role.kubernetes.io/master=""
+[bootstraptoken] Using token: 8c2350.f55343444a6ffc46
+[bootstraptoken] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstraptoken] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstraptoken] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstraptoken] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[addons] Applied essential addon: kube-dns
+[addons] Applied essential addon: kube-proxy
 
-	Your Kubernetes master has initialized successfully!
+Your Kubernetes master has initialized successfully!
 
-	To start using your cluster, you need to run (as a regular user):
+To start using your cluster, you need to run (as a regular user):
 
-	  mkdir -p $HOME/.kube
-	  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-	  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-	You should now deploy a pod network to the cluster.
-	Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-	  http://kubernetes.io/docs/admin/addons/
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  http://kubernetes.io/docs/admin/addons/
 
-	You can now join any number of machines by running the following on each node
-	as root:
+You can now join any number of machines by running the following on each node
+as root:
 
-	  kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443
+  kubeadm join --token 8c2350.f55343444a6ffc46 192.168.0.23:6443 --discovery-token-ca-cert-hash sha256:f46f209281c68c9fa49e98bd580acaf42381eef057d8a0ff7a474a4ffd32773e
+
+Waiting for api server to startup..
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+daemonset "kube-proxy" configured
+No resources found
 	-------------------------------------------------
 2. (kubernetes-ms) Setup run cluster system by command (Regular User):
 		  mkdir -p $HOME/.kube
@@ -107,13 +128,16 @@ kube-system   kube-flannel-ds-738kk                  1/1       Running   0      
 kube-system   kube-proxy-tf8pm                       1/1       Running   0          43m
 kube-system   kube-scheduler-ubuntumaster            1/1       Running   0          38m
 	-------------------------------------------------
-6. (kubernetes-ms) Install dashboard by command:
+6. (kubernetes-ms) Install dashboard,heapster and matric server by command:
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 kubectl apply -f https://github.com/kubernetes/heapster/raw/master/deploy/kube-config/rbac/heapster-rbac.yaml
 kubectl apply -f https://github.com/kubernetes/heapster/raw/master/deploy/kube-config/influxdb/heapster.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml
 kubectl create clusterrolebinding insecure-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 kubectl get pods --all-namespaces
+git clone https://github.com/kubernetes-incubator/metrics-server.git
+cd metrics-server/
+kubectl create -f deploy/
 
 7. (kubernetes-ms) Check readyness by command:
 	kubectl get pods --all-namespaces
@@ -126,31 +150,23 @@ http://10.38.14.200:8001/api/v1/namespaces/kube-system/services/https:kubernetes
 
 10. (kubernetes-1),(kubernetes-2) ssh and join to cluster by command:
 	sudo su -
-	kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443
+	swapoff -a
+	kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443 --discovery-token-ca-cert-hash <sha256>
 	exit
 
 	-------------------------------------------------
 	Sample Output
 	-------------------------------------------------
+Initializing machine ID from random generator.
 [kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
-[preflight] Running pre-flight checks
-[preflight] Some fatal errors occurred:
-	user is not running as root
-[preflight] If you know what you are doing, you can skip pre-flight checks with `--skip-preflight-checks`
-kubeadmin@kubeserve-1:~$ sudo kubeadm join --token 78435a.f1eb236036e232ff 10.38.14.200:6443
-[sudo] password for kubeadmin:
-[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
-[preflight] Running pre-flight checks
-[preflight] WARNING: docker version is greater than the most recently validated version. Docker version: 17.06.0-ce. Max validated version: 1.12
-[discovery] Trying to connect to API Server "10.38.14.200:6443"
-[discovery] Created cluster-info discovery client, requesting info from "https://10.38.14.200:6443"
-[discovery] Cluster info signature and contents are valid, will use API Server "https://10.38.14.200:6443"
-[discovery] Successfully established connection with API Server "10.38.14.200:6443"
-[bootstrap] Detected server version: v1.7.0
+[preflight] Skipping pre-flight checks
+[discovery] Trying to connect to API Server "192.168.0.23:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://192.168.0.23:6443"
+[discovery] Requesting info from "https://192.168.0.23:6443" again to validate TLS against the pinned public key
+[discovery] Cluster info signature and contents are valid and TLS certificate validates against pinned roots, will use API Server "192.168.0.23:6443"
+[discovery] Successfully established connection with API Server "192.168.0.23:6443"
+[bootstrap] Detected server version: v1.9.2
 [bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
-[csr] Created API client to obtain unique certificate for this node, generating keys and certificate signing request
-[csr] Received signed certificate from the API server, generating KubeConfig...
-[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
 
 Node join complete:
 * Certificate signing request sent to master and response

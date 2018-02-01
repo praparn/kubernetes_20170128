@@ -48,6 +48,9 @@ spec:
       containers:
         - name: webtest
           image: labdocker/cluster:webservicelite_v1
+          resources:
+            requests:
+              cpu: "200m"                 
           ports:
           - containerPort: 5000
             protocol: TCP

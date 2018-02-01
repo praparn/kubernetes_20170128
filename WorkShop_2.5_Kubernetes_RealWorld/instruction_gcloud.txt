@@ -36,10 +36,10 @@ gcloud compute instances list
 ------------------------------------
 Sample Output
 ------------------------------------
-NAME           ZONE          MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP     EXTERNAL_IP      STATUS
-kubernetes-1   asia-east1-a  n1-standard-1               192.168.99.201  35.194.199.107  RUNNING
-kubernetes-2   asia-east1-a  n1-standard-1               192.168.99.202  35.201.184.247  RUNNING
-kubernetes-ms  asia-east1-a  n1-standard-1               192.168.99.200  35.201.165.23   RUNNING
+NAME           ZONE          MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP     EXTERNAL_IP     STATUS
+kubernetes-1   asia-east1-a  n1-standard-1               192.168.99.201  35.185.173.156  RUNNING
+kubernetes-2   asia-east1-a  n1-standard-1               192.168.99.202  35.194.197.171  RUNNING
+kubernetes-ms  asia-east1-a  n1-standard-1               192.168.99.200  35.194.129.10   RUNNING
 ------------------------------------
 
 5. Copy script from local to googlecloud:
@@ -53,9 +53,11 @@ gcloud compute ssh "kubernetes-1"
 gcloud compute ssh "kubernetes-2"
 
 7. For each node initial installation by command:
+sudo iptables-save > /tmp/iptables.conf
 sudo apt-get update
 chmod +x ./initialsetup.sh
 ./initialsetup.sh
+sudo iptables-restore < /tmp/iptables.conf
 
 ******Logoff/Logon all node again*****
 gcloud compute ssh "kubernetes-ms"
@@ -63,16 +65,17 @@ gcloud compute ssh "kubernetes-1"
 gcloud compute ssh "kubernetes-2"
 **************************************
 
-
+*SKIP
 8. For each node modify iptables by command: 
 	8.0: sudo su -
 	8.1: iptables-save > /etc/iptables.conf
 	8.2: vi /etc/iptables.conf ==> change ":FORWARD DROP [0:0]" to ":FORWARD ACCEPT [0:0]"
 	8.3: iptables-restore < /etc/iptables.conf
+*SKIP
 	
 9. (kubernetes-ms) initial cluster by command:
 	sudo su -
-	kubeadm init --kubernetes-version=v1.7.0 --pod-network-cidr=10.244.0.0/16 --token 8c2350.f55343444a6ffc46 --apiserver-cert-extra-sans <public ip>
+	kubeadm init --kubernetes-version=v1.9.2 --pod-network-cidr=10.244.0.0/16 --token 8c2350.f55343444a6ffc46 --apiserver-cert-extra-sans <public ip>
 	exit
 
 	*Remark: output of this command will generate token that need to keep:
@@ -80,7 +83,7 @@ gcloud compute ssh "kubernetes-2"
 	Sample Output:
 	-------------------------------------------------
 	[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
-	[init] Using Kubernetes version: v1.7.0
+	[init] Using Kubernetes version: v1.9.2
 	[init] Using Authorization modes: [Node RBAC]
 	[preflight] Running pre-flight checks
 	[preflight] WARNING: docker version is greater than the most recently validated version. Docker version: 17.06.0-ce. Max validated version: 1.12
@@ -118,7 +121,9 @@ gcloud compute ssh "kubernetes-2"
 	You can now join any number of machines by running the following on each node
 	as root:
 
-	 kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443
+	 kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hash <sha256 key>
+
+	 Ex: kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hashs sha256:7c1f1a2c0f578f06b5e449631d38eaeacd47f346cce2e965799d164719dbbf89
 	-------------------------------------------------
 10. (kubernetes-ms) Setup run cluster system by command (Regular User):
 		  mkdir -p $HOME/.kube
@@ -172,37 +177,27 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-da
 
 19. (kubernetes-1),(kubernetes-2) ssh and join to cluster by command:
 	sudo su -
-	kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443
+	kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hash <sha256 key>
 	exit
 	-------------------------------------------------
 	Sample Output
 	-------------------------------------------------
-[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
-[preflight] Running pre-flight checks
-[preflight] Some fatal errors occurred:
-	user is not running as root
-[preflight] If you know what you are doing, you can skip pre-flight checks with `--skip-preflight-checks`
-kubeadmin@kubeserve-1:~$ sudo kubeadm join --token 78435a.f1eb236036e232ff 192.168.99.200:6443
-[sudo] password for kubeadmin:
-[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
-[preflight] Running pre-flight checks
-[preflight] WARNING: docker version is greater than the most recently validated version. Docker version: 17.06.0-ce. Max validated version: 1.12
+root@kubernetes-1:~# kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hash sha256:7c1f1a2c0f578f06b5e449631d38eaeacd47f346cce2e965799d164719dbbf89
+[preflight] Running pre-flight checks.
+	[WARNING SystemVerification]: docker version is greater than the most recently validated version. Docker version: 17.12.0-ce. Max validated version: 17.03
+	[WARNING FileExisting-crictl]: crictl not found in system path
 [discovery] Trying to connect to API Server "192.168.99.200:6443"
 [discovery] Created cluster-info discovery client, requesting info from "https://192.168.99.200:6443"
-[discovery] Cluster info signature and contents are valid, will use API Server "https://192.168.99.200:6443"
+[discovery] Requesting info from "https://192.168.99.200:6443" again to validate TLS against the pinned public key
+[discovery] Cluster info signature and contents are valid and TLS certificate validates against pinned roots, will use API Server "192.168.99.200:6443"
 [discovery] Successfully established connection with API Server "192.168.99.200:6443"
-[bootstrap] Detected server version: v1.7.0
-[bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
-[csr] Created API client to obtain unique certificate for this node, generating keys and certificate signing request
-[csr] Received signed certificate from the API server, generating KubeConfig...
-[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
 
-Node join complete:
-* Certificate signing request sent to master and response
-  received.
-* Kubelet informed of new secure connection details.
+This node has joined the cluster:
+* Certificate signing request was sent to master and a response
+  was received.
+* The Kubelet was informed of the new secure connection details.
 
-Run 'kubectl get nodes' on the master to see this machine join.
+Run 'kubectl get nodes' on the master to see this node join the cluster.
 	-------------------------------------------------
 
 20. (kubernetes-ms) Check Node in Cluster by command (This take 5 - 10 min):
@@ -211,10 +206,10 @@ kubectl get nodes
 -------------------------------------------------
 Sample Output
 -------------------------------------------------
-NAME           STATUS    AGE       VERSION
-kubeserve-1    Ready     5m        v1.7.0
-kubeserve-2    Ready     3m        v1.7.0
-kubeserve-ms   Ready     19m       v1.7.0
+NAME            STATUS    ROLES     AGE       VERSION
+kubernetes-1    Ready     <none>    4m        v1.9.2
+kubernetes-2    Ready     <none>    23s       v1.9.2
+kubernetes-ms   Ready     master    36m       v1.9.2
 -------------------------------------------------
 
 21. (kubernetes-ms)Check Pods from all cluster system running by command:
@@ -236,8 +231,11 @@ kube-system   kube-proxy-qzfdr                       1/1       Running   0      
 kube-system   kube-proxy-vzswv                       1/1       Running   0          11m
 kube-system   kube-scheduler-kubeserve-ms            1/1       Running   0          11m
 -------------------------------------------------
+
+*Skip
 22. (all node) configure iptable for forward packet from host to container by command:
 sudo iptables -P FORWARD ACCEPT
+*SKip
 
 23. (kubernetes-ms) Test deployment basic nginx pods by command
 kubectl run webtest --image=labdocker/nginx:latest --port=80
