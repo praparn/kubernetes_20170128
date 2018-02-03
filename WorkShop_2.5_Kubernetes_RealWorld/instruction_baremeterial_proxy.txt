@@ -42,13 +42,6 @@ Part 1: Setup Docker and Kubernetest Binary: (Apply all node)
 	
 6. Relogon system and test docker command:  docker run hello-world
 
-*Skip
-7. Modify iptables by command:
-	7.0: sudo su -
-	7.1: iptables-save > /etc/iptables.conf
-	7.2: vi /etc/iptables.conf ==> change ":FORWARD DROP [0:0]" to ":FORWARD ACCEPT [0:0]"
-	7.3: iptables-restore < /etc/iptables.conf
-*Skip
 ===================================================
 Part 2: Initial Kubernetes Cluster
 ===================================================
@@ -65,15 +58,14 @@ Part 2: Initial Kubernetes Cluster
 	-------------------------------------------------
 	Sample Output:
 	-------------------------------------------------
-	Initializing machine ID from random generator.
-[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
 [init] Using Kubernetes version: v1.9.2
 [init] Using Authorization modes: [Node RBAC]
-[preflight] Skipping pre-flight checks
-[kubeadm] WARNING: starting in 1.8, tokens expire after 24 hours by default (if you require a non-expiring token use --token-ttl 0)
+[preflight] Running pre-flight checks.
+	[WARNING SystemVerification]: docker version is greater than the most recently validated version. Docker version: 17.12.0-ce. Max validated version: 17.03
+	[WARNING FileExisting-crictl]: crictl not found in system path
 [certificates] Generated ca certificate and key.
 [certificates] Generated apiserver certificate and key.
-[certificates] apiserver serving cert is signed for DNS names [node1 kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.0.23]
+[certificates] apiserver serving cert is signed for DNS names [kubernetes-ms kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.38.14.200]
 [certificates] Generated apiserver-kubelet-client certificate and key.
 [certificates] Generated sa key and public key.
 [certificates] Generated front-proxy-ca certificate and key.
@@ -87,12 +79,12 @@ Part 2: Initial Kubernetes Cluster
 [controlplane] Wrote Static Pod manifest for component kube-controller-manager to "/etc/kubernetes/manifests/kube-controller-manager.yaml"
 [controlplane] Wrote Static Pod manifest for component kube-scheduler to "/etc/kubernetes/manifests/kube-scheduler.yaml"
 [etcd] Wrote Static Pod manifest for a local etcd instance to "/etc/kubernetes/manifests/etcd.yaml"
-[init] Waiting for the kubelet to boot up the control plane as Static Pods from directory "/etc/kubernetes/manifests"
-[init] This often takes around a minute; or longer if the control plane images have to be pulled.
-[apiclient] All control plane components are healthy after 30.501959 seconds
-[uploadconfig] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
-[markmaster] Will mark node node1 as master by adding a label and a taint
-[markmaster] Master node1 tainted and labelled with key/value: node-role.kubernetes.io/master=""
+[init] Waiting for the kubelet to boot up the control plane as Static Pods from directory "/etc/kubernetes/manifests".
+[init] This might take a minute or longer if the control plane images have to be pulled.
+[apiclient] All control plane components are healthy after 88.502541 seconds
+[uploadconfig] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[markmaster] Will mark node kubernetes-ms as master by adding a label and a taint
+[markmaster] Master kubernetes-ms tainted and labelled with key/value: node-role.kubernetes.io/master=""
 [bootstraptoken] Using token: 8c2350.f55343444a6ffc46
 [bootstraptoken] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
 [bootstraptoken] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
@@ -103,7 +95,7 @@ Part 2: Initial Kubernetes Cluster
 
 Your Kubernetes master has initialized successfully!
 
-To start using your cluster, you need to run (as a regular user):
+To start using your cluster, you need to run the following as a regular user:
 
   mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -111,17 +103,12 @@ To start using your cluster, you need to run (as a regular user):
 
 You should now deploy a pod network to the cluster.
 Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-  http://kubernetes.io/docs/admin/addons/
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
 
 You can now join any number of machines by running the following on each node
 as root:
 
-  kubeadm join --token 8c2350.f55343444a6ffc46 192.168.0.23:6443 --discovery-token-ca-cert-hash sha256:f46f209281c68c9fa49e98bd580acaf42381eef057d8a0ff7a474a4ffd32773e
-
-Waiting for api server to startup..
-Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
-daemonset "kube-proxy" configured
-No resources found
+  kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443 --discovery-token-ca-cert-hash sha256:103c19a6967b9f01c9b3cbca65fedb89db507daec1d546b54c6a46a1c2b898f1
 	-------------------------------------------------
 2. (kubernetes-ms) Setup run cluster system by command (Regular User):
 		  mkdir -p $HOME/.kube
@@ -176,29 +163,27 @@ http://10.38.14.200:8001/api/v1/namespaces/kube-system/services/https:kubernetes
 	export NO_PROXY=<ip of kubenetes1 / 2>
 	sudo su -
 	swapoff -a
-	kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443 --discovery-token-ca-cert-hash sha256:88c7f444846c9f896e5bd3cc00d6148a93d640977713af6a15e0c00fedf58116
+	kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443 --discovery-token-ca-cert-hash sha256:103c19a6967b9f01c9b3cbca65fedb89db507daec1d546b54c6a46a1c2b898f1
 	exit
 
 	-------------------------------------------------
 	Sample Output
 	-------------------------------------------------
-Initializing machine ID from random generator.
-[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
-[preflight] Skipping pre-flight checks
-[discovery] Trying to connect to API Server "192.168.0.23:6443"
-[discovery] Created cluster-info discovery client, requesting info from "https://192.168.0.23:6443"
-[discovery] Requesting info from "https://192.168.0.23:6443" again to validate TLS against the pinned public key
-[discovery] Cluster info signature and contents are valid and TLS certificate validates against pinned roots, will use API Server "192.168.0.23:6443"
-[discovery] Successfully established connection with API Server "192.168.0.23:6443"
-[bootstrap] Detected server version: v1.9.2
-[bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
+[preflight] Running pre-flight checks.
+	[WARNING SystemVerification]: docker version is greater than the most recently validated version. Docker version: 17.12.0-ce. Max validated version: 17.03
+	[WARNING FileExisting-crictl]: crictl not found in system path
+[discovery] Trying to connect to API Server "10.38.14.200:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://10.38.14.200:6443"
+[discovery] Requesting info from "https://10.38.14.200:6443" again to validate TLS against the pinned public key
+[discovery] Cluster info signature and contents are valid and TLS certificate validates against pinned roots, will use API Server "10.38.14.200:6443"
+[discovery] Successfully established connection with API Server "10.38.14.200:6443"
 
-Node join complete:
-* Certificate signing request sent to master and response
-  received.
-* Kubelet informed of new secure connection details.
+This node has joined the cluster:
+* Certificate signing request was sent to master and a response
+  was received.
+* The Kubelet was informed of the new secure connection details.
 
-Run 'kubectl get nodes' on the master to see this machine join.
+Run 'kubectl get nodes' on the master to see this node join the cluster.
 	-------------------------------------------------
 
 11. (kubernetes-ms) Check Node in Cluster by command (This take 5 - 10 min):
@@ -232,24 +217,20 @@ kube-system   kube-proxy-jv01t                       1/1       Running   0      
 kube-system   kube-proxy-tf8pm                       1/1       Running   0          47m
 kube-system   kube-scheduler-ubuntumaster            1/1       Running   0          42m
 -------------------------------------------------
-*Skip
-13. (all node) configure iptable for forward packet from host to container by command:
-sudo iptables -P FORWARD ACCEPT
-*Skip
 
-14. (kubernetes-ms) Test deployment basic nginx pods by command
+13. (kubernetes-ms) Test deployment basic nginx pods by command
 kubectl run webtest --image=labdocker/nginx:latest --port=80
 kubectl get pods -o wide
 kubectl expose deployment webtest --target-port=80 --type=NodePort
 kubectl get svc -o wide
 
-15. (kubernetes-ms) Test get web inside farm by curl:
+14. (kubernetes-ms) Test get web inside farm by curl:
 curl http://10.38.14.200:<port>
 curl http://10.38.14.201:<port>
 curl http://10.38.14.202:<port>
 
 
-16. (kubeserve-ms) Cleanup Lab by command:
+15. (kubeserve-ms) Cleanup Lab by command:
 kubectl delete deployment/webtest
 kubectl delete svc/webtest
 

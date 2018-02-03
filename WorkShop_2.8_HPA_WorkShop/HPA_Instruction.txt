@@ -1,0 +1,54 @@
+====================================================
+Part0: Enable Heapster and Metric Server
+====================================================
+1. Enable heapster by command:
+	minikube addons enable heapster
+	minikube addons open heapster
+	minikube addons list
+
+2. Create Metric Server:
+	git clone https://github.com/kubernetes-incubator/metrics-server.git
+	cd metrics-server/
+	kubectl create -f deploy/
+
+
+====================================================
+Part 1: HPA Configuration:
+====================================================
+1. Create Namespace by command:
+	kubectl create -f webtest_deploy_hpa.yml (In case github: kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_1.7_Resource_Management_and_HPA/webtest_deploy_hpa.yml)
+	 
+2. Check Pods status by command:
+	kubectl get deployment/webtest -o wide
+	kubectl get svc/webtest -o wide
+
+3. Test Access by url:
+	http://x.x.x.x:32500
+
+4. Apply HPA by command:
+	kubectl autoscale deployment/webtest --min=1 --max=10 --cpu-percent=10 
+
+5. Monitor by command:
+	kubectl get hpa
+	kubectl describe hpa/<hpa name>
+
+6. Generate Load:
+	kubectl run -i --tty load-generator --image=busybox /bin/sh
+	while true; sleep 0.01; do wget -q -O- http://webtest.default.svc.cluster.local:5000; done
+
+7. Create another shell for monitor performance by command: (Interval is 5 min)
+	kubectl get hpa
+	kubectl top pods
+	kubectl top nodes
+
+8. Scale Down by Ctrl+C on load-generate
+
+9. Monitor performance: (Interval is 5 min)
+	kubectl get hpa
+	kubectl top pods
+	kubectl top nodes
+
+10. Cleanup lab by command:
+	kubectl delete hpa/webtest
+	kubectl delete deployment/load-generator
+	kubectl delete -f webtest_deploy_hpa.yml (In case github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_1.7_Resource_Management_and_HPA/webtest_deploy_hpa.yml)

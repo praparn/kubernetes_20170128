@@ -1,7 +1,18 @@
 Instruction for Workshop 1.7_Resource_Management_and_HPA:
 Note: This instruction will demonstrate about how to manage resouce in cluster with namespace and HPA:
 ====================================================
+Part0: Enable Heapster and Metric Server
+====================================================
+1. Enable heapster by command:
+	minikube addons enable heapster
+	minikube addons open heapster
+	minikube addons list
 
+2. Create Metric Server:
+	git clone https://github.com/kubernetes-incubator/metrics-server.git
+	cd metrics-server/
+	kubectl create -f deploy/
+	
 ====================================================
 Part1: Container level configuration:
 ====================================================

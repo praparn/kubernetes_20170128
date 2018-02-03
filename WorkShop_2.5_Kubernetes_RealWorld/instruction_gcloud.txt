@@ -65,15 +65,8 @@ gcloud compute ssh "kubernetes-1"
 gcloud compute ssh "kubernetes-2"
 **************************************
 
-*SKIP
-8. For each node modify iptables by command: 
-	8.0: sudo su -
-	8.1: iptables-save > /etc/iptables.conf
-	8.2: vi /etc/iptables.conf ==> change ":FORWARD DROP [0:0]" to ":FORWARD ACCEPT [0:0]"
-	8.3: iptables-restore < /etc/iptables.conf
-*SKIP
 	
-9. (kubernetes-ms) initial cluster by command:
+8. (kubernetes-ms) initial cluster by command:
 	sudo su -
 	kubeadm init --kubernetes-version=v1.9.2 --pod-network-cidr=10.244.0.0/16 --token 8c2350.f55343444a6ffc46 --apiserver-cert-extra-sans <public ip>
 	exit
@@ -125,20 +118,20 @@ gcloud compute ssh "kubernetes-2"
 
 	 Ex: kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hashs sha256:7c1f1a2c0f578f06b5e449631d38eaeacd47f346cce2e965799d164719dbbf89
 	-------------------------------------------------
-10. (kubernetes-ms) Setup run cluster system by command (Regular User):
+9. (kubernetes-ms) Setup run cluster system by command (Regular User):
 		  mkdir -p $HOME/.kube
 		  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 		  sudo chown $(id -u):$(id -g) $HOME/.kube/config
 		  kubectl taint nodes --all node-role.kubernetes.io/master-
 
-11. (local) SCP Certificate from Google Cloud to Local:
+10. (local) SCP Certificate from Google Cloud to Local:
 	gcloud compute scp kubernetes-ms:/home/<home directory>/.kube/config adminconfig.conf
 
-12. (kubernetes-ms) Create flannel net plugin for network for cluster by command:
+11. (kubernetes-ms) Create flannel net plugin for network for cluster by command:
 	kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 	kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.8.0/Documentation/kube-flannel-rbac.yml
 
-13. (kubernetes-ms) Check master readyness and dns by command (Take 5 - 10 min):
+12. (kubernetes-ms) Check master readyness and dns by command (Take 5 - 10 min):
 	kubectl get pods --all-namespaces
 	kubectl describe pods <kube-dns name> --namespace kube-system
 
@@ -154,14 +147,14 @@ kube-system   kube-flannel-ds-n9ws7                  2/2       Running   0      
 kube-system   kube-proxy-vzswv                       1/1       Running   0          2m
 kube-system   kube-scheduler-kubeserve-ms            1/1       Running   0          2m
 	-------------------------------------------------
-14. (local) Edit file adminconfig.conf for change ip address from private to public ip:
+13. (local) Edit file adminconfig.conf for change ip address from private to public ip:
 vi adminconfig.conf
 
-15. (local) Configure local kubectl for access and command cluster:
+14. (local) Configure local kubectl for access and command cluster:
 kubectl --kubeconfig ./adminconfig.conf get nodes
 kubectl --kubeconfig ./adminconfig.conf get svc
 
-16. (kubenetes-ms) Install dashboard by command:
+15. (kubenetes-ms) Install dashboard by command:
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 kubectl apply -f https://github.com/kubernetes/heapster/raw/master/deploy/kube-config/rbac/heapster-rbac.yaml
 kubectl apply -f https://github.com/kubernetes/heapster/raw/master/deploy/kube-config/influxdb/heapster.yaml
@@ -169,13 +162,13 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/de
 kubectl create clusterrolebinding insecure-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 kubectl get pods --all-namespaces
 
-17. (local) Open dashboard by command:
+16. (local) Open dashboard by command:
 kubectl --kubeconfig ./adminconfig.conf proxy --accept-hosts '.*'
 
-18. (local) Open browser by command
+17. (local) Open browser by command
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 
-19. (kubernetes-1),(kubernetes-2) ssh and join to cluster by command:
+18. (kubernetes-1),(kubernetes-2) ssh and join to cluster by command:
 	sudo su -
 	kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hash <sha256 key>
 	exit
@@ -200,7 +193,7 @@ This node has joined the cluster:
 Run 'kubectl get nodes' on the master to see this node join the cluster.
 	-------------------------------------------------
 
-20. (kubernetes-ms) Check Node in Cluster by command (This take 5 - 10 min):
+19. (kubernetes-ms) Check Node in Cluster by command (This take 5 - 10 min):
 kubectl get nodes
 
 -------------------------------------------------
@@ -212,7 +205,7 @@ kubernetes-2    Ready     <none>    23s       v1.9.2
 kubernetes-ms   Ready     master    36m       v1.9.2
 -------------------------------------------------
 
-21. (kubernetes-ms)Check Pods from all cluster system running by command:
+20. (kubernetes-ms)Check Pods from all cluster system running by command:
 kubectl get pods --all-namespaces
 
 -------------------------------------------------
@@ -232,23 +225,18 @@ kube-system   kube-proxy-vzswv                       1/1       Running   0      
 kube-system   kube-scheduler-kubeserve-ms            1/1       Running   0          11m
 -------------------------------------------------
 
-*Skip
-22. (all node) configure iptable for forward packet from host to container by command:
-sudo iptables -P FORWARD ACCEPT
-*SKip
-
-23. (kubernetes-ms) Test deployment basic nginx pods by command
+21. (kubernetes-ms) Test deployment basic nginx pods by command
 kubectl run webtest --image=labdocker/nginx:latest --port=80
 kubectl get pods -o wide
 kubectl expose deployment webtest --target-port=80 --type=NodePort
 kubectl get svc -o wide
 
-24. (kubernetes-ms) Test get web inside farm by curl:
+22. (kubernetes-ms) Test get web inside farm by curl:
 curl http://192.168.99.200:<port>
 curl http://192.168.99.201:<port>
 curl http://192.168.99.202:<port>
 
-25. (Client Machine) Test get web outside farm by curl or browser:
+23. (Client Machine) Test get web outside farm by curl or browser:
 gcloud compute instances list
 ------------------------------------
 Sample Output
@@ -263,6 +251,6 @@ curl http://<External IP of MS>:<port>
 curl http://<External IP of MS>:<port>
 curl http://<External IP of MS>:<port>
 
-26. (kubeserve-ms) Cleanup Lab by command:
+24. (kubeserve-ms) Cleanup Lab by command:
 kubectl delete deployment/webtest
 kubectl delete svc/webtest

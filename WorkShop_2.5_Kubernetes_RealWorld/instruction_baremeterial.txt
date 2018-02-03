@@ -16,20 +16,13 @@ Part 1: Setup Docker and Kubernetest Binary: (Apply all node)
 1. SCP script (initialsetup.sh) from local to Kubernetes Machine (/home/<user>/initialsetup.sh):
 
 2. Start setup docker and kubernetes by command:
-	sudo iptables-save > /etc/iptables.conf
+	sudo iptables-save > /tmp/iptables.conf
 	sudo chmod +x *.sh
 	./initialsetup.sh
-	sudo iptables-restore < /etc/iptables.conf
+	sudo iptables-restore < /tmp/iptables.conf
 
 3. Relogon System and Test docker command:  docker run hello-world
 
-*Skip
-4. Modify iptables by command:
-	4.1: sudo su -
-	4.2: iptables-save > /etc/iptables.conf
-	4.3: vi /etc/iptables.conf ==> change ":FORWARD DROP [0:0]" to ":FORWARD ACCEPT [0:0]"
-	4.4: iptables-restore < /etc/iptables.conf
-*Skip
 ===================================================
 Part 2: Initial Kubernetes Cluster
 ===================================================
@@ -157,23 +150,21 @@ http://10.38.14.200:8001/api/v1/namespaces/kube-system/services/https:kubernetes
 	-------------------------------------------------
 	Sample Output
 	-------------------------------------------------
-Initializing machine ID from random generator.
-[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
-[preflight] Skipping pre-flight checks
-[discovery] Trying to connect to API Server "192.168.0.23:6443"
-[discovery] Created cluster-info discovery client, requesting info from "https://192.168.0.23:6443"
-[discovery] Requesting info from "https://192.168.0.23:6443" again to validate TLS against the pinned public key
-[discovery] Cluster info signature and contents are valid and TLS certificate validates against pinned roots, will use API Server "192.168.0.23:6443"
-[discovery] Successfully established connection with API Server "192.168.0.23:6443"
-[bootstrap] Detected server version: v1.9.2
-[bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
+[preflight] Running pre-flight checks.
+	[WARNING SystemVerification]: docker version is greater than the most recently validated version. Docker version: 17.12.0-ce. Max validated version: 17.03
+	[WARNING FileExisting-crictl]: crictl not found in system path
+[discovery] Trying to connect to API Server "10.38.14.200:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://10.38.14.200:6443"
+[discovery] Requesting info from "https://10.38.14.200:6443" again to validate TLS against the pinned public key
+[discovery] Cluster info signature and contents are valid and TLS certificate validates against pinned roots, will use API Server "10.38.14.200:6443"
+[discovery] Successfully established connection with API Server "10.38.14.200:6443"
 
-Node join complete:
-* Certificate signing request sent to master and response
-  received.
-* Kubelet informed of new secure connection details.
+This node has joined the cluster:
+* Certificate signing request was sent to master and a response
+  was received.
+* The Kubelet was informed of the new secure connection details.
 
-Run 'kubectl get nodes' on the master to see this machine join.
+Run 'kubectl get nodes' on the master to see this node join the cluster.
 	-------------------------------------------------
 
 11. (kubernetes-ms) Check Node in Cluster by command (This take 5 - 10 min):
@@ -208,22 +199,19 @@ kube-system   kube-proxy-tf8pm                       1/1       Running   0      
 kube-system   kube-scheduler-ubuntumaster            1/1       Running   0          42m
 -------------------------------------------------
 
-13. (all node) configure iptable for forward packet from host to container by command:
-sudo iptables -P FORWARD ACCEPT
-
-14. (kubernetes-ms) Test deployment basic nginx pods by command
+13. (kubernetes-ms) Test deployment basic nginx pods by command
 kubectl run webtest --image=labdocker/nginx:latest --port=80
 kubectl get pods -o wide
 kubectl expose deployment webtest --target-port=80 --type=NodePort
 kubectl get svc -o wide
 
-15. (kubernetes-ms) Test get web inside farm by curl:
+14. (kubernetes-ms) Test get web inside farm by curl:
 curl http://10.38.14.200:<port>
 curl http://10.38.14.201:<port>
 curl http://10.38.14.202:<port>
 
 
-16. (kubeserve-ms) Cleanup Lab by command:
+15. (kubeserve-ms) Cleanup Lab by command:
 kubectl delete deployment/webtest
 kubectl delete svc/webtest
 
