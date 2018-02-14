@@ -7,9 +7,6 @@ kubernetes-ms					kubernetes-ms		Master						192.168.99.200
 kubernetes-1					kubernetes-1		NodePort					192.168.99.201
 kubernetes-2					kubernetes-2		NodePort					192.168.99.202
 ===================================================
-Username: kubeadmin
-Password: kubeadmin
-===================================================
 0. Check region and zone current on GCloud (Note: your zone prefer, project code):
 gcloud compute regions list
 gcloud compute zones list
@@ -23,13 +20,18 @@ gcloud config set compute/zone asia-east1-a
 2. Create Network/Firewall for KubernetesLab Group:
 ./initialnetwork.sh
 
-Windows 10: initialnetwork.ps1
+Windows 10: 
+#####Run PowerShell as Administrator####
+
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted ==> Answer: "A (All)"
+.\initialnetwork.ps1
 
 3. Create Machine for KubernetesLab:
 ./initialcluster.sh
 
-Windows 10: initialcluster.ps1
-
+Windows 10: 
+#####Run PowerShell as Administrator####
+.\initialcluster.ps1
 
 4. Check state of internet/external ip address (Note for all ip related):
 gcloud compute instances list

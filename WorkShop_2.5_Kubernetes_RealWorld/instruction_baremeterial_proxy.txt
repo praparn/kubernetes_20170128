@@ -108,7 +108,7 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 You can now join any number of machines by running the following on each node
 as root:
 
-  kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443 --discovery-token-ca-cert-hash sha256:103c19a6967b9f01c9b3cbca65fedb89db507daec1d546b54c6a46a1c2b898f1
+  kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443 --discovery-token-ca-cert-hash sha256:4d2839643129359f43c4fdfdda38718009494535ed5685940f6271b7d9791494
 	-------------------------------------------------
 2. (kubernetes-ms) Setup run cluster system by command (Regular User):
 		  mkdir -p $HOME/.kube
@@ -163,7 +163,7 @@ http://10.38.14.200:8001/api/v1/namespaces/kube-system/services/https:kubernetes
 	export NO_PROXY=<ip of kubenetes1 / 2>
 	sudo su -
 	swapoff -a
-	kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443 --discovery-token-ca-cert-hash sha256:103c19a6967b9f01c9b3cbca65fedb89db507daec1d546b54c6a46a1c2b898f1
+	kubeadm join --token 8c2350.f55343444a6ffc46 10.38.14.200:6443 --discovery-token-ca-cert-hash sha256:4d2839643129359f43c4fdfdda38718009494535ed5685940f6271b7d9791494
 	exit
 
 	-------------------------------------------------
