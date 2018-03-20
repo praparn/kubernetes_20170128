@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: loadbot
@@ -10,6 +10,13 @@ metadata:
     environment: development
 spec:
   replicas: 5
+  selector:
+    matchLabels:
+      name: loadbot
+      owner: Praparn_L
+      version: "1.0"
+      module: LoadBot
+      environment: development
   template:
     metadata:
       labels:

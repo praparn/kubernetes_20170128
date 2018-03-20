@@ -24,7 +24,7 @@ spec:
      protocol: TCP
      nodePort: 31000
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cadvisor
@@ -36,6 +36,13 @@ metadata:
     environment: development
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: cadvisor
+      owner: Praparn_L
+      version: "1.0"
+      module: Monitor
+      environment: development
   template:
     metadata:
       labels:
