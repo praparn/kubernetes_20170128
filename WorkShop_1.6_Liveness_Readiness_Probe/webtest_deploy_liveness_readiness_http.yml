@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webtest
@@ -45,7 +45,7 @@ spec:
                   value: "Werkzeug/0.12.2 Python/2.7.13"
             initialDelaySeconds: 15
             periodSeconds: 5
-            timeoutSeconds: 5
+            timeoutSeconds: 10
             successThreshold: 1
             failureThreshold: 3
           livenessProbe:
@@ -60,6 +60,6 @@ spec:
                   value: "Werkzeug/0.12.2 Python/2.7.13"
             initialDelaySeconds: 15
             periodSeconds: 5
-            timeoutSeconds: 5
+            timeoutSeconds: 10
             successThreshold: 1
             failureThreshold: 3
