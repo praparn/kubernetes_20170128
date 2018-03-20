@@ -118,8 +118,8 @@ Part 2: Name space level configuration:
 	kubectl exec <pod name> -c webtest md5sum /dev/urandom --namespace=webtest-namespace
 	<When finished> <Ctrl+c> for cancel
 
-11. Set resource for Deployment to Normal "0.9CPU", "900MB memory" by command:
-kubectl set resources deployment/webtest --limits=cpu="1",memory=1Gi --requests=cpu="0.9",memory=900Mi --record --namespace=webtest-namespace
+11. Set resource for Deployment to Normal "0.8CPU", "800MB memory" by command:
+kubectl set resources deployment/webtest --limits=cpu="1",memory=1Gi --requests=cpu="0.8",memory=800Mi --record --namespace=webtest-namespace
 kubectl rollout status deployment/webtest --namespace=webtest-namespace
 kubectl get rs --namespace=webtest-namespace
 kubectl get pods --namespace=webtest-namespace
