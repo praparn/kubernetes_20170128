@@ -36,6 +36,13 @@ metadata:
     environment: development
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: cadvisor
+      owner: Praparn_L
+      version: "1.0"
+      module: Monitor
+      environment: development
   template:
     metadata:
       labels:

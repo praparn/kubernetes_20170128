@@ -81,6 +81,7 @@ Note: This instruction will demonstrate about how to use Deployment/RS for deplo
 
 17. Rollback revision "2" of rollout with command:
 	kubectl rollout undo deployment/webtest --to-revision=2
+	kubectl rollout status deployment/webtest
 
 18. Test curl and web browser for access web by command:
 			curl http://<ip of minikube>:32500

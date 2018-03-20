@@ -23,6 +23,9 @@ Workshop's Resource:
 			docker pull labdocker/cluster:webservicelite
 			docker pull labdocker/cadvisor:latest
 			docker pull labdocker/linenotify:onetime
+			docker pull labdocker/cluster:webservicelite_v1
+			docker pull labdocker/cluster:webservicelite_v1.51rc
+			docker pull labdocker/cluster:webservicelite_v1.8ga
 
 	3.2 Windows 10 :
 		3.2.1 putty to <minikube ip address>, Username: docker, Password: tcuser
@@ -34,5 +37,8 @@ Workshop's Resource:
 			docker pull labdocker/cluster:webservicelite
 			docker pull labdocker/cadvisor:latest
 			docker pull labdocker/linenotify:onetime
+			docker pull labdocker/cluster:webservicelite_v1
+			docker pull labdocker/cluster:webservicelite_v1.51rc
+			docker pull labdocker/cluster:webservicelite_v1.8ga
 			
 4. Open dashboard on minikube by command: minikube dashboard
