@@ -10,6 +10,13 @@ metadata:
     environment: development
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      name: web
+      owner: Praparn_L
+      version: "1.0"
+      module: WebServer
+      environment: development
   template:
     metadata:
       labels:
