@@ -33,7 +33,9 @@ Part 1: HPA Configuration:
 	kubectl describe hpa/<hpa name>
 
 6. Generate Load:
-	kubectl run -i --tty load-generator --image=busybox /bin/sh
+	minikube ssh
+	docker pull busybox
+	kubectl run -i --tty load-generator --image=busybox /bin/sh	<Check Until Load Generator WorkFine>
 	wget -q -O- http://webtest.default.svc.cluster.local:5000
 	while true; sleep 0.01; do wget -q -O- http://webtest.default.svc.cluster.local:5000; done
 
