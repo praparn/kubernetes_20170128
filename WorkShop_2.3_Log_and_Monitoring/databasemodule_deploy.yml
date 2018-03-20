@@ -19,7 +19,7 @@ spec:
     module: "maindb"
     environment: "development"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: maindb
@@ -31,6 +31,13 @@ metadata:
     environment: "development"
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: "maindb"
+      owner: "Praparn_L"
+      version: "1.0"
+      module: "maindb"
+      environment: "development"
   template:
     metadata:
       labels:

@@ -28,7 +28,7 @@ spec:
      protocol: TCP
      nodePort: 30500
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
@@ -40,6 +40,13 @@ metadata:
     environment: "development"
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: "web"
+      owner: "Praparn_L"
+      version: "1.0"
+      module: "web"
+      environment: "development"
   template:
     metadata:
       labels:
