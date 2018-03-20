@@ -38,10 +38,10 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: cadvisor
+      name: web
       owner: Praparn_L
       version: "1.0"
-      module: Monitor
+      module: WebServer
       environment: development
   template:
     metadata:

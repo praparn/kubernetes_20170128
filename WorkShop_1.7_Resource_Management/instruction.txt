@@ -9,9 +9,10 @@ Part0: Enable Heapster and Metric Server
 	minikube addons list
 
 2. Create Metric Server:
+	cd /WorkShop_1.7_Resource_Management
 	git clone https://github.com/kubernetes-incubator/metrics-server.git
 	cd metrics-server/
-	kubectl create -f deploy/
+	kubectl create -f deploy/1.8+/
 	
 ====================================================
 Part1: Container level configuration:
