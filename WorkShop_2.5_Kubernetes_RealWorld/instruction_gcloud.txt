@@ -45,6 +45,20 @@ kubernetes-ms  asia-east1-a  n1-standard-1               192.168.99.200  35.194.
 ------------------------------------
 
 5. Copy script from local to googlecloud:
+
+gcloud compute ssh "kubernetes-ms"
+wget https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/initialsetup.sh
+exit 
+
+gcloud compute ssh "kubernetes-1"
+wget https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/initialsetup.sh
+exit 
+
+gcloud compute ssh "kubernetes-2"
+wget https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/initialsetup.sh
+exit
+
+Optional:
 gcloud compute scp ./initialsetup.sh kubernetes-ms:/home/praparn/initialsetup.sh
 gcloud compute scp ./initialsetup.sh kubernetes-1:/home/praparn/initialsetup.sh
 gcloud compute scp ./initialsetup.sh kubernetes-2:/home/praparn/initialsetup.sh
