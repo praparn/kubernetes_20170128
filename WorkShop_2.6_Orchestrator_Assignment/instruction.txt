@@ -20,8 +20,9 @@ Part 1: nodeSelector:
 
 2. (Client Machine) SCP file test by command (Or github can skip):
 	Google Cloud:
-	gcloud compute scp *.yml kubernetes-ms:/home/<your account>/
-	gcloud compute --project "kubernetesproject-170714" ssh "kubernetes-ms"
+	    Optional:
+		gcloud compute scp *.yml kubernetes-ms:/home/<your account>/
+		gcloud compute --project "kubernetesproject-170714" ssh "kubernetes-ms"
 
 	Onpremise:
 	scp *.yml xxxxxx@x.x.x.x:/home/<your account>/
