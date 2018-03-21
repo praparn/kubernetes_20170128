@@ -22,7 +22,7 @@ spec:
      targetPort: 5000
      protocol: TCP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webtest2
@@ -34,6 +34,13 @@ metadata:
     environment: development
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: webtest2
+      owner: Praparn_L
+      version: "1.0"
+      module: WebServer
+      environment: development
   template:
     metadata:
       labels:
