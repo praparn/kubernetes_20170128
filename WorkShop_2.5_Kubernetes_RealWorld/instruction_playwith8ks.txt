@@ -4,12 +4,12 @@ URL: http://labs.play-with-k8s.com/
 ====================================================
 Lab Description:
 VMName:							Machine name		Roles:						IP Address:
-node1       					node1       		Master						10.0.x.x
-node2       					node2       		NodePort					10.0.x.x
-node3					        node3		        NodePort					10.0.x.x
+node1       					node1       		Master						172.28.x.x
+node2       					node2       		NodePort					172.28.x.x
+node3					        node3		        NodePort					172.28.x.x
 ===================================================
 
-0. Access K8S with url http://labs.play-with-k8s.com/: and Click on checkbox "Catcha"
+0. Access K8S with url http://labs.play-with-k8s.com/: and Login with docker/github account
 
 1. Click "+Add NEW Instance" for 3 Times
 	
