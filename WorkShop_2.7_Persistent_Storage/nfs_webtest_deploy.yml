@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webtest
@@ -10,6 +10,13 @@ metadata:
     environment: development
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      name: web
+      owner: "Praparn_L"
+      version: "1.0"
+      module: WebServer
+      environment: development
   template:
     metadata:
       labels:
