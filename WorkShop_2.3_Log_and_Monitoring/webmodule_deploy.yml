@@ -53,7 +53,7 @@ spec:
         name: "web"
         owner: "Praparn_L"
         version: "1.0"
-        module: "maindb"
+        module: "web"
         environment: "development"
     spec:
       containers:
