@@ -50,7 +50,7 @@ spec:
   template:
     metadata:
       labels:
-        name: "maindb"
+        name: "web"
         owner: "Praparn_L"
         version: "1.0"
         module: "maindb"
