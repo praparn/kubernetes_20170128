@@ -133,6 +133,15 @@ gcloud compute ssh "kubernetes-2"
 	 kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hash <sha256 key>
 
 	 Ex: kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hashs sha256:7c1f1a2c0f578f06b5e449631d38eaeacd47f346cce2e965799d164719dbbf89
+	
+	Note: for show token again plase kindly use command:
+
+		kubeadm token list
+		
+		Retoken:
+		kubeadm token generate	==> Keep token <If need token> 
+		kubeadm token create <generated-token> --print-join-command --ttl=0
+
 	-------------------------------------------------
 9. (kubernetes-ms) Setup run cluster system by command (Regular User):
 		  mkdir -p $HOME/.kube
