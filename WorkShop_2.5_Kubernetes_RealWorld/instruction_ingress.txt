@@ -71,6 +71,10 @@ kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/
 	https://webtest1.kuberneteslabthailand.com
 	https://webtest2.kuberneteslabthailand.com
 
+    Or curl command:
+    curl --resolve webtest1.kuberneteslabthailand.com:443:<IP Address> https://webtest1.kuberneteslabthailand.com --insecure
+    curl --resolve webtest2.kuberneteslabthailand.com:443:<IP Address> https://webtest2.kuberneteslabthailand.com --insecure
+
 8. Clean Up Lab:
 	kubectl delete -f ingress_webtest_tls.yml	 (In case run via github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest_tls.yml)
 	kubectl delete -f ingress_webtest_tls_secret_webtest1.yml	(In case run via github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest_tls_secret_webtest1.yml)
