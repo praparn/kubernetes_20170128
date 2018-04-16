@@ -179,6 +179,14 @@ vi adminconfig.conf
 kubectl --kubeconfig ./adminconfig.conf get nodes
 kubectl --kubeconfig ./adminconfig.conf get svc
 
+
+Optional:
+	1. copy configuration on adminconfig.conf ==> ~/.kube/config (3 Part: cluster, context, users)
+	2. kubectl config use-context <context name>
+	
+
+
+
 15. (kubenetes-ms) Install dashboard by command:
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 kubectl apply -f https://github.com/kubernetes/heapster/raw/master/deploy/kube-config/rbac/heapster-rbac.yaml
