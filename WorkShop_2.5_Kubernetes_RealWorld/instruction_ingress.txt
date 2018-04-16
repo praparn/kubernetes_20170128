@@ -1,0 +1,80 @@
+Instruction for Inplement Ingress in RealWorld:
+Note: This instruction will start lab for kubernetes for real workshop:
+
+
+1. (kubernetes-ms) Create ingress set:
+# Create Namespace and SA 
+kubectl apply -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/kubernetes-ingress/install/common/ns-and-sa.yaml
+
+# Create Default Secret for 404 Return
+kubectl apply -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/kubernetes-ingress/install/common/default-server-secret.yaml
+
+# Add optional for configure nginx customization (Ref: https://github.com/nginxinc/kubernetes-ingress/tree/master/examples/customization)
+kubectl apply -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/kubernetes-ingress/install/common/nginx-config.yaml
+
+# Configure rbac
+kubectl apply -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/kubernetes-ingress/install/rbac/rbac.yaml
+
+# Deploy with nginx
+kubectl apply -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/kubernetes-ingress/install/deployment/nginx-ingress.yaml
+
+# Create Daemon Setup
+kubectl apply -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/kubernetes-ingress/install/daemon-set/nginx-ingress.yaml
+
+# Check ingress running
+kubectl get pods --namespace=nginx-ingress
+
+# Create NodePort for Ingress access
+kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.5_Kubernetes_RealWorld/kubernetes-ingress/install/service/nodeport.yaml
+
+2. (kubernetes-ms) Test deploy ingress service
+
+# Create Service/Pods/Deployment for webtest1 and webtest2 by command:
+	kubectl create -f webtest_deploy.yml 	(In case run via github: kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/webtest_deploy.yml )
+	kubectl create -f webtest_deploy2.yml 	(In case run via github: kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/webtest_deploy2.yml )
+
+# View service for connection by command:
+	kubectl get svc -o wide
+	
+# Try to connect for each service via curl by command:
+	kubectl run curl --image=radial/busyboxplus:curl -i --tty
+	curl http://<ip of webtest1> or curl http://webtest1
+	curl http://<ip of webtest2> or durl http://webtest2
+
+# Create ingress for access by command:
+	kubectl create -f ingress_webtest.yml 	(In case run via github: kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest.yml )
+	kubectl get ing -o wide
+	kubectl describe ing/ingresswebtest
+
+# Test Access: 
+	*Remark: for case you don't prefer for add hosts please kindly use curl instead:
+	curl http://<minikube ip> -H 'Host:webtest1.kuberneteslabthailand.com'
+	curl http://<minikube ip> -H 'Host:webtest2.kuberneteslabthailand.com'
+
+3. Test access website by command or browser:
+	curl http://webtest1.kuberneteslabthailand.com
+	curl http://webtest2.kuberneteslabthailand.com
+
+4. Delete Existing Ingress by command:
+	kubectl delete -f ingress_webtest.yml	(In case run via github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest.yml)
+
+5. Create TLS Secret by command:
+	kubectl create -f ingress_webtest_tls_secret_webtest1.yml 	(In case run via github: kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest_tls_secret_webtest1.yml )
+	kubectl create -f ingress_webtest_tls_secret_webtest2.yml 	(In case run via github: kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest_tls_secret_webtest2.yml )
+
+6. Create ingress for TLS by command:
+	kubectl create -f ingress_webtest_tls.yml 	(In case run via github: kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest_tls.yml )
+	kubectl get ing/ingresswebtesttls -o wide
+	kubectl describe ing/ingresswebtesttls
+
+7. Test access website by browser:
+	https://webtest1.kuberneteslabthailand.com
+	https://webtest2.kuberneteslabthailand.com
+
+8. Clean Up Lab:
+	kubectl delete -f ingress_webtest_tls.yml	 (In case run via github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest_tls.yml)
+	kubectl delete -f ingress_webtest_tls_secret_webtest1.yml	(In case run via github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest_tls_secret_webtest1.yml)
+	kubectl delete -f ingress_webtest_tls_secret_webtest2.yml	(In case run via github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest_tls_secret_webtest2.yml)
+	kubectl delete -f webtest_deploy.yml	(In case run via github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/webtest_deploy.yml)
+	kubectl delete -f webtest_deploy2.yml	(In case run via github: kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/webtest_deploy2.yml)
+	kubectl delete deployment/curl
