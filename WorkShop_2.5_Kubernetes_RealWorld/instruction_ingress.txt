@@ -39,7 +39,7 @@ kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/
 # Try to connect for each service via curl by command:
 	kubectl run curl --image=radial/busyboxplus:curl -i --tty
 	curl http://<ip of webtest1> or curl http://webtest1
-	curl http://<ip of webtest2> or durl http://webtest2
+	curl http://<ip of webtest2> or curl http://webtest2
 
 # Create ingress for access by command:
 	kubectl create -f ingress_webtest.yml 	(In case run via github: kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_20170128/master/WorkShop_2.4_Ingress_Network/ingress_webtest.yml )
