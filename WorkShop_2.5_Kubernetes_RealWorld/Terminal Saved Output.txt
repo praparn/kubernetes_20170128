@@ -1,0 +1,2330 @@
+Last login: Mon Jun  4 19:13:46 on ttys004
+praparns-MacBook-Pro:~ praparn$ gcloud compute ssh "kubernetes-2"
+Enter passphrase for key '/Users/praparnlueangphoonlap/.ssh/google_compute_engine': 
+Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.8.0-56-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+Last login: Mon Jun  4 12:50:04 2018 from 184.22.242.48
+praparn@kubernetes-2:~$ sudo iptables-save > /tmp/iptables.conf
+praparn@kubernetes-2:~$ sudo apt-get update
+
+Hit:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial InRelease
+Get:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]                    
+Get:3 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]                  
+Get:4 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/main Sources [868 kB]                                                   
+Get:5 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/restricted Sources [4808 B]                                              
+Get:6 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/universe Sources [7728 kB]                             
+Get:7 http://security.ubuntu.com/ubuntu xenial-security InRelease [107 kB]                                                    
+Get:8 http://archive.canonical.com/ubuntu xenial InRelease [11.5 kB]                                                                     
+Get:9 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/multiverse Sources [179 kB]                                                 
+Get:10 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main Sources [306 kB]                      
+Get:11 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/restricted Sources [2524 B]             
+Get:12 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/universe Sources [203 kB]               
+Get:13 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/multiverse Sources [8404 B]                 
+Get:14 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [783 kB]            
+Get:15 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main Translation-en [324 kB]             
+Get:16 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/restricted amd64 Packages [7560 B]             
+Get:17 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/restricted Translation-en [2272 B] 
+Get:18 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [632 kB]   
+Get:19 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/universe Translation-en [254 kB]             
+Get:20 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 Packages [16.4 kB]
+Get:21 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/multiverse Translation-en [8344 B]
+Get:22 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports/main Sources [3436 B]
+Get:23 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports/universe Sources [5844 B]         
+Get:24 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports/main amd64 Packages [4844 B]      
+Get:25 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports/universe amd64 Packages [7400 B]  
+Get:26 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports/universe Translation-en [3996 B]  
+Get:27 http://archive.canonical.com/ubuntu xenial/partner amd64 Packages [3124 B]                         
+Get:28 http://archive.canonical.com/ubuntu xenial/partner Translation-en [1616 B]
+Get:29 http://security.ubuntu.com/ubuntu xenial-security/main Sources [124 kB]
+Get:30 http://security.ubuntu.com/ubuntu xenial-security/restricted Sources [2116 B]
+Get:31 http://security.ubuntu.com/ubuntu xenial-security/universe Sources [65.6 kB]
+Get:32 http://security.ubuntu.com/ubuntu xenial-security/multiverse Sources [2120 B]
+Get:33 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [500 kB]
+Get:34 http://security.ubuntu.com/ubuntu xenial-security/main Translation-en [215 kB]
+Get:35 http://security.ubuntu.com/ubuntu xenial-security/restricted amd64 Packages [7204 B]
+Get:36 http://security.ubuntu.com/ubuntu xenial-security/restricted Translation-en [2152 B]
+Get:37 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [351 kB]
+Get:38 http://security.ubuntu.com/ubuntu xenial-security/universe Translation-en [131 kB]
+Get:39 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [3460 B]
+Get:40 http://security.ubuntu.com/ubuntu xenial-security/multiverse Translation-en [1744 B]
+Fetched 13.1 MB in 4s (3109 kB/s) 
+Reading package lists... Done
+praparn@kubernetes-2:~$ chmod +x ./initialsetup.sh
+praparn@kubernetes-2:~$ ./initialsetup.sh
+Hit:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial InRelease
+Hit:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates InRelease                             
+Hit:3 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports InRelease                           
+Hit:4 http://security.ubuntu.com/ubuntu xenial-security InRelease                                                                    
+Hit:5 http://archive.canonical.com/ubuntu xenial InRelease                                                 
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package 'docker-engine' is not installed, so not removed
+Package 'docker' is not installed, so not removed
+0 upgraded, 0 newly installed, 0 to remove and 184 not upgraded.
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+software-properties-common is already the newest version (0.96.20.7).
+The following packages will be upgraded:
+  apt-transport-https ca-certificates curl libcurl3-gnutls
+4 upgraded, 0 newly installed, 0 to remove and 180 not upgraded.
+Need to get 517 kB of archives.
+After this operation, 57.3 kB disk space will be freed.
+Get:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 curl amd64 7.47.0-1ubuntu2.8 [139 kB]
+Get:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 libcurl3-gnutls amd64 7.47.0-1ubuntu2.8 [185 kB]
+Get:3 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 apt-transport-https amd64 1.2.26 [26.1 kB]
+Get:4 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 ca-certificates all 20170717~16.04.1 [168 kB]
+Fetched 517 kB in 0s (24.2 MB/s)     
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Preconfiguring packages ...
+(Reading database ... 63663 files and directories currently installed.)
+Preparing to unpack .../curl_7.47.0-1ubuntu2.8_amd64.deb ...
+Unpacking curl (7.47.0-1ubuntu2.8) over (7.47.0-1ubuntu2.2) ...
+Preparing to unpack .../libcurl3-gnutls_7.47.0-1ubuntu2.8_amd64.deb ...
+Unpacking libcurl3-gnutls:amd64 (7.47.0-1ubuntu2.8) over (7.47.0-1ubuntu2.2) ...
+Preparing to unpack .../apt-transport-https_1.2.26_amd64.deb ...
+Unpacking apt-transport-https (1.2.26) over (1.2.20) ...
+Preparing to unpack .../ca-certificates_20170717~16.04.1_all.deb ...
+Unpacking ca-certificates (20170717~16.04.1) over (20160104ubuntu1) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+Setting up libcurl3-gnutls:amd64 (7.47.0-1ubuntu2.8) ...
+Setting up curl (7.47.0-1ubuntu2.8) ...
+Setting up apt-transport-https (1.2.26) ...
+Setting up ca-certificates (20170717~16.04.1) ...
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+Processing triggers for ca-certificates (20170717~16.04.1) ...
+Updating certificates in /etc/ssl/certs...
+17 added, 42 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+OK
+pub   4096R/0EBFCD88 2017-02-22
+      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid                  Docker Release (CE deb) <docker@docker.com>
+sub   4096R/F273FCD8 2017-02-22
+
+Hit:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial InRelease
+Hit:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates InRelease                             
+Hit:3 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports InRelease                           
+Get:4 https://download.docker.com/linux/ubuntu xenial InRelease [65.8 kB]                                                            
+Get:5 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages [3653 B]                                                 
+Hit:6 http://security.ubuntu.com/ubuntu xenial-security InRelease    
+Hit:7 http://archive.canonical.com/ubuntu xenial InRelease
+Fetched 69.5 kB in 0s (124 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  aufs-tools cgroupfs-mount libltdl7 libseccomp2 pigz
+Suggested packages:
+  mountall
+The following NEW packages will be installed:
+  aufs-tools cgroupfs-mount docker-ce libltdl7 pigz
+The following packages will be upgraded:
+  libseccomp2
+1 upgraded, 5 newly installed, 0 to remove and 179 not upgraded.
+Need to get 34.3 MB of archives.
+After this operation, 182 MB of additional disk space will be used.
+Get:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/universe amd64 pigz amd64 2.3.1-2 [61.1 kB]
+Get:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 libseccomp2 amd64 2.3.1-2.1ubuntu2~16.04.1 [38.7 kB]
+Get:3 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/universe amd64 aufs-tools amd64 1:3.2+20130722-1.1ubuntu1 [92.9 kB]
+Get:4 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/universe amd64 cgroupfs-mount all 1.2 [4970 B]
+Get:5 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/main amd64 libltdl7 amd64 2.4.6-0.1 [38.3 kB]
+Get:6 https://download.docker.com/linux/ubuntu xenial/stable amd64 docker-ce amd64 18.03.1~ce-0~ubuntu [34.0 MB]
+Fetched 34.3 MB in 0s (42.9 MB/s)    
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Selecting previously unselected package pigz.
+(Reading database ... 63637 files and directories currently installed.)
+Preparing to unpack .../pigz_2.3.1-2_amd64.deb ...
+Unpacking pigz (2.3.1-2) ...
+Preparing to unpack .../libseccomp2_2.3.1-2.1ubuntu2~16.04.1_amd64.deb ...
+Unpacking libseccomp2:amd64 (2.3.1-2.1ubuntu2~16.04.1) over (2.2.3-3ubuntu3) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+Setting up libseccomp2:amd64 (2.3.1-2.1ubuntu2~16.04.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+Selecting previously unselected package aufs-tools.
+(Reading database ... 63645 files and directories currently installed.)
+Preparing to unpack .../aufs-tools_1%3a3.2+20130722-1.1ubuntu1_amd64.deb ...
+Unpacking aufs-tools (1:3.2+20130722-1.1ubuntu1) ...
+Selecting previously unselected package cgroupfs-mount.
+Preparing to unpack .../cgroupfs-mount_1.2_all.deb ...
+Unpacking cgroupfs-mount (1.2) ...
+Selecting previously unselected package libltdl7:amd64.
+Preparing to unpack .../libltdl7_2.4.6-0.1_amd64.deb ...
+Unpacking libltdl7:amd64 (2.4.6-0.1) ...
+Selecting previously unselected package docker-ce.
+Preparing to unpack .../docker-ce_18.03.1~ce-0~ubuntu_amd64.deb ...
+Unpacking docker-ce (18.03.1~ce-0~ubuntu) ...
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Processing triggers for systemd (229-4ubuntu17) ...
+Setting up pigz (2.3.1-2) ...
+Setting up aufs-tools (1:3.2+20130722-1.1ubuntu1) ...
+Setting up cgroupfs-mount (1.2) ...
+Setting up libltdl7:amd64 (2.4.6-0.1) ...
+Setting up docker-ce (18.03.1~ce-0~ubuntu) ...
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+Processing triggers for systemd (229-4ubuntu17) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  keyutils libnfsidmap2 libtirpc1 nfs-common rpcbind
+Suggested packages:
+  watchdog
+The following NEW packages will be installed:
+  keyutils libnfsidmap2 libtirpc1 nfs-common nfs-kernel-server rpcbind
+0 upgraded, 6 newly installed, 0 to remove and 179 not upgraded.
+Need to get 467 kB of archives.
+After this operation, 1874 kB of additional disk space will be used.
+Get:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/main amd64 libnfsidmap2 amd64 0.25-5 [32.2 kB]
+Get:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/main amd64 libtirpc1 amd64 0.2.5-1 [75.6 kB]
+Get:3 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/main amd64 keyutils amd64 1.5.9-8ubuntu1 [47.1 kB]
+Get:4 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/main amd64 rpcbind amd64 0.2.3-0.2 [40.3 kB]
+Get:5 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 nfs-common amd64 1:1.2.8-9ubuntu12.1 [184 kB]
+Get:6 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 nfs-kernel-server amd64 1:1.2.8-9ubuntu12.1 [88.0 kB]
+Fetched 467 kB in 1s (295 kB/s)         
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Selecting previously unselected package libnfsidmap2:amd64.
+(Reading database ... 63932 files and directories currently installed.)
+Preparing to unpack .../libnfsidmap2_0.25-5_amd64.deb ...
+Unpacking libnfsidmap2:amd64 (0.25-5) ...
+Selecting previously unselected package libtirpc1:amd64.
+Preparing to unpack .../libtirpc1_0.2.5-1_amd64.deb ...
+Unpacking libtirpc1:amd64 (0.2.5-1) ...
+Selecting previously unselected package keyutils.
+Preparing to unpack .../keyutils_1.5.9-8ubuntu1_amd64.deb ...
+Unpacking keyutils (1.5.9-8ubuntu1) ...
+Selecting previously unselected package rpcbind.
+Preparing to unpack .../rpcbind_0.2.3-0.2_amd64.deb ...
+Unpacking rpcbind (0.2.3-0.2) ...
+Selecting previously unselected package nfs-common.
+Preparing to unpack .../nfs-common_1%3a1.2.8-9ubuntu12.1_amd64.deb ...
+Unpacking nfs-common (1:1.2.8-9ubuntu12.1) ...
+Selecting previously unselected package nfs-kernel-server.
+Preparing to unpack .../nfs-kernel-server_1%3a1.2.8-9ubuntu12.1_amd64.deb ...
+Unpacking nfs-kernel-server (1:1.2.8-9ubuntu12.1) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for systemd (229-4ubuntu17) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Setting up libnfsidmap2:amd64 (0.25-5) ...
+Setting up libtirpc1:amd64 (0.2.5-1) ...
+Setting up keyutils (1.5.9-8ubuntu1) ...
+Setting up rpcbind (0.2.3-0.2) ...
+Setting up nfs-common (1:1.2.8-9ubuntu12.1) ...
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+
+Creating config file /etc/idmapd.conf with new version
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+
+Creating config file /etc/default/nfs-common with new version
+Adding system user `statd' (UID 113) ...
+Adding new user `statd' (UID 113) with group `nogroup' ...
+Not creating home directory `/var/lib/nfs'.
+nfs-utils.service is a disabled or a static unit, not starting it.
+Setting up nfs-kernel-server (1:1.2.8-9ubuntu12.1) ...
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+
+Creating config file /etc/exports with new version
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+
+Creating config file /etc/default/nfs-kernel-server with new version
+Processing triggers for libc-bin (2.23-0ubuntu9) ...
+Processing triggers for systemd (229-4ubuntu17) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+nfs-common is already the newest version (1:1.2.8-9ubuntu12.1).
+nfs-common set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 179 not upgraded.
+groupadd: group 'docker' already exists
+Synchronizing state of docker.service with SysV init with /lib/systemd/systemd-sysv-install...
+Executing /lib/systemd/systemd-sysv-install enable docker
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 64.2M  100 64.2M    0     0  68.2M      0 --:--:-- --:--:-- --:--:-- 68.2M
+Hit:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial InRelease
+Hit:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates InRelease                             
+Hit:3 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports InRelease                           
+Hit:4 https://download.docker.com/linux/ubuntu xenial InRelease                                                                      
+Hit:5 http://security.ubuntu.com/ubuntu xenial-security InRelease                                                                    
+Hit:6 http://archive.canonical.com/ubuntu xenial InRelease
+Reading package lists... Done
+E: Could not open lock file /var/lib/dpkg/lock - open (13: Permission denied)
+E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
+OK
+Hit:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial InRelease
+Hit:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates InRelease                             
+Hit:3 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-backports InRelease                           
+Hit:4 https://download.docker.com/linux/ubuntu xenial InRelease                                                                                       
+Hit:6 http://security.ubuntu.com/ubuntu xenial-security InRelease                                                                                     
+Hit:7 http://archive.canonical.com/ubuntu xenial InRelease
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [8993 B]
+Get:8 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [16.5 kB]
+Fetched 25.5 kB in 0s (26.2 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  ebtables kubectl kubernetes-cni socat
+The following NEW packages will be installed:
+  ebtables kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 6 newly installed, 0 to remove and 179 not upgraded.
+Need to get 55.7 MB of archives.
+After this operation, 400 MB of additional disk space will be used.
+Get:1 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial-updates/main amd64 ebtables amd64 2.0.10.4-3.4ubuntu2.16.04.1 [79.6 kB]
+Get:2 http://asia-east1.gce.archive.ubuntu.com/ubuntu xenial/universe amd64 socat amd64 1.7.3.1-1 [321 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.6.0-00 [5910 kB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.9.2-00 [20.5 MB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.10.3-00 [8907 kB]
+Get:6 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.9.2-00 [20.1 MB]
+Fetched 55.7 MB in 1s (39.6 MB/s)
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_US.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_US.UTF-8").
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Selecting previously unselected package ebtables.
+(Reading database ... 64106 files and directories currently installed.)
+Preparing to unpack .../ebtables_2.0.10.4-3.4ubuntu2.16.04.1_amd64.deb ...
+Unpacking ebtables (2.0.10.4-3.4ubuntu2.16.04.1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../kubernetes-cni_0.6.0-00_amd64.deb ...
+Unpacking kubernetes-cni (0.6.0-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../socat_1.7.3.1-1_amd64.deb ...
+Unpacking socat (1.7.3.1-1) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../kubelet_1.9.2-00_amd64.deb ...
+Unpacking kubelet (1.9.2-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../kubectl_1.10.3-00_amd64.deb ...
+Unpacking kubectl (1.10.3-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../kubeadm_1.9.2-00_amd64.deb ...
+Unpacking kubeadm (1.9.2-00) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for systemd (229-4ubuntu17) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+Setting up ebtables (2.0.10.4-3.4ubuntu2.16.04.1) ...
+update-rc.d: warning: start and stop actions are no longer supported; falling back to defaults
+Setting up kubernetes-cni (0.6.0-00) ...
+Setting up socat (1.7.3.1-1) ...
+Setting up kubelet (1.9.2-00) ...
+Setting up kubectl (1.10.3-00) ...
+Setting up kubeadm (1.9.2-00) ...
+Processing triggers for systemd (229-4ubuntu17) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+praparn@kubernetes-2:~$ sudo iptables-restore < /tmp/iptables.conf
+praparn@kubernetes-2:~$ exit
+logout
+Connection to 35.234.29.46 closed.
+praparns-MacBook-Pro:~ praparn$ gcloud compute ssh "kubernetes-2"
+Enter passphrase for key '/Users/praparnlueangphoonlap/.ssh/google_compute_engine': 
+Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.8.0-56-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+188 packages can be updated.
+92 updates are security updates.
+
+
+Last login: Mon Jun  4 12:52:01 2018 from 184.22.242.48
+praparn@kubernetes-2:~$ top
+
+top - 12:59:15 up 11 min,  1 user,  load average: 0.03, 0.10, 0.08
+Tasks: 112 total,   2 running, 110 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  3788208 total,  2434024 free,   155532 used,  1198652 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  3368544 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND                                                                            
+    1 root      20   0   39892   5944   4024 S  0.0  0.2   0:03.30 systemd                                                                            
+    2 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kthreadd                                                                           
+    3 root      20   0       0      0      0 S  0.0  0.0   0:00.09 ksoftirqd/0                                                                        
+    5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:0H                                                                       
+    7 root      20   0       0      0      0 S  0.0  0.0   0:00.09 rcu_sched                                                                          
+    8 root      20   0       0      0      0 S  0.0  0.0   0:00.00 rcu_bh                                                                             
+    9 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 migration/0                                                                        
+   10 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 lru-add-drain                                                                      
+   11 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 watchdog/0                                                                         
+   12 root      20   0       0      0      0 S  0.0  0.0   0:00.00 cpuhp/0                                                                            
+   13 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kdevtmpfs                                                                          
+   14 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 netns                                                                              
+   15 root      20   0       0      0      0 S  0.0  0.0   0:00.00 khungtaskd                                                                         
+   16 root      20   0       0      0      0 S  0.0  0.0   0:00.00 oom_reaper                                                                         
+   17 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 writeback                                                                          
+   18 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kcompactd0                                                                         
+   19 root      25   5       0      0      0 S  0.0  0.0   0:00.00 ksmd                                                                               
+   20 root      39  19       0      0      0 S  0.0  0.0   0:00.01 khugepaged                                                                         
+   21 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 crypto                                                                             
+   22 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kintegrityd                                                                        
+   23 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 bioset                                                                             
+   24 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kblockd                                                                            
+   25 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 ata_sff                                                                            
+   26 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 md                                                                                 
+praparn@kubernetes-2:~$ sudo su -
+root@kubernetes-2:~# kubeadm join --token 8c2350.f55343444a6ffc46 192.168.99.200:6443 --discovery-token-ca-cert-hash sha256:62b4c1f7f99c36b3e10ad6ca0563fc74b95e5f73d947b16375d6342075e170d0
+[preflight] Running pre-flight checks.
+	[WARNING SystemVerification]: docker version is greater than the most recently validated version. Docker version: 18.03.1-ce. Max validated version: 17.03
+	[WARNING FileExisting-crictl]: crictl not found in system path
+[discovery] Trying to connect to API Server "192.168.99.200:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://192.168.99.200:6443"
+[discovery] Requesting info from "https://192.168.99.200:6443" again to validate TLS against the pinned public key
+[discovery] Cluster info signature and contents are valid and TLS certificate validates against pinned roots, will use API Server "192.168.99.200:6443"
+[discovery] Successfully established connection with API Server "192.168.99.200:6443"
+
+This node has joined the cluster:
+* Certificate signing request was sent to master and a response
+  was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the master to see this node join the cluster.
+root@kubernetes-2:~# top
+
+top - 13:04:05 up 15 min,  1 user,  load average: 0.00, 0.07, 0.07
+Tasks: 136 total,   1 running, 135 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.0 us,  1.3 sy,  0.0 ni, 96.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  3788208 total,  1971112 free,   293988 used,  1523108 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  3199544 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND                                                                            
+15785 root      20   0  499768  85728  49000 S  1.7  2.3   0:04.45 kubelet                                                                            
+11278 root      20   0  491028  94712  38776 S  0.7  2.5   0:07.22 dockerd                                                                            
+    1 root      20   0   39892   5944   4024 S  0.0  0.2   0:03.41 systemd                                                                            
+    2 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kthreadd                                                                           
+    3 root      20   0       0      0      0 S  0.0  0.0   0:00.13 ksoftirqd/0                                                                        
+    5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:0H                                                                       
+    7 root      20   0       0      0      0 S  0.0  0.0   0:00.15 rcu_sched                                                                          
+    8 root      20   0       0      0      0 S  0.0  0.0   0:00.00 rcu_bh                                                                             
+    9 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 migration/0                                                                        
+   10 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 lru-add-drain                                                                      
+   11 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 watchdog/0                                                                         
+   12 root      20   0       0      0      0 S  0.0  0.0   0:00.00 cpuhp/0                                                                            
+   13 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kdevtmpfs                                                                          
+   14 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 netns                                                                              
+   15 root      20   0       0      0      0 S  0.0  0.0   0:00.00 khungtaskd                                                                         
+   16 root      20   0       0      0      0 S  0.0  0.0   0:00.00 oom_reaper                                                                         
+   17 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 writeback                                                                          
+   18 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kcompactd0                                                                         
+   19 root      25   5       0      0      0 S  0.0  0.0   0:00.00 ksmd                                                                               
+   20 root      39  19       0      0      0 S  0.0  0.0   0:00.05 khugepaged                                                                         
+   21 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 crypto                                                                             
+   22 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kintegrityd                                                                        
+   23 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 bioset                                                                             
+   24 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kblockd                                                                            Connection to 35.234.29.46 closed by remote host.
+Connection to 35.234.29.46 closed.
+ERROR: (gcloud.compute.ssh) [/usr/bin/ssh] exited with return code [255].
+praparns-MacBook-Pro:~ praparn$ minikube stop
+There is a newer version of minikube available (v0.27.0).  Download it here:
+https://github.com/kubernetes/minikube/releases/tag/v0.27.0
+
+To disable this notification, run the following:
+minikube config set WantUpdateNotification false
+Stopping local Kubernetes cluster...
+Machine stopped.
+praparns-MacBook-Pro:~ praparn$ pwd
+/Users/praparnlueangphoonlap
+praparns-MacBook-Pro:~ praparn$ cd ~/Work/Opscellent_Company/BITBucket/opscellent_terraform/
+praparns-MacBook-Pro:opscellent_terraform praparn$ ls
+0.IAM				2.Instance			99.Test_Module			global_variable.auto.tfvars
+1.Network			3.Database			README.md			userdata.sh
+praparns-MacBook-Pro:opscellent_terraform praparn$ 
+praparns-MacBook-Pro:opscellent_terraform praparn$ pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform
+praparns-MacBook-Pro:opscellent_terraform praparn$ zSh
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform
+praparns-MacBook-Pro% ls
+0.IAM				2.Instance			99.Test_Module			global_variable.auto.tfvars
+1.Network			3.Database			README.md			userdata.sh
+praparns-MacBook-Pro% cd 2.Instance 
+praparns-MacBook-Pro% ls
+00_Standard_EC2			03_Jenkin_Slave			06_Pfsense_VPN			start_ec2_terraform_all.sh
+01_JumpSVR_Linux		04_CMS_Build_Server		07_Kubernetes_MM_KOPS_Option
+02_Jenkin_Master		05_Kubernetes_Farm		destroy_ec2_terraform_all.sh
+praparns-MacBook-Pro% cd ..                        
+praparns-MacBook-Pro% cd 1.Network 
+praparns-MacBook-Pro% ./start_terraform.sh 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Please kindly export your access_key/secret_key to environment variable before use this script
+=======================================================================================================
+export TF_VAR_access_key = <your access key>
+export TF_VAR_secret_key = <your secret key>
+=======================================================================================================
+Your current environment variable now:
+=======================================================================================================
+TF_VAR_access_key:
+
+TF_VAR_secret_key:
+
+=======================================================================================================
+Please input 'Yes'. If you already check and confirm the environment variable.
+=======================================================================================================
+^C
+praparns-MacBook-Pro% export TF_VAR_access_key=AKIAJVN4YTMQWORR4ANQ
+praparns-MacBook-Pro% export TF_VAR_secret_key=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
+praparns-MacBook-Pro% ./start_terraform.sh                                             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Please kindly export your access_key/secret_key to environment variable before use this script
+=======================================================================================================
+export TF_VAR_access_key = <your access key>
+export TF_VAR_secret_key = <your secret key>
+=======================================================================================================
+Your current environment variable now:
+=======================================================================================================
+TF_VAR_access_key:
+AKIAJVN4YTMQWORR4ANQ
+TF_VAR_secret_key:
+fs/YbdWozFJzzHRdVMlWkfZxONhKqOp4FEac1X8k
+=======================================================================================================
+Please input 'Yes'. If you already check and confirm the environment variable.
+=======================================================================================================
+Yes
+====================================Finished to Set Credential==========================================
+=================================Start Execution Process Now !!!========================================
+./start_terraform.sh: line 41: ./log/Result_2018_06_04__21_28_40.log: No such file or directory
+===============================Finished Execution Process Now !!!=======================================
+============================Start Export Global Output Variable=========================================
+The state file either has no outputs defined, or all the defined
+outputs are empty. Please define an output in your configuration
+with the `output` keyword and run `terraform refresh` for it to
+become available. If you are using interpolation, please verify
+the interpolated value is not empty. You can use the 
+`terraform console` command to assist.
+==========================Finsihed Export Global Output Variable=========================================
+praparns-MacBook-Pro% ./start_terraform.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Please kindly export your access_key/secret_key to environment variable before use this script
+=======================================================================================================
+export TF_VAR_access_key = <your access key>
+export TF_VAR_secret_key = <your secret key>
+=======================================================================================================
+Your current environment variable now:
+=======================================================================================================
+TF_VAR_access_key:
+AKIAJVN4YTMQWORR4ANQ
+TF_VAR_secret_key:
+fs/YbdWozFJzzHRdVMlWkfZxONhKqOp4FEac1X8k
+=======================================================================================================
+Please input 'Yes'. If you already check and confirm the environment variable.
+=======================================================================================================
+Yes
+====================================Finished to Set Credential==========================================
+=================================Start Execution Process Now !!!========================================
+===============================Finished Execution Process Now !!!=======================================
+============================Start Export Global Output Variable=========================================
+==========================Finsihed Export Global Output Variable=========================================
+praparns-MacBook-Pro% cd ..
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform
+praparns-MacBook-Pro% ls
+0.IAM				2.Instance			99.Test_Module			global_variable.auto.tfvars
+1.Network			3.Database			README.md			userdata.sh
+praparns-MacBook-Pro% cd 2.Instance 
+praparns-MacBook-Pro% ls
+00_Standard_EC2			03_Jenkin_Slave			06_Pfsense_VPN			start_ec2_terraform_all.sh
+01_JumpSVR_Linux		04_CMS_Build_Server		07_Kubernetes_MM_KOPS_Option
+02_Jenkin_Master		05_Kubernetes_Farm		destroy_ec2_terraform_all.sh
+praparns-MacBook-Pro% cd 00_Standard_EC2 
+praparns-MacBook-Pro% ls
+00_provider.tf			99_automate.sh			start_terraform.sh		terraform.tfvars
+01_security_group.tf		destroy_terraform.sh		start_terraform_auto.sh		tfplan
+02_iam_role.tf			global_variable.auto.tfvars	terraform.tfstate		variables.tf
+03_key_pair.tf			log				terraform.tfstate.backup
+praparns-MacBook-Pro% ./start_terraform.sh 
+
+
+
+
+
+
+
+
+
+
+
+
+Please kindly export your access_key/secret_key to environment variable before use this script
+=======================================================================================================
+export TF_VAR_access_key=<your access key>
+export TF_VAR_secret_key=<your secret key>
+=======================================================================================================
+Your current environment variable now:
+=======================================================================================================
+TF_VAR_access_key:
+AKIAJVN4YTMQWORR4ANQ
+TF_VAR_secret_key:
+fs/YbdWozFJzzHRdVMlWkfZxONhKqOp4FEac1X8k
+=======================================================================================================
+Please input 'Yes'. If you already check and confirm the environment variable.
+=======================================================================================================
+Yes
+For initial key pair you need to generate public/private key and set on tfvar (public_key). Please input your public/private key name <Skip if you already have key file or you already set tfvar file>:
+
+Please input your public key filename <Skip if you already set tfvar file>:
+
+====================================Finished to Set Credential==========================================
+===================================Import Global Configuration==========================================
+=================================Start Execution Process Now !!!========================================
+===============================Finished Execution Process Now !!!=======================================
+============================Start Export Global Output Variable=========================================
+==========================Finished Export Global Output Variable=========================================
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform/2.Instance/00_Standard_EC2
+praparns-MacBook-Pro% cd ..
+praparns-MacBook-Pro% ls
+00_Standard_EC2			03_Jenkin_Slave			06_Pfsense_VPN			start_ec2_terraform_all.sh
+01_JumpSVR_Linux		04_CMS_Build_Server		07_Kubernetes_MM_KOPS_Option
+02_Jenkin_Master		05_Kubernetes_Farm		destroy_ec2_terraform_all.sh
+praparns-MacBook-Pro% cd 05_Kubernetes_Farm 
+praparns-MacBook-Pro% ./start_terraform.sh 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Please kindly export your access_key/secret_key to environment variable before use this script
+=======================================================================================================
+export TF_VAR_access_key=<your access key>
+export TF_VAR_secret_key=<your secret key>
+=======================================================================================================
+Your current environment variable now:
+=======================================================================================================
+TF_VAR_access_key:
+AKIAJVN4YTMQWORR4ANQ
+TF_VAR_secret_key:
+fs/YbdWozFJzzHRdVMlWkfZxONhKqOp4FEac1X8k
+=======================================================================================================
+Please input 'Yes'. If you already check and confirm the environment variable.
+=======================================================================================================
+Yes
+====================================Finished to Set Credential==========================================
+===================================Import Global Configuration==========================================
+=================================Start Execution Process Now !!!========================================
+===============================Finished Execution Process Now !!!=======================================
+praparns-MacBook-Pro% cd ..
+praparns-MacBook-Pro% ls
+00_Standard_EC2			03_Jenkin_Slave			06_Pfsense_VPN			start_ec2_terraform_all.sh
+01_JumpSVR_Linux		04_CMS_Build_Server		07_Kubernetes_MM_KOPS_Option
+02_Jenkin_Master		05_Kubernetes_Farm		destroy_ec2_terraform_all.sh
+praparns-MacBook-Pro% cd 01_JumpSVR_Linux 
+praparns-MacBook-Pro% ./start_terraform.sh 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Please kindly export your access_key/secret_key to environment variable before use this script
+=======================================================================================================
+export TF_VAR_access_key=<your access key>
+export TF_VAR_secret_key=<your secret key>
+=======================================================================================================
+Your current environment variable now:
+=======================================================================================================
+TF_VAR_access_key:
+AKIAJVN4YTMQWORR4ANQ
+TF_VAR_secret_key:
+fs/YbdWozFJzzHRdVMlWkfZxONhKqOp4FEac1X8k
+=======================================================================================================
+Please input 'Yes'. If you already check and confirm the environment variable.
+=======================================================================================================
+Yes
+====================================Finished to Set Credential==========================================
+===================================Import Global Configuration==========================================
+=================================Start Execution Process Now !!!========================================
+===============================Finished Execution Process Now !!!=======================================
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform/2.Instance/01_JumpSVR_Linux
+praparns-MacBook-Pro% cd ..
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform/2.Instance
+praparns-MacBook-Pro% ls
+00_Standard_EC2			04_CMS_Build_Server		destroy_ec2_terraform_all.sh
+01_JumpSVR_Linux		05_Kubernetes_Farm		start_ec2_terraform_all.sh
+02_Jenkin_Master		06_Pfsense_VPN
+03_Jenkin_Slave			07_Kubernetes_MM_KOPS_Option
+praparns-MacBook-Pro% ./destroy_ec2_terraform_all.sh 
+aws_instance.ec2: Refreshing state... (ID: i-0c9a7a93615f16b89)
+aws_route53_record.opscellent_zone_record: Refreshing state... (ID: Z3JBML20VLT9UW_opscellent_prd_jump_1_A)
+aws_route53_record.opscellent_zone_record: Destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_jump_1_A)
+aws_route53_record.opscellent_zone_record: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_jump_1_A, 10s elapsed)
+aws_route53_record.opscellent_zone_record: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_jump_1_A, 20s elapsed)
+aws_route53_record.opscellent_zone_record: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_jump_1_A, 30s elapsed)
+aws_route53_record.opscellent_zone_record: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_jump_1_A, 40s elapsed)
+aws_route53_record.opscellent_zone_record: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_jump_1_A, 50s elapsed)
+aws_route53_record.opscellent_zone_record: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_jump_1_A, 1m0s elapsed)
+aws_route53_record.opscellent_zone_record: Destruction complete after 1m8s
+aws_instance.ec2: Destroying... (ID: i-0c9a7a93615f16b89)
+aws_instance.ec2: Still destroying... (ID: i-0c9a7a93615f16b89, 10s elapsed)
+aws_instance.ec2: Still destroying... (ID: i-0c9a7a93615f16b89, 20s elapsed)
+aws_instance.ec2: Still destroying... (ID: i-0c9a7a93615f16b89, 30s elapsed)
+aws_instance.ec2: Destruction complete after 31s
+
+Destroy complete! Resources: 2 destroyed.
+
+Error: Error applying plan:
+
+7 error(s) occurred:
+
+* output.ec2_name_id: variable "ec2" is nil, but no error was reported
+* output.ec2_name_public_ip: variable "ec2" is nil, but no error was reported
+* output.ec2_name_private_ip: variable "ec2" is nil, but no error was reported
+* output.ec2_name_public_dns: variable "ec2" is nil, but no error was reported
+* output.ec2_name_keyname: variable "ec2" is nil, but no error was reported
+* output.aws_ebs_volume_disk_id: variable "ec2_ebsdisk" is nil, but no error was reported
+* output.ec2_name_private_dns: variable "ec2" is nil, but no error was reported
+
+Terraform does not automatically rollback in the face of errors.
+Instead, your Terraform state file has been partially updated with
+any resources that successfully completed. Please address the error
+above and apply again to incrementally change your infrastructure.
+
+
+
+Error: Error applying plan:
+
+7 error(s) occurred:
+
+* output.ec2_name_public_dns: variable "ec2" is nil, but no error was reported
+* output.aws_ebs_volume_disk_id: variable "ec2_ebsdisk" is nil, but no error was reported
+* output.ec2_name_keyname: variable "ec2" is nil, but no error was reported
+* output.ec2_name_private_dns: variable "ec2" is nil, but no error was reported
+* output.ec2_name_public_ip: variable "ec2" is nil, but no error was reported
+* output.ec2_name_id: variable "ec2" is nil, but no error was reported
+* output.ec2_name_private_ip: variable "ec2" is nil, but no error was reported
+
+Terraform does not automatically rollback in the face of errors.
+Instead, your Terraform state file has been partially updated with
+any resources that successfully completed. Please address the error
+above and apply again to incrementally change your infrastructure.
+
+
+
+Error: Error applying plan:
+
+14 error(s) occurred:
+
+* output.ec2_name_private_dns_2: variable "ec2_2" is nil, but no error was reported
+* output.ec2_name_public_ip: variable "ec2" is nil, but no error was reported
+* output.ec2_name_private_ip: variable "ec2" is nil, but no error was reported
+* output.aws_ebs_volume_disk_id: variable "ec2_ebsdisk" is nil, but no error was reported
+* output.aws_ebs_volume_disk_id_2: variable "ec2_ebsdisk_2" is nil, but no error was reported
+* output.ec2_name_keyname: variable "ec2" is nil, but no error was reported
+* output.ec2_name_keyname_2: variable "ec2_2" is nil, but no error was reported
+* output.ec2_name_public_dns: variable "ec2" is nil, but no error was reported
+* output.ec2_name_private_dns: variable "ec2" is nil, but no error was reported
+* output.ec2_name_private_ip_2: variable "ec2_2" is nil, but no error was reported
+* output.ec2_name_id: variable "ec2" is nil, but no error was reported
+* output.ec2_name_id_2: variable "ec2_2" is nil, but no error was reported
+* output.ec2_name_public_ip_2: variable "ec2_2" is nil, but no error was reported
+* output.ec2_name_public_dns_2: variable "ec2_2" is nil, but no error was reported
+
+Terraform does not automatically rollback in the face of errors.
+Instead, your Terraform state file has been partially updated with
+any resources that successfully completed. Please address the error
+above and apply again to incrementally change your infrastructure.
+
+
+aws_instance.ec2[2]: Refreshing state... (ID: i-03feb466cf91e27f5)
+aws_instance.ec2[0]: Refreshing state... (ID: i-036d8058f1b9aea1b)
+aws_instance.ec2[1]: Refreshing state... (ID: i-0290153d0325d5bfb)
+aws_instance.ec2[3]: Refreshing state... (ID: i-0813eccb195ff33a7)
+aws_route53_record.opscellent_zone_record[2]: Refreshing state... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_2_A)
+aws_route53_record.opscellent_zone_record[3]: Refreshing state... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_3_A)
+aws_route53_record.opscellent_zone_record[0]: Refreshing state... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_master_1_A)
+aws_route53_record.opscellent_zone_record[1]: Refreshing state... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_1_A)
+aws_route53_record.opscellent_zone_record[1]: Destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_1_A)
+aws_route53_record.opscellent_zone_record[2]: Destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_2_A)
+aws_route53_record.opscellent_zone_record[0]: Destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_master_1_A)
+aws_route53_record.opscellent_zone_record[3]: Destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_3_A)
+aws_route53_record.opscellent_zone_record.1: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_1_A, 10s elapsed)
+aws_route53_record.opscellent_zone_record.0: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_master_1_A, 10s elapsed)
+aws_route53_record.opscellent_zone_record.2: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_2_A, 10s elapsed)
+aws_route53_record.opscellent_zone_record.3: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_3_A, 10s elapsed)
+aws_route53_record.opscellent_zone_record.1: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_1_A, 20s elapsed)
+aws_route53_record.opscellent_zone_record.2: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_2_A, 20s elapsed)
+aws_route53_record.opscellent_zone_record.0: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_master_1_A, 20s elapsed)
+aws_route53_record.opscellent_zone_record.3: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_3_A, 20s elapsed)
+aws_route53_record.opscellent_zone_record.1: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_1_A, 30s elapsed)
+aws_route53_record.opscellent_zone_record.3: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_3_A, 30s elapsed)
+aws_route53_record.opscellent_zone_record.0: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_master_1_A, 30s elapsed)
+aws_route53_record.opscellent_zone_record.2: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_2_A, 30s elapsed)
+aws_route53_record.opscellent_zone_record.1: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_1_A, 40s elapsed)
+aws_route53_record.opscellent_zone_record.2: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_2_A, 40s elapsed)
+aws_route53_record.opscellent_zone_record.3: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_3_A, 40s elapsed)
+aws_route53_record.opscellent_zone_record.0: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_master_1_A, 40s elapsed)
+aws_route53_record.opscellent_zone_record.1: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_1_A, 50s elapsed)
+aws_route53_record.opscellent_zone_record.2: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_2_A, 50s elapsed)
+aws_route53_record.opscellent_zone_record.0: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_master_1_A, 50s elapsed)
+aws_route53_record.opscellent_zone_record.3: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_3_A, 50s elapsed)
+aws_route53_record.opscellent_zone_record.1: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_1_A, 1m0s elapsed)
+aws_route53_record.opscellent_zone_record.2: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_2_A, 1m0s elapsed)
+aws_route53_record.opscellent_zone_record.0: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_master_1_A, 1m0s elapsed)
+aws_route53_record.opscellent_zone_record.3: Still destroying... (ID: Z3JBML20VLT9UW_opscellent_prd_kubernetes_worker_3_A, 1m0s elapsed)
+aws_route53_record.opscellent_zone_record[3]: Destruction complete after 1m5s
+aws_route53_record.opscellent_zone_record[2]: Destruction complete after 1m7s
+aws_route53_record.opscellent_zone_record[0]: Destruction complete after 1m7s
+aws_route53_record.opscellent_zone_record[1]: Destruction complete after 1m8s
+aws_instance.ec2[1]: Destroying... (ID: i-0290153d0325d5bfb)
+aws_instance.ec2[0]: Destroying... (ID: i-036d8058f1b9aea1b)
+aws_instance.ec2[3]: Destroying... (ID: i-0813eccb195ff33a7)
+aws_instance.ec2[2]: Destroying... (ID: i-03feb466cf91e27f5)
+aws_instance.ec2.0: Still destroying... (ID: i-036d8058f1b9aea1b, 10s elapsed)
+aws_instance.ec2.1: Still destroying... (ID: i-0290153d0325d5bfb, 10s elapsed)
+aws_instance.ec2.2: Still destroying... (ID: i-03feb466cf91e27f5, 10s elapsed)
+aws_instance.ec2.3: Still destroying... (ID: i-0813eccb195ff33a7, 10s elapsed)
+aws_instance.ec2.1: Still destroying... (ID: i-0290153d0325d5bfb, 20s elapsed)
+aws_instance.ec2.2: Still destroying... (ID: i-03feb466cf91e27f5, 20s elapsed)
+aws_instance.ec2.3: Still destroying... (ID: i-0813eccb195ff33a7, 20s elapsed)
+aws_instance.ec2.0: Still destroying... (ID: i-036d8058f1b9aea1b, 20s elapsed)
+aws_instance.ec2.1: Still destroying... (ID: i-0290153d0325d5bfb, 30s elapsed)
+aws_instance.ec2.0: Still destroying... (ID: i-036d8058f1b9aea1b, 30s elapsed)
+aws_instance.ec2.3: Still destroying... (ID: i-0813eccb195ff33a7, 30s elapsed)
+aws_instance.ec2.2: Still destroying... (ID: i-03feb466cf91e27f5, 30s elapsed)
+aws_instance.ec2[2]: Destruction complete after 32s
+aws_instance.ec2[3]: Destruction complete after 32s
+aws_instance.ec2[1]: Destruction complete after 32s
+aws_instance.ec2.0: Still destroying... (ID: i-036d8058f1b9aea1b, 40s elapsed)
+aws_instance.ec2[0]: Destruction complete after 43s
+
+Destroy complete! Resources: 8 destroyed.
+
+Destroy complete! Resources: 0 destroyed.
+aws_security_group.opscellent_secgroup_jenkin: Refreshing state... (ID: sg-0ebeb854341a1a235)
+aws_security_group.opscellent_secgroup_jumpsvr: Refreshing state... (ID: sg-0403932eb10056a56)
+aws_iam_policy.opscellent_iampolicy_ec2: Refreshing state... (ID: arn:aws:iam::635780203112:policy/opscellent_iampolicy_ec2)
+aws_key_pair.opscellent_keypair: Refreshing state... (ID: opscellent_keypair)
+aws_iam_role.opscellent_iamrole_ec2: Refreshing state... (ID: opscellent_iamrole_ec2)
+aws_security_group.opscellent_secgroup_kubernetes: Refreshing state... (ID: sg-0f8e90a96ef18a120)
+aws_security_group.opscellent_secgroup_cms: Refreshing state... (ID: sg-01a3f687208ec8e4a)
+aws_iam_instance_profile.opscellent_iaminstanceprofile_ec2: Refreshing state... (ID: opscellent_iaminstanceprofile_ec2)
+aws_iam_policy_attachment.opscellent_iampolicyattach_ec2: Refreshing state... (ID: opscellent_iampolicyattach_ec2)
+aws_security_group.opscellent_secgroup_jumpsvr: Destroying... (ID: sg-0403932eb10056a56)
+aws_iam_instance_profile.opscellent_iaminstanceprofile_ec2: Destroying... (ID: opscellent_iaminstanceprofile_ec2)
+aws_key_pair.opscellent_keypair: Destroying... (ID: opscellent_keypair)
+aws_security_group.opscellent_secgroup_cms: Destroying... (ID: sg-01a3f687208ec8e4a)
+aws_iam_policy_attachment.opscellent_iampolicyattach_ec2: Destroying... (ID: opscellent_iampolicyattach_ec2)
+aws_security_group.opscellent_secgroup_jenkin: Destroying... (ID: sg-0ebeb854341a1a235)
+aws_security_group.opscellent_secgroup_kubernetes: Destroying... (ID: sg-0f8e90a96ef18a120)
+aws_key_pair.opscellent_keypair: Destruction complete after 0s
+aws_security_group.opscellent_secgroup_jenkin: Destruction complete after 1s
+aws_security_group.opscellent_secgroup_jumpsvr: Destruction complete after 1s
+aws_security_group.opscellent_secgroup_kubernetes: Destruction complete after 1s
+aws_security_group.opscellent_secgroup_cms: Destruction complete after 1s
+aws_iam_policy_attachment.opscellent_iampolicyattach_ec2: Destruction complete after 1s
+aws_iam_policy.opscellent_iampolicy_ec2: Destroying... (ID: arn:aws:iam::635780203112:policy/opscellent_iampolicy_ec2)
+aws_iam_instance_profile.opscellent_iaminstanceprofile_ec2: Destruction complete after 3s
+aws_iam_role.opscellent_iamrole_ec2: Destroying... (ID: opscellent_iamrole_ec2)
+aws_iam_policy.opscellent_iampolicy_ec2: Destruction complete after 3s
+aws_iam_role.opscellent_iamrole_ec2: Destruction complete after 2s
+
+Destroy complete! Resources: 9 destroyed.
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform/2.Instance
+praparns-MacBook-Pro% 
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Opscellent_Company/BITBucket/opscellent_terraform/2.Instance
+praparns-MacBook-Pro% ls
+00_Standard_EC2			04_CMS_Build_Server		destroy_ec2_terraform_all.sh
+01_JumpSVR_Linux		05_Kubernetes_Farm		start_ec2_terraform_all.sh
+02_Jenkin_Master		06_Pfsense_VPN
+03_Jenkin_Slave			07_Kubernetes_MM_KOPS_Option
+praparns-MacBook-Pro% cd ..
+praparns-MacBook-Pro% ls
+0.IAM				3.Database			global_variable.auto.tfvars
+1.Network			99.Test_Module			userdata.sh
+2.Instance			README.md
+praparns-MacBook-Pro% cd 1.Network 
+praparns-MacBook-Pro% ./destroy_terraform.sh 
+aws_eip.opscellent_eipnat_1b: Refreshing state... (ID: eipalloc-0c34c6827e7045999)
+aws_vpc.vpc: Refreshing state... (ID: vpc-0b2b12a7e60ad0536)
+aws_eip.opscellent_eipnat_1a: Refreshing state... (ID: eipalloc-0c270901aa84722e8)
+aws_eip.opscellent_eipnat_1c: Refreshing state... (ID: eipalloc-075c4b809ad8228a4)
+aws_subnet.subnet_private_1b: Refreshing state... (ID: subnet-0a96a8b0487dac89f)
+aws_internet_gateway.igw: Refreshing state... (ID: igw-0c7233d183e1cd9e6)
+aws_subnet.subnet_public_1b: Refreshing state... (ID: subnet-035090d7ade6e6da6)
+aws_route53_zone.route53: Refreshing state... (ID: Z3JBML20VLT9UW)
+aws_subnet.subnet_public_1a: Refreshing state... (ID: subnet-0740b2c08b3cc6663)
+aws_subnet.subnet_private_1a: Refreshing state... (ID: subnet-019c540014caea62a)
+aws_route_table.opscellent_rtb_public: Refreshing state... (ID: rtb-001ec354b62c92727)
+aws_network_interface.opscellent_netinterface2_1a: Refreshing state... (ID: eni-0dff6c6a62f54662f)
+aws_network_interface.opscellent_netinterface1_1a: Refreshing state... (ID: eni-012c11e9c660bd1f8)
+aws_nat_gateway.aws_nat_gateway: Refreshing state... (ID: nat-028f557afdbc75204)
+aws_network_interface.opscellent_netinterface3_1a: Refreshing state... (ID: eni-0672258288ca6d094)
+aws_route_table_association.opscellent_rtbass_public: Refreshing state... (ID: rtbassoc-0c2d1be06347eede7)
+aws_eip.opscellent_eipinterface2_1a: Refreshing state... (ID: eipalloc-08be09cac137a1f7d)
+aws_eip.opscellent_eipinterface3_1a: Refreshing state... (ID: eipalloc-0fcbaaf3bface3bd9)
+aws_eip.opscellent_eipinterface1_1a: Refreshing state... (ID: eipalloc-09e74a0a5455ac412)
+aws_route_table.opscellent_rtb_private: Refreshing state... (ID: rtb-0c9eb53c6b0f24cff)
+aws_route_table_association.opscellent_rtbass_private: Refreshing state... (ID: rtbassoc-0b0cb559bf0a0d34e)
+aws_subnet.subnet_private_1b: Destroying... (ID: subnet-0a96a8b0487dac89f)
+aws_route_table_association.opscellent_rtbass_public: Destroying... (ID: rtbassoc-0c2d1be06347eede7)
+aws_subnet.subnet_public_1b: Destroying... (ID: subnet-035090d7ade6e6da6)
+aws_eip.opscellent_eipinterface3_1a: Destroying... (ID: eipalloc-0fcbaaf3bface3bd9)
+aws_eip.opscellent_eipinterface2_1a: Destroying... (ID: eipalloc-08be09cac137a1f7d)
+aws_eip.opscellent_eipnat_1c: Destroying... (ID: eipalloc-075c4b809ad8228a4)
+aws_route_table_association.opscellent_rtbass_private: Destroying... (ID: rtbassoc-0b0cb559bf0a0d34e)
+aws_route53_zone.route53: Destroying... (ID: Z3JBML20VLT9UW)
+aws_eip.opscellent_eipnat_1b: Destroying... (ID: eipalloc-0c34c6827e7045999)
+aws_eip.opscellent_eipinterface1_1a: Destroying... (ID: eipalloc-09e74a0a5455ac412)
+aws_route_table_association.opscellent_rtbass_private: Destruction complete after 0s
+aws_subnet.subnet_private_1a: Destroying... (ID: subnet-019c540014caea62a)
+aws_eip.opscellent_eipnat_1c: Destruction complete after 1s
+aws_route_table.opscellent_rtb_private: Destroying... (ID: rtb-0c9eb53c6b0f24cff)
+aws_subnet.subnet_private_1a: Destruction complete after 1s
+aws_eip.opscellent_eipnat_1b: Destruction complete after 1s
+aws_route53_zone.route53: Destruction complete after 1s
+aws_eip.opscellent_eipinterface2_1a: Destruction complete after 1s
+aws_network_interface.opscellent_netinterface2_1a: Destroying... (ID: eni-0dff6c6a62f54662f)
+aws_subnet.subnet_private_1b: Destruction complete after 2s
+aws_subnet.subnet_public_1b: Destruction complete after 2s
+aws_route_table.opscellent_rtb_private: Destruction complete after 1s
+aws_nat_gateway.aws_nat_gateway: Destroying... (ID: nat-028f557afdbc75204)
+aws_network_interface.opscellent_netinterface2_1a: Destruction complete after 1s
+aws_eip.opscellent_eipinterface1_1a: Destruction complete after 2s
+aws_eip.opscellent_eipinterface3_1a: Destruction complete after 2s
+aws_network_interface.opscellent_netinterface1_1a: Destroying... (ID: eni-012c11e9c660bd1f8)
+aws_network_interface.opscellent_netinterface3_1a: Destroying... (ID: eni-0672258288ca6d094)
+aws_route_table_association.opscellent_rtbass_public: Destruction complete after 2s
+aws_route_table.opscellent_rtb_public: Destroying... (ID: rtb-001ec354b62c92727)
+aws_network_interface.opscellent_netinterface3_1a: Destruction complete after 1s
+aws_network_interface.opscellent_netinterface1_1a: Destruction complete after 1s
+aws_route_table.opscellent_rtb_public: Destruction complete after 1s
+aws_internet_gateway.igw: Destroying... (ID: igw-0c7233d183e1cd9e6)
+aws_nat_gateway.aws_nat_gateway: Still destroying... (ID: nat-028f557afdbc75204, 10s elapsed)
+aws_internet_gateway.igw: Still destroying... (ID: igw-0c7233d183e1cd9e6, 10s elapsed)
+aws_nat_gateway.aws_nat_gateway: Still destroying... (ID: nat-028f557afdbc75204, 20s elapsed)
+aws_internet_gateway.igw: Still destroying... (ID: igw-0c7233d183e1cd9e6, 20s elapsed)
+aws_nat_gateway.aws_nat_gateway: Still destroying... (ID: nat-028f557afdbc75204, 30s elapsed)
+aws_internet_gateway.igw: Still destroying... (ID: igw-0c7233d183e1cd9e6, 30s elapsed)
+aws_nat_gateway.aws_nat_gateway: Still destroying... (ID: nat-028f557afdbc75204, 40s elapsed)
+aws_internet_gateway.igw: Still destroying... (ID: igw-0c7233d183e1cd9e6, 40s elapsed)
+aws_nat_gateway.aws_nat_gateway: Still destroying... (ID: nat-028f557afdbc75204, 50s elapsed)
+aws_internet_gateway.igw: Still destroying... (ID: igw-0c7233d183e1cd9e6, 50s elapsed)
+aws_nat_gateway.aws_nat_gateway: Still destroying... (ID: nat-028f557afdbc75204, 1m0s elapsed)
+aws_internet_gateway.igw: Still destroying... (ID: igw-0c7233d183e1cd9e6, 1m0s elapsed)
+aws_nat_gateway.aws_nat_gateway: Still destroying... (ID: nat-028f557afdbc75204, 1m10s elapsed)
+aws_internet_gateway.igw: Still destroying... (ID: igw-0c7233d183e1cd9e6, 1m10s elapsed)
+aws_internet_gateway.igw: Destruction complete after 1m11s
+aws_nat_gateway.aws_nat_gateway: Destruction complete after 1m13s
+aws_subnet.subnet_public_1a: Destroying... (ID: subnet-0740b2c08b3cc6663)
+aws_eip.opscellent_eipnat_1a: Destroying... (ID: eipalloc-0c270901aa84722e8)
+aws_subnet.subnet_public_1a: Destruction complete after 0s
+aws_vpc.vpc: Destroying... (ID: vpc-0b2b12a7e60ad0536)
+aws_eip.opscellent_eipnat_1a: Destruction complete after 0s
+aws_vpc.vpc: Destruction complete after 1s
+
+Destroy complete! Resources: 21 destroyed.
+praparns-MacBook-Pro% cd ~/Work/Special_Project/3DS_Consult/3DS_LPN/LPN-server-access 
+praparns-MacBook-Pro% ls
+lpn-keypair2.pem	lpn-keypair2.ppk	note.txt		pam-vms.txt
+praparns-MacBook-Pro% ssh -i lpn-keypair2.pem pamuser@203.154.58.128
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-87-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+161 packages can be updated.
+78 updates are security updates.
+
+
+Last login: Mon Jun  4 23:58:32 2018 from 184.22.242.48
+pamuser@dockerserve-lpn-prd-0001:~$ df -kh
+Filesystem                   Size  Used Avail Use% Mounted on
+udev                          11G     0   11G   0% /dev
+tmpfs                        2.2G  242M  2.0G  11% /run
+/dev/mapper/root_vg-root_lv  138G   13G  118G  10% /
+tmpfs                         11G     0   11G   0% /dev/shm
+tmpfs                        5.0M     0  5.0M   0% /run/lock
+tmpfs                         11G     0   11G   0% /sys/fs/cgroup
+/dev/mapper/root_vg-tmp      9.1G   58M  8.6G   1% /tmp
+/dev/mapper/root_vg-Mineo     46G   61M   44G   1% /mineo
+/dev/mapper/root_vg-var       46G  8.8G   35G  21% /var
+/dev/mapper/root_vg-var_log  9.1G   50M  8.6G   1% /var/log
+tmpfs                        2.2G     0  2.2G   0% /run/user/1001
+pamuser@dockerserve-lpn-prd-0001:~$ ls
+backup				    connectlb.lpn.co.th-docker.tar.gz  pam-worker.lpn.co.th-docker.tar.gz
+backupscript			    connect.lpn.co.th-code.tar.gz      tools.lpn.co.th-code.tar.gz
+connectcms.lpn.co.th-code.tar.gz    connect.lpn.co.th-docker.tar.gz    tools.lpn.co.th-docker.tar.gz
+connectcms.lpn.co.th-docker.tar.gz  initialsetup_docker_3ds.sh	       tuningkernel_docker.sh
+connectlb.lpn.co.th-code.tar.gz     pam-worker.lpn.co.th-code.tar.gz
+pamuser@dockerserve-lpn-prd-0001:~$ cd /backup
+-bash: cd: /backup: No such file or directory
+pamuser@dockerserve-lpn-prd-0001:~$ ls
+backup				    connectlb.lpn.co.th-docker.tar.gz  pam-worker.lpn.co.th-docker.tar.gz
+backupscript			    connect.lpn.co.th-code.tar.gz      tools.lpn.co.th-code.tar.gz
+connectcms.lpn.co.th-code.tar.gz    connect.lpn.co.th-docker.tar.gz    tools.lpn.co.th-docker.tar.gz
+connectcms.lpn.co.th-docker.tar.gz  initialsetup_docker_3ds.sh	       tuningkernel_docker.sh
+connectlb.lpn.co.th-code.tar.gz     pam-worker.lpn.co.th-code.tar.gz
+pamuser@dockerserve-lpn-prd-0001:~$ cd backup
+pamuser@dockerserve-lpn-prd-0001:~/backup$ ls
+archive		       backup_asset_20180429  backup_nginxlog_20180324	backup_nginxlog_20180430
+backup_asset_20180324  backup_asset_20180430  backup_nginxlog_20180325	backup_nginxlog_20180501
+backup_asset_20180325  backup_asset_20180501  backup_nginxlog_20180326	backup_nginxlog_20180502
+backup_asset_20180326  backup_asset_20180502  backup_nginxlog_20180327	backup_nginxlog_20180503
+backup_asset_20180327  backup_asset_20180503  backup_nginxlog_20180328	backup_nginxlog_20180504
+backup_asset_20180328  backup_asset_20180504  backup_nginxlog_20180329	backup_nginxlog_20180505
+backup_asset_20180329  backup_asset_20180505  backup_nginxlog_20180330	backup_nginxlog_20180506
+backup_asset_20180330  backup_asset_20180506  backup_nginxlog_20180331	backup_nginxlog_20180507
+backup_asset_20180331  backup_asset_20180507  backup_nginxlog_20180401	backup_nginxlog_20180508
+backup_asset_20180401  backup_asset_20180508  backup_nginxlog_20180402	backup_nginxlog_20180509
+backup_asset_20180402  backup_asset_20180509  backup_nginxlog_20180403	backup_nginxlog_20180510
+backup_asset_20180403  backup_asset_20180510  backup_nginxlog_20180404	backup_nginxlog_20180511
+backup_asset_20180404  backup_asset_20180511  backup_nginxlog_20180405	backup_nginxlog_20180512
+backup_asset_20180405  backup_asset_20180512  backup_nginxlog_20180406	backup_nginxlog_20180513
+backup_asset_20180406  backup_asset_20180513  backup_nginxlog_20180407	backup_nginxlog_20180514
+backup_asset_20180407  backup_asset_20180514  backup_nginxlog_20180408	backup_nginxlog_20180515
+backup_asset_20180408  backup_asset_20180515  backup_nginxlog_20180409	backup_nginxlog_20180516
+backup_asset_20180409  backup_asset_20180516  backup_nginxlog_20180410	backup_nginxlog_20180517
+backup_asset_20180410  backup_asset_20180517  backup_nginxlog_20180411	backup_nginxlog_20180518
+backup_asset_20180411  backup_asset_20180518  backup_nginxlog_20180412	backup_nginxlog_20180519
+backup_asset_20180412  backup_asset_20180519  backup_nginxlog_20180413	backup_nginxlog_20180520
+backup_asset_20180413  backup_asset_20180520  backup_nginxlog_20180414	backup_nginxlog_20180521
+backup_asset_20180414  backup_asset_20180521  backup_nginxlog_20180415	backup_nginxlog_20180522
+backup_asset_20180415  backup_asset_20180522  backup_nginxlog_20180416	backup_nginxlog_20180523
+backup_asset_20180416  backup_asset_20180523  backup_nginxlog_20180417	backup_nginxlog_20180524
+backup_asset_20180417  backup_asset_20180524  backup_nginxlog_20180418	backup_nginxlog_20180525
+backup_asset_20180418  backup_asset_20180525  backup_nginxlog_20180419	backup_nginxlog_20180526
+backup_asset_20180419  backup_asset_20180526  backup_nginxlog_20180420	backup_nginxlog_20180527
+backup_asset_20180420  backup_asset_20180527  backup_nginxlog_20180421	backup_nginxlog_20180528
+backup_asset_20180421  backup_asset_20180528  backup_nginxlog_20180422	backup_nginxlog_20180529
+backup_asset_20180422  backup_asset_20180529  backup_nginxlog_20180423	backup_nginxlog_20180530
+backup_asset_20180423  backup_asset_20180530  backup_nginxlog_20180424	backup_nginxlog_20180531
+backup_asset_20180424  backup_asset_20180531  backup_nginxlog_20180425	backup_nginxlog_20180601
+backup_asset_20180425  backup_asset_20180601  backup_nginxlog_20180426	backup_nginxlog_20180602
+backup_asset_20180426  backup_asset_20180602  backup_nginxlog_20180427	backup_nginxlog_20180603
+backup_asset_20180427  backup_asset_20180603  backup_nginxlog_20180428	backup_nginxlog_20180604
+backup_asset_20180428  backup_asset_20180604  backup_nginxlog_20180429
+pamuser@dockerserve-lpn-prd-0001:~/backup$ สห
+สห: command not found
+pamuser@dockerserve-lpn-prd-0001:~/backup$ ls -lh
+total 12G
+drwxr-xr-x 2 root root 4.0K Mar 30 03:00 archive
+-rw-r--r-- 1 root root 4.0M Mar 24 03:00 backup_asset_20180324
+-rw-r--r-- 1 root root 4.0M Mar 25 03:00 backup_asset_20180325
+-rw-r--r-- 1 root root 4.0M Mar 26 03:00 backup_asset_20180326
+-rw-r--r-- 1 root root 4.0M Mar 27 03:00 backup_asset_20180327
+-rw-r--r-- 1 root root 4.1M Mar 28 03:00 backup_asset_20180328
+-rw-r--r-- 1 root root 4.1M Mar 29 03:00 backup_asset_20180329
+-rw-r--r-- 1 root root 4.1M Mar 30 03:00 backup_asset_20180330
+-rw-r--r-- 1 root root 4.1M Mar 31 03:00 backup_asset_20180331
+-rw-r--r-- 1 root root 4.1M Apr  1 03:00 backup_asset_20180401
+-rw-r--r-- 1 root root 4.1M Apr  2 03:00 backup_asset_20180402
+-rw-r--r-- 1 root root 4.1M Apr  3 03:00 backup_asset_20180403
+-rw-r--r-- 1 root root 4.1M Apr  4 03:00 backup_asset_20180404
+-rw-r--r-- 1 root root 4.1M Apr  5 03:00 backup_asset_20180405
+-rw-r--r-- 1 root root 4.1M Apr  6 03:00 backup_asset_20180406
+-rw-r--r-- 1 root root 4.1M Apr  7 03:00 backup_asset_20180407
+-rw-r--r-- 1 root root 4.1M Apr  8 03:00 backup_asset_20180408
+-rw-r--r-- 1 root root 4.1M Apr  9 03:00 backup_asset_20180409
+-rw-r--r-- 1 root root 4.1M Apr 10 03:00 backup_asset_20180410
+-rw-r--r-- 1 root root 4.1M Apr 11 03:00 backup_asset_20180411
+-rw-r--r-- 1 root root 4.1M Apr 12 03:00 backup_asset_20180412
+-rw-r--r-- 1 root root 4.1M Apr 13 03:00 backup_asset_20180413
+-rw-r--r-- 1 root root 4.1M Apr 14 03:00 backup_asset_20180414
+-rw-r--r-- 1 root root 4.1M Apr 15 03:00 backup_asset_20180415
+-rw-r--r-- 1 root root 4.1M Apr 16 03:00 backup_asset_20180416
+-rw-r--r-- 1 root root 4.1M Apr 17 03:00 backup_asset_20180417
+-rw-r--r-- 1 root root 4.1M Apr 18 03:00 backup_asset_20180418
+-rw-r--r-- 1 root root 4.1M Apr 19 03:00 backup_asset_20180419
+-rw-r--r-- 1 root root 4.1M Apr 20 03:00 backup_asset_20180420
+-rw-r--r-- 1 root root 4.2M Apr 21 03:00 backup_asset_20180421
+-rw-r--r-- 1 root root 4.2M Apr 22 03:00 backup_asset_20180422
+-rw-r--r-- 1 root root 4.2M Apr 23 03:00 backup_asset_20180423
+-rw-r--r-- 1 root root 4.2M Apr 24 03:00 backup_asset_20180424
+-rw-r--r-- 1 root root 4.2M Apr 25 03:00 backup_asset_20180425
+-rw-r--r-- 1 root root 4.2M Apr 26 03:00 backup_asset_20180426
+-rw-r--r-- 1 root root 4.2M Apr 27 03:00 backup_asset_20180427
+-rw-r--r-- 1 root root 4.2M Apr 28 03:00 backup_asset_20180428
+-rw-r--r-- 1 root root 4.2M Apr 29 03:00 backup_asset_20180429
+-rw-r--r-- 1 root root 4.2M Apr 30 03:00 backup_asset_20180430
+-rw-r--r-- 1 root root 4.2M May  1 03:00 backup_asset_20180501
+-rw-r--r-- 1 root root 4.2M May  2 03:00 backup_asset_20180502
+-rw-r--r-- 1 root root 4.2M May  3 03:00 backup_asset_20180503
+-rw-r--r-- 1 root root 4.2M May  4 03:00 backup_asset_20180504
+-rw-r--r-- 1 root root 4.2M May  5 03:00 backup_asset_20180505
+-rw-r--r-- 1 root root 4.2M May  6 03:00 backup_asset_20180506
+-rw-r--r-- 1 root root 4.2M May  7 03:00 backup_asset_20180507
+-rw-r--r-- 1 root root 4.2M May  8 03:00 backup_asset_20180508
+-rw-r--r-- 1 root root 4.2M May  9 03:00 backup_asset_20180509
+-rw-r--r-- 1 root root 4.2M May 10 03:00 backup_asset_20180510
+-rw-r--r-- 1 root root 4.2M May 11 03:00 backup_asset_20180511
+-rw-r--r-- 1 root root 4.2M May 12 03:00 backup_asset_20180512
+-rw-r--r-- 1 root root 4.2M May 13 03:00 backup_asset_20180513
+-rw-r--r-- 1 root root 4.2M May 14 03:00 backup_asset_20180514
+-rw-r--r-- 1 root root 4.2M May 15 03:00 backup_asset_20180515
+-rw-r--r-- 1 root root 4.2M May 16 03:00 backup_asset_20180516
+-rw-r--r-- 1 root root 4.2M May 17 03:00 backup_asset_20180517
+-rw-r--r-- 1 root root 4.2M May 18 03:00 backup_asset_20180518
+-rw-r--r-- 1 root root 4.2M May 19 03:00 backup_asset_20180519
+-rw-r--r-- 1 root root 4.2M May 20 03:00 backup_asset_20180520
+-rw-r--r-- 1 root root 4.2M May 21 03:00 backup_asset_20180521
+-rw-r--r-- 1 root root 4.2M May 22 03:00 backup_asset_20180522
+-rw-r--r-- 1 root root 4.2M May 23 03:00 backup_asset_20180523
+-rw-r--r-- 1 root root 4.2M May 24 03:00 backup_asset_20180524
+-rw-r--r-- 1 root root 4.2M May 25 03:00 backup_asset_20180525
+-rw-r--r-- 1 root root 4.2M May 26 03:00 backup_asset_20180526
+-rw-r--r-- 1 root root 4.2M May 27 03:00 backup_asset_20180527
+-rw-r--r-- 1 root root 4.2M May 28 03:00 backup_asset_20180528
+-rw-r--r-- 1 root root 4.2M May 29 03:00 backup_asset_20180529
+-rw-r--r-- 1 root root 4.2M May 30 03:00 backup_asset_20180530
+-rw-r--r-- 1 root root 4.2M May 31 03:00 backup_asset_20180531
+-rw-r--r-- 1 root root 4.2M Jun  1 03:00 backup_asset_20180601
+-rw-r--r-- 1 root root 4.2M Jun  2 03:00 backup_asset_20180602
+-rw-r--r-- 1 root root 4.2M Jun  3 03:00 backup_asset_20180603
+-rw-r--r-- 1 root root 4.2M Jun  4 03:00 backup_asset_20180604
+-rw-r--r-- 1 root root  39M Mar 24 03:00 backup_nginxlog_20180324
+-rw-r--r-- 1 root root  41M Mar 25 03:00 backup_nginxlog_20180325
+-rw-r--r-- 1 root root  44M Mar 26 03:00 backup_nginxlog_20180326
+-rw-r--r-- 1 root root  47M Mar 27 03:00 backup_nginxlog_20180327
+-rw-r--r-- 1 root root  50M Mar 28 03:00 backup_nginxlog_20180328
+-rw-r--r-- 1 root root  54M Mar 29 03:00 backup_nginxlog_20180329
+-rw-r--r-- 1 root root  57M Mar 30 03:00 backup_nginxlog_20180330
+-rw-r--r-- 1 root root  60M Mar 31 03:00 backup_nginxlog_20180331
+-rw-r--r-- 1 root root  63M Apr  1 03:00 backup_nginxlog_20180401
+-rw-r--r-- 1 root root  66M Apr  2 03:00 backup_nginxlog_20180402
+-rw-r--r-- 1 root root  70M Apr  3 03:00 backup_nginxlog_20180403
+-rw-r--r-- 1 root root  73M Apr  4 03:00 backup_nginxlog_20180404
+-rw-r--r-- 1 root root  76M Apr  5 03:00 backup_nginxlog_20180405
+-rw-r--r-- 1 root root  78M Apr  6 03:00 backup_nginxlog_20180406
+-rw-r--r-- 1 root root  80M Apr  7 03:00 backup_nginxlog_20180407
+-rw-r--r-- 1 root root  82M Apr  8 03:00 backup_nginxlog_20180408
+-rw-r--r-- 1 root root  84M Apr  9 03:00 backup_nginxlog_20180409
+-rw-r--r-- 1 root root  87M Apr 10 03:00 backup_nginxlog_20180410
+-rw-r--r-- 1 root root  90M Apr 11 03:00 backup_nginxlog_20180411
+-rw-r--r-- 1 root root  93M Apr 12 03:00 backup_nginxlog_20180412
+-rw-r--r-- 1 root root  95M Apr 13 03:00 backup_nginxlog_20180413
+-rw-r--r-- 1 root root  97M Apr 14 03:00 backup_nginxlog_20180414
+-rw-r--r-- 1 root root  99M Apr 15 03:00 backup_nginxlog_20180415
+-rw-r--r-- 1 root root 101M Apr 16 03:00 backup_nginxlog_20180416
+-rw-r--r-- 1 root root 103M Apr 17 03:00 backup_nginxlog_20180417
+-rw-r--r-- 1 root root 107M Apr 18 03:00 backup_nginxlog_20180418
+-rw-r--r-- 1 root root 112M Apr 19 03:00 backup_nginxlog_20180419
+-rw-r--r-- 1 root root 116M Apr 20 03:00 backup_nginxlog_20180420
+-rw-r--r-- 1 root root 120M Apr 21 03:00 backup_nginxlog_20180421
+-rw-r--r-- 1 root root 124M Apr 22 03:00 backup_nginxlog_20180422
+-rw-r--r-- 1 root root 127M Apr 23 03:00 backup_nginxlog_20180423
+-rw-r--r-- 1 root root 131M Apr 24 03:00 backup_nginxlog_20180424
+-rw-r--r-- 1 root root 135M Apr 25 03:00 backup_nginxlog_20180425
+-rw-r--r-- 1 root root 139M Apr 26 03:00 backup_nginxlog_20180426
+-rw-r--r-- 1 root root 143M Apr 27 03:00 backup_nginxlog_20180427
+-rw-r--r-- 1 root root 147M Apr 28 03:00 backup_nginxlog_20180428
+-rw-r--r-- 1 root root 151M Apr 29 03:00 backup_nginxlog_20180429
+-rw-r--r-- 1 root root 154M Apr 30 03:00 backup_nginxlog_20180430
+-rw-r--r-- 1 root root 157M May  1 03:00 backup_nginxlog_20180501
+-rw-r--r-- 1 root root 160M May  2 03:00 backup_nginxlog_20180502
+-rw-r--r-- 1 root root 164M May  3 03:00 backup_nginxlog_20180503
+-rw-r--r-- 1 root root 167M May  4 03:00 backup_nginxlog_20180504
+-rw-r--r-- 1 root root 171M May  5 03:00 backup_nginxlog_20180505
+-rw-r--r-- 1 root root 174M May  6 03:00 backup_nginxlog_20180506
+-rw-r--r-- 1 root root 177M May  7 03:00 backup_nginxlog_20180507
+-rw-r--r-- 1 root root 181M May  8 03:00 backup_nginxlog_20180508
+-rw-r--r-- 1 root root 184M May  9 03:00 backup_nginxlog_20180509
+-rw-r--r-- 1 root root 188M May 10 03:01 backup_nginxlog_20180510
+-rw-r--r-- 1 root root 192M May 11 03:01 backup_nginxlog_20180511
+-rw-r--r-- 1 root root 196M May 12 03:01 backup_nginxlog_20180512
+-rw-r--r-- 1 root root 199M May 13 03:00 backup_nginxlog_20180513
+-rw-r--r-- 1 root root 202M May 14 03:00 backup_nginxlog_20180514
+-rw-r--r-- 1 root root 206M May 15 03:00 backup_nginxlog_20180515
+-rw-r--r-- 1 root root 210M May 16 03:00 backup_nginxlog_20180516
+-rw-r--r-- 1 root root 215M May 17 03:00 backup_nginxlog_20180517
+-rw-r--r-- 1 root root 219M May 18 03:00 backup_nginxlog_20180518
+-rw-r--r-- 1 root root 224M May 19 03:00 backup_nginxlog_20180519
+-rw-r--r-- 1 root root 227M May 20 03:00 backup_nginxlog_20180520
+-rw-r--r-- 1 root root 230M May 21 03:00 backup_nginxlog_20180521
+-rw-r--r-- 1 root root 235M May 22 03:00 backup_nginxlog_20180522
+-rw-r--r-- 1 root root 239M May 23 03:00 backup_nginxlog_20180523
+-rw-r--r-- 1 root root 243M May 24 03:00 backup_nginxlog_20180524
+-rw-r--r-- 1 root root 247M May 25 03:00 backup_nginxlog_20180525
+-rw-r--r-- 1 root root 252M May 26 03:00 backup_nginxlog_20180526
+-rw-r--r-- 1 root root 256M May 27 03:00 backup_nginxlog_20180527
+-rw-r--r-- 1 root root 260M May 28 03:00 backup_nginxlog_20180528
+-rw-r--r-- 1 root root 265M May 29 03:00 backup_nginxlog_20180529
+-rw-r--r-- 1 root root 269M May 30 03:00 backup_nginxlog_20180530
+-rw-r--r-- 1 root root 273M May 31 03:00 backup_nginxlog_20180531
+-rw-r--r-- 1 root root 277M Jun  1 03:01 backup_nginxlog_20180601
+-rw-r--r-- 1 root root 280M Jun  2 03:00 backup_nginxlog_20180602
+-rw-r--r-- 1 root root 283M Jun  3 03:01 backup_nginxlog_20180603
+-rw-r--r-- 1 root root 286M Jun  4 03:01 backup_nginxlog_20180604
+pamuser@dockerserve-lpn-prd-0001:~/backup$ sudo su -
+[sudo] password for pamuser: 
+Sorry, try again.
+[sudo] password for pamuser: 
+root@dockerserve-lpn-prd-0001:~# cd /home/pamuser
+root@dockerserve-lpn-prd-0001:/home/pamuser# ls
+backup                              connectlb.lpn.co.th-docker.tar.gz  pam-worker.lpn.co.th-docker.tar.gz
+backupscript                        connect.lpn.co.th-code.tar.gz      tools.lpn.co.th-code.tar.gz
+connectcms.lpn.co.th-code.tar.gz    connect.lpn.co.th-docker.tar.gz    tools.lpn.co.th-docker.tar.gz
+connectcms.lpn.co.th-docker.tar.gz  initialsetup_docker_3ds.sh         tuningkernel_docker.sh
+connectlb.lpn.co.th-code.tar.gz     pam-worker.lpn.co.th-code.tar.gz
+root@dockerserve-lpn-prd-0001:/home/pamuser# 
+root@dockerserve-lpn-prd-0001:/home/pamuser# 
+root@dockerserve-lpn-prd-0001:/home/pamuser# 
+root@dockerserve-lpn-prd-0001:/home/pamuser# 
+root@dockerserve-lpn-prd-0001:/home/pamuser# cd backup
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180429  backup_nginxlog_20180324  backup_nginxlog_20180430
+backup_asset_20180324  backup_asset_20180430  backup_nginxlog_20180325  backup_nginxlog_20180501
+backup_asset_20180325  backup_asset_20180501  backup_nginxlog_20180326  backup_nginxlog_20180502
+backup_asset_20180326  backup_asset_20180502  backup_nginxlog_20180327  backup_nginxlog_20180503
+backup_asset_20180327  backup_asset_20180503  backup_nginxlog_20180328  backup_nginxlog_20180504
+backup_asset_20180328  backup_asset_20180504  backup_nginxlog_20180329  backup_nginxlog_20180505
+backup_asset_20180329  backup_asset_20180505  backup_nginxlog_20180330  backup_nginxlog_20180506
+backup_asset_20180330  backup_asset_20180506  backup_nginxlog_20180331  backup_nginxlog_20180507
+backup_asset_20180331  backup_asset_20180507  backup_nginxlog_20180401  backup_nginxlog_20180508
+backup_asset_20180401  backup_asset_20180508  backup_nginxlog_20180402  backup_nginxlog_20180509
+backup_asset_20180402  backup_asset_20180509  backup_nginxlog_20180403  backup_nginxlog_20180510
+backup_asset_20180403  backup_asset_20180510  backup_nginxlog_20180404  backup_nginxlog_20180511
+backup_asset_20180404  backup_asset_20180511  backup_nginxlog_20180405  backup_nginxlog_20180512
+backup_asset_20180405  backup_asset_20180512  backup_nginxlog_20180406  backup_nginxlog_20180513
+backup_asset_20180406  backup_asset_20180513  backup_nginxlog_20180407  backup_nginxlog_20180514
+backup_asset_20180407  backup_asset_20180514  backup_nginxlog_20180408  backup_nginxlog_20180515
+backup_asset_20180408  backup_asset_20180515  backup_nginxlog_20180409  backup_nginxlog_20180516
+backup_asset_20180409  backup_asset_20180516  backup_nginxlog_20180410  backup_nginxlog_20180517
+backup_asset_20180410  backup_asset_20180517  backup_nginxlog_20180411  backup_nginxlog_20180518
+backup_asset_20180411  backup_asset_20180518  backup_nginxlog_20180412  backup_nginxlog_20180519
+backup_asset_20180412  backup_asset_20180519  backup_nginxlog_20180413  backup_nginxlog_20180520
+backup_asset_20180413  backup_asset_20180520  backup_nginxlog_20180414  backup_nginxlog_20180521
+backup_asset_20180414  backup_asset_20180521  backup_nginxlog_20180415  backup_nginxlog_20180522
+backup_asset_20180415  backup_asset_20180522  backup_nginxlog_20180416  backup_nginxlog_20180523
+backup_asset_20180416  backup_asset_20180523  backup_nginxlog_20180417  backup_nginxlog_20180524
+backup_asset_20180417  backup_asset_20180524  backup_nginxlog_20180418  backup_nginxlog_20180525
+backup_asset_20180418  backup_asset_20180525  backup_nginxlog_20180419  backup_nginxlog_20180526
+backup_asset_20180419  backup_asset_20180526  backup_nginxlog_20180420  backup_nginxlog_20180527
+backup_asset_20180420  backup_asset_20180527  backup_nginxlog_20180421  backup_nginxlog_20180528
+backup_asset_20180421  backup_asset_20180528  backup_nginxlog_20180422  backup_nginxlog_20180529
+backup_asset_20180422  backup_asset_20180529  backup_nginxlog_20180423  backup_nginxlog_20180530
+backup_asset_20180423  backup_asset_20180530  backup_nginxlog_20180424  backup_nginxlog_20180531
+backup_asset_20180424  backup_asset_20180531  backup_nginxlog_20180425  backup_nginxlog_20180601
+backup_asset_20180425  backup_asset_20180601  backup_nginxlog_20180426  backup_nginxlog_20180602
+backup_asset_20180426  backup_asset_20180602  backup_nginxlog_20180427  backup_nginxlog_20180603
+backup_asset_20180427  backup_asset_20180603  backup_nginxlog_20180428  backup_nginxlog_20180604
+backup_asset_20180428  backup_asset_20180604  backup_nginxlog_20180429
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm backup_nginxlog_201803*
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm backup_nginxlog_201804*
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# สห
+สห: command not found
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180420  backup_asset_20180518     backup_nginxlog_20180511
+backup_asset_20180324  backup_asset_20180421  backup_asset_20180519     backup_nginxlog_20180512
+backup_asset_20180325  backup_asset_20180422  backup_asset_20180520     backup_nginxlog_20180513
+backup_asset_20180326  backup_asset_20180423  backup_asset_20180521     backup_nginxlog_20180514
+backup_asset_20180327  backup_asset_20180424  backup_asset_20180522     backup_nginxlog_20180515
+backup_asset_20180328  backup_asset_20180425  backup_asset_20180523     backup_nginxlog_20180516
+backup_asset_20180329  backup_asset_20180426  backup_asset_20180524     backup_nginxlog_20180517
+backup_asset_20180330  backup_asset_20180427  backup_asset_20180525     backup_nginxlog_20180518
+backup_asset_20180331  backup_asset_20180428  backup_asset_20180526     backup_nginxlog_20180519
+backup_asset_20180401  backup_asset_20180429  backup_asset_20180527     backup_nginxlog_20180520
+backup_asset_20180402  backup_asset_20180430  backup_asset_20180528     backup_nginxlog_20180521
+backup_asset_20180403  backup_asset_20180501  backup_asset_20180529     backup_nginxlog_20180522
+backup_asset_20180404  backup_asset_20180502  backup_asset_20180530     backup_nginxlog_20180523
+backup_asset_20180405  backup_asset_20180503  backup_asset_20180531     backup_nginxlog_20180524
+backup_asset_20180406  backup_asset_20180504  backup_asset_20180601     backup_nginxlog_20180525
+backup_asset_20180407  backup_asset_20180505  backup_asset_20180602     backup_nginxlog_20180526
+backup_asset_20180408  backup_asset_20180506  backup_asset_20180603     backup_nginxlog_20180527
+backup_asset_20180409  backup_asset_20180507  backup_asset_20180604     backup_nginxlog_20180528
+backup_asset_20180410  backup_asset_20180508  backup_nginxlog_20180501  backup_nginxlog_20180529
+backup_asset_20180411  backup_asset_20180509  backup_nginxlog_20180502  backup_nginxlog_20180530
+backup_asset_20180412  backup_asset_20180510  backup_nginxlog_20180503  backup_nginxlog_20180531
+backup_asset_20180413  backup_asset_20180511  backup_nginxlog_20180504  backup_nginxlog_20180601
+backup_asset_20180414  backup_asset_20180512  backup_nginxlog_20180505  backup_nginxlog_20180602
+backup_asset_20180415  backup_asset_20180513  backup_nginxlog_20180506  backup_nginxlog_20180603
+backup_asset_20180416  backup_asset_20180514  backup_nginxlog_20180507  backup_nginxlog_20180604
+backup_asset_20180417  backup_asset_20180515  backup_nginxlog_20180508
+backup_asset_20180418  backup_asset_20180516  backup_nginxlog_20180509
+backup_asset_20180419  backup_asset_20180517  backup_nginxlog_20180510
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm backup_asset_201803*
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm backup_asset_201804*
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180518  backup_nginxlog_20180501  backup_nginxlog_20180519
+backup_asset_20180501  backup_asset_20180519  backup_nginxlog_20180502  backup_nginxlog_20180520
+backup_asset_20180502  backup_asset_20180520  backup_nginxlog_20180503  backup_nginxlog_20180521
+backup_asset_20180503  backup_asset_20180521  backup_nginxlog_20180504  backup_nginxlog_20180522
+backup_asset_20180504  backup_asset_20180522  backup_nginxlog_20180505  backup_nginxlog_20180523
+backup_asset_20180505  backup_asset_20180523  backup_nginxlog_20180506  backup_nginxlog_20180524
+backup_asset_20180506  backup_asset_20180524  backup_nginxlog_20180507  backup_nginxlog_20180525
+backup_asset_20180507  backup_asset_20180525  backup_nginxlog_20180508  backup_nginxlog_20180526
+backup_asset_20180508  backup_asset_20180526  backup_nginxlog_20180509  backup_nginxlog_20180527
+backup_asset_20180509  backup_asset_20180527  backup_nginxlog_20180510  backup_nginxlog_20180528
+backup_asset_20180510  backup_asset_20180528  backup_nginxlog_20180511  backup_nginxlog_20180529
+backup_asset_20180511  backup_asset_20180529  backup_nginxlog_20180512  backup_nginxlog_20180530
+backup_asset_20180512  backup_asset_20180530  backup_nginxlog_20180513  backup_nginxlog_20180531
+backup_asset_20180513  backup_asset_20180531  backup_nginxlog_20180514  backup_nginxlog_20180601
+backup_asset_20180514  backup_asset_20180601  backup_nginxlog_20180515  backup_nginxlog_20180602
+backup_asset_20180515  backup_asset_20180602  backup_nginxlog_20180516  backup_nginxlog_20180603
+backup_asset_20180516  backup_asset_20180603  backup_nginxlog_20180517  backup_nginxlog_20180604
+backup_asset_20180517  backup_asset_20180604  backup_nginxlog_20180518
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# สห
+สห: command not found
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180518  backup_nginxlog_20180501  backup_nginxlog_20180519
+backup_asset_20180501  backup_asset_20180519  backup_nginxlog_20180502  backup_nginxlog_20180520
+backup_asset_20180502  backup_asset_20180520  backup_nginxlog_20180503  backup_nginxlog_20180521
+backup_asset_20180503  backup_asset_20180521  backup_nginxlog_20180504  backup_nginxlog_20180522
+backup_asset_20180504  backup_asset_20180522  backup_nginxlog_20180505  backup_nginxlog_20180523
+backup_asset_20180505  backup_asset_20180523  backup_nginxlog_20180506  backup_nginxlog_20180524
+backup_asset_20180506  backup_asset_20180524  backup_nginxlog_20180507  backup_nginxlog_20180525
+backup_asset_20180507  backup_asset_20180525  backup_nginxlog_20180508  backup_nginxlog_20180526
+backup_asset_20180508  backup_asset_20180526  backup_nginxlog_20180509  backup_nginxlog_20180527
+backup_asset_20180509  backup_asset_20180527  backup_nginxlog_20180510  backup_nginxlog_20180528
+backup_asset_20180510  backup_asset_20180528  backup_nginxlog_20180511  backup_nginxlog_20180529
+backup_asset_20180511  backup_asset_20180529  backup_nginxlog_20180512  backup_nginxlog_20180530
+backup_asset_20180512  backup_asset_20180530  backup_nginxlog_20180513  backup_nginxlog_20180531
+backup_asset_20180513  backup_asset_20180531  backup_nginxlog_20180514  backup_nginxlog_20180601
+backup_asset_20180514  backup_asset_20180601  backup_nginxlog_20180515  backup_nginxlog_20180602
+backup_asset_20180515  backup_asset_20180602  backup_nginxlog_20180516  backup_nginxlog_20180603
+backup_asset_20180516  backup_asset_20180603  backup_nginxlog_20180517  backup_nginxlog_20180604
+backup_asset_20180517  backup_asset_20180604  backup_nginxlog_20180518
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180518  backup_nginxlog_20180501  backup_nginxlog_20180519
+backup_asset_20180501  backup_asset_20180519  backup_nginxlog_20180502  backup_nginxlog_20180520
+backup_asset_20180502  backup_asset_20180520  backup_nginxlog_20180503  backup_nginxlog_20180521
+backup_asset_20180503  backup_asset_20180521  backup_nginxlog_20180504  backup_nginxlog_20180522
+backup_asset_20180504  backup_asset_20180522  backup_nginxlog_20180505  backup_nginxlog_20180523
+backup_asset_20180505  backup_asset_20180523  backup_nginxlog_20180506  backup_nginxlog_20180524
+backup_asset_20180506  backup_asset_20180524  backup_nginxlog_20180507  backup_nginxlog_20180525
+backup_asset_20180507  backup_asset_20180525  backup_nginxlog_20180508  backup_nginxlog_20180526
+backup_asset_20180508  backup_asset_20180526  backup_nginxlog_20180509  backup_nginxlog_20180527
+backup_asset_20180509  backup_asset_20180527  backup_nginxlog_20180510  backup_nginxlog_20180528
+backup_asset_20180510  backup_asset_20180528  backup_nginxlog_20180511  backup_nginxlog_20180529
+backup_asset_20180511  backup_asset_20180529  backup_nginxlog_20180512  backup_nginxlog_20180530
+backup_asset_20180512  backup_asset_20180530  backup_nginxlog_20180513  backup_nginxlog_20180531
+backup_asset_20180513  backup_asset_20180531  backup_nginxlog_20180514  backup_nginxlog_20180601
+backup_asset_20180514  backup_asset_20180601  backup_nginxlog_20180515  backup_nginxlog_20180602
+backup_asset_20180515  backup_asset_20180602  backup_nginxlog_20180516  backup_nginxlog_20180603
+backup_asset_20180516  backup_asset_20180603  backup_nginxlog_20180517  backup_nginxlog_20180604
+backup_asset_20180517  backup_asset_20180604  backup_nginxlog_20180518
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# crontab -l
+# Edit this file to introduce tasks to be run by cron.
+# 
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+00 03 * * * /home/pamuser/backupscript/backup.sh
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180518  backup_nginxlog_20180501  backup_nginxlog_20180519
+backup_asset_20180501  backup_asset_20180519  backup_nginxlog_20180502  backup_nginxlog_20180520
+backup_asset_20180502  backup_asset_20180520  backup_nginxlog_20180503  backup_nginxlog_20180521
+backup_asset_20180503  backup_asset_20180521  backup_nginxlog_20180504  backup_nginxlog_20180522
+backup_asset_20180504  backup_asset_20180522  backup_nginxlog_20180505  backup_nginxlog_20180523
+backup_asset_20180505  backup_asset_20180523  backup_nginxlog_20180506  backup_nginxlog_20180524
+backup_asset_20180506  backup_asset_20180524  backup_nginxlog_20180507  backup_nginxlog_20180525
+backup_asset_20180507  backup_asset_20180525  backup_nginxlog_20180508  backup_nginxlog_20180526
+backup_asset_20180508  backup_asset_20180526  backup_nginxlog_20180509  backup_nginxlog_20180527
+backup_asset_20180509  backup_asset_20180527  backup_nginxlog_20180510  backup_nginxlog_20180528
+backup_asset_20180510  backup_asset_20180528  backup_nginxlog_20180511  backup_nginxlog_20180529
+backup_asset_20180511  backup_asset_20180529  backup_nginxlog_20180512  backup_nginxlog_20180530
+backup_asset_20180512  backup_asset_20180530  backup_nginxlog_20180513  backup_nginxlog_20180531
+backup_asset_20180513  backup_asset_20180531  backup_nginxlog_20180514  backup_nginxlog_20180601
+backup_asset_20180514  backup_asset_20180601  backup_nginxlog_20180515  backup_nginxlog_20180602
+backup_asset_20180515  backup_asset_20180602  backup_nginxlog_20180516  backup_nginxlog_20180603
+backup_asset_20180516  backup_asset_20180603  backup_nginxlog_20180517  backup_nginxlog_20180604
+backup_asset_20180517  backup_asset_20180604  backup_nginxlog_20180518
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# cd ..
+root@dockerserve-lpn-prd-0001:/home/pamuser# ls
+backup                              connectlb.lpn.co.th-docker.tar.gz  pam-worker.lpn.co.th-docker.tar.gz
+backupscript                        connect.lpn.co.th-code.tar.gz      tools.lpn.co.th-code.tar.gz
+connectcms.lpn.co.th-code.tar.gz    connect.lpn.co.th-docker.tar.gz    tools.lpn.co.th-docker.tar.gz
+connectcms.lpn.co.th-docker.tar.gz  initialsetup_docker_3ds.sh         tuningkernel_docker.sh
+connectlb.lpn.co.th-code.tar.gz     pam-worker.lpn.co.th-code.tar.gz
+root@dockerserve-lpn-prd-0001:/home/pamuser# cd backupscript/
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# ls
+backup_asset_nginx.sh           log_asset_nginx20180413_030001  log_asset_nginx20180510_030001
+backup.sh                       log_asset_nginx20180414_030001  log_asset_nginx20180511_030001
+log_asset_nginx20180316_230553  log_asset_nginx20180415_030001  log_asset_nginx20180512_030001
+log_asset_nginx20180323_215142  log_asset_nginx20180416_030001  log_asset_nginx20180513_030001
+log_asset_nginx20180323_215801  log_asset_nginx20180417_030001  log_asset_nginx20180514_030001
+log_asset_nginx20180323_220001  log_asset_nginx20180418_030001  log_asset_nginx20180515_030001
+log_asset_nginx20180323_220601  log_asset_nginx20180419_030001  log_asset_nginx20180516_030001
+log_asset_nginx20180324_030001  log_asset_nginx20180420_030001  log_asset_nginx20180517_030001
+log_asset_nginx20180325_030001  log_asset_nginx20180421_030001  log_asset_nginx20180518_030001
+log_asset_nginx20180326_030001  log_asset_nginx20180422_030001  log_asset_nginx20180519_030001
+log_asset_nginx20180327_030001  log_asset_nginx20180423_030001  log_asset_nginx20180520_030001
+log_asset_nginx20180328_030001  log_asset_nginx20180424_030001  log_asset_nginx20180521_030001
+log_asset_nginx20180329_030001  log_asset_nginx20180425_030001  log_asset_nginx20180522_030001
+log_asset_nginx20180330_030001  log_asset_nginx20180426_030001  log_asset_nginx20180523_030001
+log_asset_nginx20180331_030001  log_asset_nginx20180427_030001  log_asset_nginx20180524_030001
+log_asset_nginx20180401_030001  log_asset_nginx20180428_030001  log_asset_nginx20180525_030001
+log_asset_nginx20180402_030001  log_asset_nginx20180429_030001  log_asset_nginx20180526_030001
+log_asset_nginx20180403_030001  log_asset_nginx20180430_030001  log_asset_nginx20180527_030001
+log_asset_nginx20180404_030001  log_asset_nginx20180501_030001  log_asset_nginx20180528_030001
+log_asset_nginx20180405_030001  log_asset_nginx20180502_030001  log_asset_nginx20180529_030001
+log_asset_nginx20180406_030001  log_asset_nginx20180503_030001  log_asset_nginx20180530_030001
+log_asset_nginx20180407_030001  log_asset_nginx20180504_030001  log_asset_nginx20180531_030001
+log_asset_nginx20180408_030001  log_asset_nginx20180505_030001  log_asset_nginx20180601_030001
+log_asset_nginx20180409_030001  log_asset_nginx20180506_030001  log_asset_nginx20180602_030001
+log_asset_nginx20180410_030001  log_asset_nginx20180507_030001  log_asset_nginx20180603_030001
+log_asset_nginx20180411_030001  log_asset_nginx20180508_030001  log_asset_nginx20180604_030001
+log_asset_nginx20180412_030001  log_asset_nginx20180509_030001
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# vi backup_asset_nginx.sh 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# crontab -l
+# Edit this file to introduce tasks to be run by cron.
+# 
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+00 03 * * * /home/pamuser/backupscript/backup.sh
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# ./backup.sh 
+mv: cannot stat '/home/pamuser/backup/*.gz': No such file or directory
+tar: 02608.gz: Cannot stat: No such file or directory
+tar: Removing leading `/' from member names
+tar: Exiting with failure status due to previous errors
+tar: 02608.gz: Cannot stat: No such file or directory
+tar: Removing leading `/' from member names
+tar: Exiting with failure status due to previous errors
+local: *.gz: No such file or directory
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# ls
+backup_asset_nginx.sh           log_asset_nginx20180413_030001  log_asset_nginx20180510_030001
+backup.sh                       log_asset_nginx20180414_030001  log_asset_nginx20180511_030001
+log_asset_nginx20180316_230553  log_asset_nginx20180415_030001  log_asset_nginx20180512_030001
+log_asset_nginx20180323_215142  log_asset_nginx20180416_030001  log_asset_nginx20180513_030001
+log_asset_nginx20180323_215801  log_asset_nginx20180417_030001  log_asset_nginx20180514_030001
+log_asset_nginx20180323_220001  log_asset_nginx20180418_030001  log_asset_nginx20180515_030001
+log_asset_nginx20180323_220601  log_asset_nginx20180419_030001  log_asset_nginx20180516_030001
+log_asset_nginx20180324_030001  log_asset_nginx20180420_030001  log_asset_nginx20180517_030001
+log_asset_nginx20180325_030001  log_asset_nginx20180421_030001  log_asset_nginx20180518_030001
+log_asset_nginx20180326_030001  log_asset_nginx20180422_030001  log_asset_nginx20180519_030001
+log_asset_nginx20180327_030001  log_asset_nginx20180423_030001  log_asset_nginx20180520_030001
+log_asset_nginx20180328_030001  log_asset_nginx20180424_030001  log_asset_nginx20180521_030001
+log_asset_nginx20180329_030001  log_asset_nginx20180425_030001  log_asset_nginx20180522_030001
+log_asset_nginx20180330_030001  log_asset_nginx20180426_030001  log_asset_nginx20180523_030001
+log_asset_nginx20180331_030001  log_asset_nginx20180427_030001  log_asset_nginx20180524_030001
+log_asset_nginx20180401_030001  log_asset_nginx20180428_030001  log_asset_nginx20180525_030001
+log_asset_nginx20180402_030001  log_asset_nginx20180429_030001  log_asset_nginx20180526_030001
+log_asset_nginx20180403_030001  log_asset_nginx20180430_030001  log_asset_nginx20180527_030001
+log_asset_nginx20180404_030001  log_asset_nginx20180501_030001  log_asset_nginx20180528_030001
+log_asset_nginx20180405_030001  log_asset_nginx20180502_030001  log_asset_nginx20180529_030001
+log_asset_nginx20180406_030001  log_asset_nginx20180503_030001  log_asset_nginx20180530_030001
+log_asset_nginx20180407_030001  log_asset_nginx20180504_030001  log_asset_nginx20180531_030001
+log_asset_nginx20180408_030001  log_asset_nginx20180505_030001  log_asset_nginx20180601_030001
+log_asset_nginx20180409_030001  log_asset_nginx20180506_030001  log_asset_nginx20180602_030001
+log_asset_nginx20180410_030001  log_asset_nginx20180507_030001  log_asset_nginx20180603_030001
+log_asset_nginx20180411_030001  log_asset_nginx20180508_030001  log_asset_nginx20180604_030001
+log_asset_nginx20180412_030001  log_asset_nginx20180509_030001  log_asset_nginx20180605_002608
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# cd ..
+root@dockerserve-lpn-prd-0001:/home/pamuser# ls
+backup                              connectlb.lpn.co.th-docker.tar.gz  pam-worker.lpn.co.th-docker.tar.gz
+backupscript                        connect.lpn.co.th-code.tar.gz      tools.lpn.co.th-code.tar.gz
+connectcms.lpn.co.th-code.tar.gz    connect.lpn.co.th-docker.tar.gz    tools.lpn.co.th-docker.tar.gz
+connectcms.lpn.co.th-docker.tar.gz  initialsetup_docker_3ds.sh         tuningkernel_docker.sh
+connectlb.lpn.co.th-code.tar.gz     pam-worker.lpn.co.th-code.tar.gz
+root@dockerserve-lpn-prd-0001:/home/pamuser# cd backup
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180519     backup_nginxlog_20180502  backup_nginxlog_20180521
+backup_asset_20180501  backup_asset_20180520     backup_nginxlog_20180503  backup_nginxlog_20180522
+backup_asset_20180502  backup_asset_20180521     backup_nginxlog_20180504  backup_nginxlog_20180523
+backup_asset_20180503  backup_asset_20180522     backup_nginxlog_20180505  backup_nginxlog_20180524
+backup_asset_20180504  backup_asset_20180523     backup_nginxlog_20180506  backup_nginxlog_20180525
+backup_asset_20180505  backup_asset_20180524     backup_nginxlog_20180507  backup_nginxlog_20180526
+backup_asset_20180506  backup_asset_20180525     backup_nginxlog_20180508  backup_nginxlog_20180527
+backup_asset_20180507  backup_asset_20180526     backup_nginxlog_20180509  backup_nginxlog_20180528
+backup_asset_20180508  backup_asset_20180527     backup_nginxlog_20180510  backup_nginxlog_20180529
+backup_asset_20180509  backup_asset_20180528     backup_nginxlog_20180511  backup_nginxlog_20180530
+backup_asset_20180510  backup_asset_20180529     backup_nginxlog_20180512  backup_nginxlog_20180531
+backup_asset_20180511  backup_asset_20180530     backup_nginxlog_20180513  backup_nginxlog_20180601
+backup_asset_20180512  backup_asset_20180531     backup_nginxlog_20180514  backup_nginxlog_20180602
+backup_asset_20180513  backup_asset_20180601     backup_nginxlog_20180515  backup_nginxlog_20180603
+backup_asset_20180514  backup_asset_20180602     backup_nginxlog_20180516  backup_nginxlog_20180604
+backup_asset_20180515  backup_asset_20180603     backup_nginxlog_20180517  backup_nginxlog_20180605
+backup_asset_20180516  backup_asset_20180604     backup_nginxlog_20180518
+backup_asset_20180517  backup_asset_20180605     backup_nginxlog_20180519
+backup_asset_20180518  backup_nginxlog_20180501  backup_nginxlog_20180520
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# cd archive/
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup/archive# ls
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup/archive# cd ..
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# cd ../backupscript/
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# ls
+backup_asset_nginx.sh           log_asset_nginx20180413_030001  log_asset_nginx20180510_030001
+backup.sh                       log_asset_nginx20180414_030001  log_asset_nginx20180511_030001
+log_asset_nginx20180316_230553  log_asset_nginx20180415_030001  log_asset_nginx20180512_030001
+log_asset_nginx20180323_215142  log_asset_nginx20180416_030001  log_asset_nginx20180513_030001
+log_asset_nginx20180323_215801  log_asset_nginx20180417_030001  log_asset_nginx20180514_030001
+log_asset_nginx20180323_220001  log_asset_nginx20180418_030001  log_asset_nginx20180515_030001
+log_asset_nginx20180323_220601  log_asset_nginx20180419_030001  log_asset_nginx20180516_030001
+log_asset_nginx20180324_030001  log_asset_nginx20180420_030001  log_asset_nginx20180517_030001
+log_asset_nginx20180325_030001  log_asset_nginx20180421_030001  log_asset_nginx20180518_030001
+log_asset_nginx20180326_030001  log_asset_nginx20180422_030001  log_asset_nginx20180519_030001
+log_asset_nginx20180327_030001  log_asset_nginx20180423_030001  log_asset_nginx20180520_030001
+log_asset_nginx20180328_030001  log_asset_nginx20180424_030001  log_asset_nginx20180521_030001
+log_asset_nginx20180329_030001  log_asset_nginx20180425_030001  log_asset_nginx20180522_030001
+log_asset_nginx20180330_030001  log_asset_nginx20180426_030001  log_asset_nginx20180523_030001
+log_asset_nginx20180331_030001  log_asset_nginx20180427_030001  log_asset_nginx20180524_030001
+log_asset_nginx20180401_030001  log_asset_nginx20180428_030001  log_asset_nginx20180525_030001
+log_asset_nginx20180402_030001  log_asset_nginx20180429_030001  log_asset_nginx20180526_030001
+log_asset_nginx20180403_030001  log_asset_nginx20180430_030001  log_asset_nginx20180527_030001
+log_asset_nginx20180404_030001  log_asset_nginx20180501_030001  log_asset_nginx20180528_030001
+log_asset_nginx20180405_030001  log_asset_nginx20180502_030001  log_asset_nginx20180529_030001
+log_asset_nginx20180406_030001  log_asset_nginx20180503_030001  log_asset_nginx20180530_030001
+log_asset_nginx20180407_030001  log_asset_nginx20180504_030001  log_asset_nginx20180531_030001
+log_asset_nginx20180408_030001  log_asset_nginx20180505_030001  log_asset_nginx20180601_030001
+log_asset_nginx20180409_030001  log_asset_nginx20180506_030001  log_asset_nginx20180602_030001
+log_asset_nginx20180410_030001  log_asset_nginx20180507_030001  log_asset_nginx20180603_030001
+log_asset_nginx20180411_030001  log_asset_nginx20180508_030001  log_asset_nginx20180604_030001
+log_asset_nginx20180412_030001  log_asset_nginx20180509_030001  log_asset_nginx20180605_002608
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# vi backup_asset_nginx.sh 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# _now=$(date +"%Y%m%d%_H%M%S")
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# _file="/home/pamuser/backup/backup_asset_${_now}.gz"
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# echo $_file
+/home/pamuser/backup/backup_asset_20180605 03034.gz
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# _file="/home/pamuser/backup/backup_asset_$_now.gz"
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# echo $_file
+/home/pamuser/backup/backup_asset_20180605 03034.gz
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# vi backup_asset_nginx.sh 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# sed -i "s/ //g" $_file
+sed: can't read 03034.gz: No such file or directory
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# vi backup_asset_nginx.sh 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# _now=$(date +"%Y%m%d%H%M%S")
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# _file="/home/pamuser/backup/backup_asset_${_now}.gz"
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# echo $_file
+/home/pamuser/backup/backup_asset_20180605003307.gz
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# vi backup_asset_nginx.sh 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# cd ../backup
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180519     backup_nginxlog_20180502  backup_nginxlog_20180521
+backup_asset_20180501  backup_asset_20180520     backup_nginxlog_20180503  backup_nginxlog_20180522
+backup_asset_20180502  backup_asset_20180521     backup_nginxlog_20180504  backup_nginxlog_20180523
+backup_asset_20180503  backup_asset_20180522     backup_nginxlog_20180505  backup_nginxlog_20180524
+backup_asset_20180504  backup_asset_20180523     backup_nginxlog_20180506  backup_nginxlog_20180525
+backup_asset_20180505  backup_asset_20180524     backup_nginxlog_20180507  backup_nginxlog_20180526
+backup_asset_20180506  backup_asset_20180525     backup_nginxlog_20180508  backup_nginxlog_20180527
+backup_asset_20180507  backup_asset_20180526     backup_nginxlog_20180509  backup_nginxlog_20180528
+backup_asset_20180508  backup_asset_20180527     backup_nginxlog_20180510  backup_nginxlog_20180529
+backup_asset_20180509  backup_asset_20180528     backup_nginxlog_20180511  backup_nginxlog_20180530
+backup_asset_20180510  backup_asset_20180529     backup_nginxlog_20180512  backup_nginxlog_20180531
+backup_asset_20180511  backup_asset_20180530     backup_nginxlog_20180513  backup_nginxlog_20180601
+backup_asset_20180512  backup_asset_20180531     backup_nginxlog_20180514  backup_nginxlog_20180602
+backup_asset_20180513  backup_asset_20180601     backup_nginxlog_20180515  backup_nginxlog_20180603
+backup_asset_20180514  backup_asset_20180602     backup_nginxlog_20180516  backup_nginxlog_20180604
+backup_asset_20180515  backup_asset_20180603     backup_nginxlog_20180517  backup_nginxlog_20180605
+backup_asset_20180516  backup_asset_20180604     backup_nginxlog_20180518
+backup_asset_20180517  backup_asset_20180605     backup_nginxlog_20180519
+backup_asset_20180518  backup_nginxlog_20180501  backup_nginxlog_20180520
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm backup_nginxlog_2018060
+backup_nginxlog_20180601  backup_nginxlog_20180603  backup_nginxlog_20180605  
+backup_nginxlog_20180602  backup_nginxlog_20180604  
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm backup_nginxlog_2018060
+backup_nginxlog_20180601  backup_nginxlog_20180603  backup_nginxlog_20180605  
+backup_nginxlog_20180602  backup_nginxlog_20180604  
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm backup_nginxlog_20180605
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm backup_asset_20180605
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# cd ../backupscript/
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# ./backup.sh 
+mv: cannot stat '/home/pamuser/backup/*.gz': No such file or directory
+tar: Removing leading `/' from member names
+tar: Removing leading `/' from member names
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# cd ../backup
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180519           backup_nginxlog_20180502  backup_nginxlog_20180521
+backup_asset_20180501  backup_asset_20180520           backup_nginxlog_20180503  backup_nginxlog_20180522
+backup_asset_20180502  backup_asset_20180521           backup_nginxlog_20180504  backup_nginxlog_20180523
+backup_asset_20180503  backup_asset_20180522           backup_nginxlog_20180505  backup_nginxlog_20180524
+backup_asset_20180504  backup_asset_20180523           backup_nginxlog_20180506  backup_nginxlog_20180525
+backup_asset_20180505  backup_asset_20180524           backup_nginxlog_20180507  backup_nginxlog_20180526
+backup_asset_20180506  backup_asset_20180525           backup_nginxlog_20180508  backup_nginxlog_20180527
+backup_asset_20180507  backup_asset_20180526           backup_nginxlog_20180509  backup_nginxlog_20180528
+backup_asset_20180508  backup_asset_20180527           backup_nginxlog_20180510  backup_nginxlog_20180529
+backup_asset_20180509  backup_asset_20180528           backup_nginxlog_20180511  backup_nginxlog_20180530
+backup_asset_20180510  backup_asset_20180529           backup_nginxlog_20180512  backup_nginxlog_20180531
+backup_asset_20180511  backup_asset_20180530           backup_nginxlog_20180513  backup_nginxlog_20180601
+backup_asset_20180512  backup_asset_20180531           backup_nginxlog_20180514  backup_nginxlog_20180602
+backup_asset_20180513  backup_asset_20180601           backup_nginxlog_20180515  backup_nginxlog_20180603
+backup_asset_20180514  backup_asset_20180602           backup_nginxlog_20180516  backup_nginxlog_20180604
+backup_asset_20180515  backup_asset_20180603           backup_nginxlog_20180517  backup_nginxlog_20180605003411.gz
+backup_asset_20180516  backup_asset_20180604           backup_nginxlog_20180518
+backup_asset_20180517  backup_asset_20180605003411.gz  backup_nginxlog_20180519
+backup_asset_20180518  backup_nginxlog_20180501        backup_nginxlog_20180520
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# cd archive/
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup/archive# ls
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup/archive# ls
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup/archive# cd ../../backupscript/
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# ls
+backup_asset_nginx.sh           log_asset_nginx20180414_030001  log_asset_nginx20180512_030001
+backup.sh                       log_asset_nginx20180415_030001  log_asset_nginx20180513_030001
+log_asset_nginx20180316_230553  log_asset_nginx20180416_030001  log_asset_nginx20180514_030001
+log_asset_nginx20180323_215142  log_asset_nginx20180417_030001  log_asset_nginx20180515_030001
+log_asset_nginx20180323_215801  log_asset_nginx20180418_030001  log_asset_nginx20180516_030001
+log_asset_nginx20180323_220001  log_asset_nginx20180419_030001  log_asset_nginx20180517_030001
+log_asset_nginx20180323_220601  log_asset_nginx20180420_030001  log_asset_nginx20180518_030001
+log_asset_nginx20180324_030001  log_asset_nginx20180421_030001  log_asset_nginx20180519_030001
+log_asset_nginx20180325_030001  log_asset_nginx20180422_030001  log_asset_nginx20180520_030001
+log_asset_nginx20180326_030001  log_asset_nginx20180423_030001  log_asset_nginx20180521_030001
+log_asset_nginx20180327_030001  log_asset_nginx20180424_030001  log_asset_nginx20180522_030001
+log_asset_nginx20180328_030001  log_asset_nginx20180425_030001  log_asset_nginx20180523_030001
+log_asset_nginx20180329_030001  log_asset_nginx20180426_030001  log_asset_nginx20180524_030001
+log_asset_nginx20180330_030001  log_asset_nginx20180427_030001  log_asset_nginx20180525_030001
+log_asset_nginx20180331_030001  log_asset_nginx20180428_030001  log_asset_nginx20180526_030001
+log_asset_nginx20180401_030001  log_asset_nginx20180429_030001  log_asset_nginx20180527_030001
+log_asset_nginx20180402_030001  log_asset_nginx20180430_030001  log_asset_nginx20180528_030001
+log_asset_nginx20180403_030001  log_asset_nginx20180501_030001  log_asset_nginx20180529_030001
+log_asset_nginx20180404_030001  log_asset_nginx20180502_030001  log_asset_nginx20180530_030001
+log_asset_nginx20180405_030001  log_asset_nginx20180503_030001  log_asset_nginx20180531_030001
+log_asset_nginx20180406_030001  log_asset_nginx20180504_030001  log_asset_nginx20180601_030001
+log_asset_nginx20180407_030001  log_asset_nginx20180505_030001  log_asset_nginx20180602_030001
+log_asset_nginx20180408_030001  log_asset_nginx20180506_030001  log_asset_nginx20180603_030001
+log_asset_nginx20180409_030001  log_asset_nginx20180507_030001  log_asset_nginx20180604_030001
+log_asset_nginx20180410_030001  log_asset_nginx20180508_030001  log_asset_nginx20180605_002608
+log_asset_nginx20180411_030001  log_asset_nginx20180509_030001  log_asset_nginx20180605_003411
+log_asset_nginx20180412_030001  log_asset_nginx20180510_030001
+log_asset_nginx20180413_030001  log_asset_nginx20180511_030001
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# vi backup_asset_nginx.sh 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backupscript# cd ../backup
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180519           backup_nginxlog_20180502  backup_nginxlog_20180521
+backup_asset_20180501  backup_asset_20180520           backup_nginxlog_20180503  backup_nginxlog_20180522
+backup_asset_20180502  backup_asset_20180521           backup_nginxlog_20180504  backup_nginxlog_20180523
+backup_asset_20180503  backup_asset_20180522           backup_nginxlog_20180505  backup_nginxlog_20180524
+backup_asset_20180504  backup_asset_20180523           backup_nginxlog_20180506  backup_nginxlog_20180525
+backup_asset_20180505  backup_asset_20180524           backup_nginxlog_20180507  backup_nginxlog_20180526
+backup_asset_20180506  backup_asset_20180525           backup_nginxlog_20180508  backup_nginxlog_20180527
+backup_asset_20180507  backup_asset_20180526           backup_nginxlog_20180509  backup_nginxlog_20180528
+backup_asset_20180508  backup_asset_20180527           backup_nginxlog_20180510  backup_nginxlog_20180529
+backup_asset_20180509  backup_asset_20180528           backup_nginxlog_20180511  backup_nginxlog_20180530
+backup_asset_20180510  backup_asset_20180529           backup_nginxlog_20180512  backup_nginxlog_20180531
+backup_asset_20180511  backup_asset_20180530           backup_nginxlog_20180513  backup_nginxlog_20180601
+backup_asset_20180512  backup_asset_20180531           backup_nginxlog_20180514  backup_nginxlog_20180602
+backup_asset_20180513  backup_asset_20180601           backup_nginxlog_20180515  backup_nginxlog_20180603
+backup_asset_20180514  backup_asset_20180602           backup_nginxlog_20180516  backup_nginxlog_20180604
+backup_asset_20180515  backup_asset_20180603           backup_nginxlog_20180517  backup_nginxlog_20180605003411.gz
+backup_asset_20180516  backup_asset_20180604           backup_nginxlog_20180518
+backup_asset_20180517  backup_asset_20180605003411.gz  backup_nginxlog_20180519
+backup_asset_20180518  backup_nginxlog_20180501        backup_nginxlog_20180520
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# rm *.gz
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# ls
+archive                backup_asset_20180518  backup_nginxlog_20180501  backup_nginxlog_20180519
+backup_asset_20180501  backup_asset_20180519  backup_nginxlog_20180502  backup_nginxlog_20180520
+backup_asset_20180502  backup_asset_20180520  backup_nginxlog_20180503  backup_nginxlog_20180521
+backup_asset_20180503  backup_asset_20180521  backup_nginxlog_20180504  backup_nginxlog_20180522
+backup_asset_20180504  backup_asset_20180522  backup_nginxlog_20180505  backup_nginxlog_20180523
+backup_asset_20180505  backup_asset_20180523  backup_nginxlog_20180506  backup_nginxlog_20180524
+backup_asset_20180506  backup_asset_20180524  backup_nginxlog_20180507  backup_nginxlog_20180525
+backup_asset_20180507  backup_asset_20180525  backup_nginxlog_20180508  backup_nginxlog_20180526
+backup_asset_20180508  backup_asset_20180526  backup_nginxlog_20180509  backup_nginxlog_20180527
+backup_asset_20180509  backup_asset_20180527  backup_nginxlog_20180510  backup_nginxlog_20180528
+backup_asset_20180510  backup_asset_20180528  backup_nginxlog_20180511  backup_nginxlog_20180529
+backup_asset_20180511  backup_asset_20180529  backup_nginxlog_20180512  backup_nginxlog_20180530
+backup_asset_20180512  backup_asset_20180530  backup_nginxlog_20180513  backup_nginxlog_20180531
+backup_asset_20180513  backup_asset_20180531  backup_nginxlog_20180514  backup_nginxlog_20180601
+backup_asset_20180514  backup_asset_20180601  backup_nginxlog_20180515  backup_nginxlog_20180602
+backup_asset_20180515  backup_asset_20180602  backup_nginxlog_20180516  backup_nginxlog_20180603
+backup_asset_20180516  backup_asset_20180603  backup_nginxlog_20180517  backup_nginxlog_20180604
+backup_asset_20180517  backup_asset_20180604  backup_nginxlog_20180518
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# df -kh
+Filesystem                   Size  Used Avail Use% Mounted on
+udev                          11G     0   11G   0% /dev
+tmpfs                        2.2G  242M  2.0G  11% /run
+/dev/mapper/root_vg-root_lv  138G  9.2G  122G   7% /
+tmpfs                         11G     0   11G   0% /dev/shm
+tmpfs                        5.0M     0  5.0M   0% /run/lock
+tmpfs                         11G     0   11G   0% /sys/fs/cgroup
+/dev/mapper/root_vg-tmp      9.1G   58M  8.6G   1% /tmp
+/dev/mapper/root_vg-Mineo     46G   61M   44G   1% /mineo
+/dev/mapper/root_vg-var       46G  8.8G   35G  21% /var
+/dev/mapper/root_vg-var_log  9.1G   50M  8.6G   1% /var/log
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/78bb9a7ca2efc3c7734a2884e931c0a9440c1413d47fa48551e9d321f05f146e/merged
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/ad62cc023da95ea47d3789fc7a42fc91e9518ce7c2d972490b37ab74b0d23bd7/merged
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/ac8da35799d2423c5df69479d6272e056313d8f307fbdea4865c17cf730eb561/merged
+shm                           64M     0   64M   0% /var/lib/docker/containers/31b944a5731d6905ffcc403e996b1d840df24a8d30fe5aafec81a1a39350efa6/shm
+shm                           64M     0   64M   0% /var/lib/docker/containers/f71a8d2dff23e5ba35fe37aca0ecb7b81507d22bb1a8e9a0e48b7a8196875d6e/shm
+shm                           64M     0   64M   0% /var/lib/docker/containers/e6d20555cdf9838fe77426c5c8137c3bf44df7a3653f5d6f42a79d59d50fb866/shm
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/d1847820aa934506523c4f17dc6f51b66e5c130f459f648649e21767c4854aa6/merged
+shm                           64M     0   64M   0% /var/lib/docker/containers/3a0367c45c19cb3c2c5c2bbe835ea921f6d6cd89bef32270012a22cbc19eda96/shm
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/d3edfba8040b8109965a9d38f264a1c320bfc59ff9d91ff02bb97737c978198e/merged
+shm                           64M     0   64M   0% /var/lib/docker/containers/dc56246050704c03f30505e93e93ed6381c8db27453f65e0e0e3dd62cb6cd025/shm
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/eab0102013fb5145daeeda2a45d255734a9f50de66e85ebe029679d95b33a133/merged
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/333188c9cd620f546da159cc12fb4b9f7d421a8a4fba5f599a78f999783b71cc/merged
+shm                           64M     0   64M   0% /var/lib/docker/containers/f6ebed02983a557631875d070d24485f4bd1ff21169549728209fc28e8631605/shm
+shm                           64M     0   64M   0% /var/lib/docker/containers/8d71d0f96a971fb212ba203ecd5544cc7698e68444e69b0814d7e04169e5de95/shm
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/8aae914f9c3078787ee9052d15374acb5325c0df3694c04bbacd82ff40555bfe/merged
+shm                           64M     0   64M   0% /var/lib/docker/containers/d042ff13bcce5689ab33c1fc261e34e2973ccf8b49f54d6552daf46749f28a71/shm
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/a4723d9e9026d61f320da219e0b5a8ab9b14488147aaf8916eb9b55b79c31308/merged
+shm                           64M     0   64M   0% /var/lib/docker/containers/50b3d166abd121e6da3109270bbeef6f5ded1137ce4155263c91160b15dee8ae/shm
+overlay                       46G  8.8G   35G  21% /var/lib/docker/overlay2/8cbac2f2609c339f412de59823c7e54e0ff8748cafa809cb47752bc40b65489b/merged
+shm                           64M     0   64M   0% /var/lib/docker/containers/1dc8f7a06cef9ffe7a630e3b05a311f7386127b417a57b852d082ba9227262f9/shm
+tmpfs                        2.2G     0  2.2G   0% /run/user/1001
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# 
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# telnet webmail.lpn.co.th 993
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+LOGIN
+Connection closed by foreign host.
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# top
+
+top - 00:42:25 up 77 days, 10:18,  1 user,  load average: 0.16, 0.20, 0.18
+Tasks: 661 total,   1 running, 660 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.0 us,  0.3 sy,  0.0 ni, 97.5 id,  0.1 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem : 22624552 total,  2047476 free,  4591656 used, 15985420 buff/cache
+KiB Swap:  7811068 total,  7810620 free,      448 used. 15662312 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                        
+11922 root      20   0   41084   4244   3144 R  10.5  0.0   0:00.04 top                                            
+    1 root      20   0   46256   5716   3560 S   0.0  0.0   1:28.04 systemd                                        
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.92 kthreadd                                       
+    3 root      20   0       0      0      0 S   0.0  0.0   1:41.81 ksoftirqd/0                                    
+    7 root      20   0       0      0      0 S   0.0  0.0  71:31.03 rcu_sched                                      
+    8 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh                                         
+    9 root      rt   0       0      0      0 S   0.0  0.0   0:03.82 migration/0                                    
+   10 root      rt   0       0      0      0 S   0.0  0.0   0:23.87 watchdog/0                                     
+   11 root      rt   0       0      0      0 S   0.0  0.0   0:19.69 watchdog/1                                     
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:03.49 migration/1                                    
+   13 root      20   0       0      0      0 S   0.0  0.0   2:08.42 ksoftirqd/1                                    
+   16 root      rt   0       0      0      0 S   0.0  0.0   0:20.68 watchdog/2                                     
+   17 root      rt   0       0      0      0 S   0.0  0.0   0:04.55 migration/2                                    
+   18 root      20   0       0      0      0 S   0.0  0.0   6:30.28 ksoftirqd/2                                    
+   21 root      rt   0       0      0      0 S   0.0  0.0   0:19.70 watchdog/3                                     
+   22 root      rt   0       0      0      0 S   0.0  0.0   0:04.92 migration/3                                    
+   23 root      20   0       0      0      0 S   0.0  0.0   1:49.92 ksoftirqd/3                                    
+   26 root      rt   0       0      0      0 S   0.0  0.0   0:19.65 watchdog/4                                     
+   27 root      rt   0       0      0      0 S   0.0  0.0   0:04.48 migration/4                                    
+   28 root      20   0       0      0      0 S   0.0  0.0   1:39.59 ksoftirqd/4                                    
+   31 root      rt   0       0      0      0 S   0.0  0.0   0:19.37 watchdog/5                                     
+   32 root      rt   0       0      0      0 S   0.0  0.0   0:04.14 migration/5                                    
+   33 root      20   0       0      0      0 S   0.0  0.0   1:41.88 ksoftirqd/5                                    
+   36 root      rt   0       0      0      0 S   0.0  0.0   0:19.56 watchdog/6                                     
+   37 root      rt   0       0      0      0 S   0.0  0.0   0:04.15 migration/6                                    
+   38 root      20   0       0      0      0 S   0.0  0.0   1:40.98 ksoftirqd/6                                    
+   41 root      rt   0       0      0      0 S   0.0  0.0   0:19.42 watchdog/7                                     
+   42 root      rt   0       0      0      0 S   0.0  0.0   0:03.96 migration/7                                    
+   43 root      20   0       0      0      0 S   0.0  0.0   1:40.77 ksoftirqd/7                                    
+   46 root      rt   0       0      0      0 S   0.0  0.0   0:20.63 watchdog/8                                     
+   47 root      rt   0       0      0      0 S   0.0  0.0   0:04.32 migration/8                                    
+   48 root      20   0       0      0      0 S   0.0  0.0   1:58.20 ksoftirqd/8                                    
+   51 root      rt   0       0      0      0 S   0.0  0.0   0:22.23 watchdog/9                                     
+   52 root      rt   0       0      0      0 S   0.0  0.0   0:04.30 migration/9                                    
+   53 root      20   0       0      0      0 S   0.0  0.0   1:45.98 ksoftirqd/9                                    
+   56 root      rt   0       0      0      0 S   0.0  0.0   0:19.67 watchdog/10                                    
+   57 root      rt   0       0      0      0 S   0.0  0.0   0:04.12 migration/10                                   
+   58 root      20   0       0      0      0 S   0.0  0.0   1:39.59 ksoftirqd/10                                   
+   61 root      rt   0       0      0      0 S   0.0  0.0   0:19.70 watchdog/11                                    
+   62 root      rt   0       0      0      0 S   0.0  0.0   0:03.76 migration/11                                   
+   63 root      20   0       0      0      0 S   0.0  0.0   1:39.84 ksoftirqd/11                                   
+   66 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                                      
+root@dockerserve-lpn-prd-0001:/home/pamuser/backup# exit
+logout
+pamuser@dockerserve-lpn-prd-0001:~/backup$ exit
+logout
+Connection to 203.154.58.128 closed.
+praparns-MacBook-Pro% 
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Special_Project/3DS_Consult/3DS_LPN/LPN-server-access
+praparns-MacBook-Pro% docker-machine ls
+NAME        ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
+labdocker   -        virtualbox   Stopped                 Unknown   
+praparns-MacBook-Pro% docker-machine start labdocker
+Starting "labdocker"...
+(labdocker) Check network to re-create if needed...
+(labdocker) Waiting for an IP...
+Machine "labdocker" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+praparns-MacBook-Pro% docker-machine ssh labdocker
+                        ##         .
+                  ## ## ##        ==
+               ## ## ## ## ##    ===
+           /"""""""""""""""""\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+           \______ o           __/
+             \    \         __/
+              \____\_______/
+ _                 _   ____     _            _
+| |__   ___   ___ | |_|___ \ __| | ___   ___| | _____ _ __
+| '_ \ / _ \ / _ \| __| __) / _` |/ _ \ / __| |/ / _ \ '__|
+| |_) | (_) | (_) | |_ / __/ (_| | (_) | (__|   <  __/ |
+|_.__/ \___/ \___/ \__|_____\__,_|\___/ \___|_|\_\___|_|
+Boot2Docker version 18.02.0-ce, build HEAD : 99245f4 - Thu Feb  8 17:43:39 UTC 2018
+Docker version 18.02.0-ce, build fc4de44
+docker@labdocker:~$ docker pull labdocker/php:php7.1.
+^C
+docker@labdocker:~$ docker pull labdocker/php:php7.1.5
+php7.1.5: Pulling from labdocker/php
+Digest: sha256:6581d1c6367bb0e4527f554aa3a604c3bdeebf2828d7975701a4670a2051aeb8
+Status: Image is up to date for labdocker/php:php7.1.5
+docker@labdocker:~$ Wrapper Docker Machine process exiting due to closed plugin server (read tcp 127.0.0.1:51380->127.0.0.1:51379: read: connection reset by peer)
+
+docker@labdocker:~$ 
+docker@labdocker:~$ 
+docker@labdocker:~$ 
+docker@labdocker:~$ 
+docker@labdocker:~$ sudo shutdown -h now
+docker@labdocker:~$ Connection to 127.0.0.1 closed by remote host.
+exit status 255
+praparns-MacBook-Pro% pwd
+/Users/praparnlueangphoonlap/Work/Special_Project/3DS_Consult/3DS_LPN/LPN-server-access
+praparns-MacBook-Pro% ls
+lpn-keypair2.pem	lpn-keypair2.ppk	note.txt		pam-vms.txt
+praparns-MacBook-Pro% ssh -i lpn-keypair2.pem pamuser@203.154.58.128
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-87-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+161 packages can be updated.
+78 updates are security updates.
+
+
+Last login: Tue Jun  5 18:15:11 2018 from 171.98.175.183
+pamuser@dockerserve-lpn-prd-0001:~$ df -kh
+Filesystem                   Size  Used Avail Use% Mounted on
+udev                          11G     0   11G   0% /dev
+tmpfs                        2.2G  234M  2.0G  11% /run
+/dev/mapper/root_vg-root_lv  138G  9.5G  121G   8% /
+tmpfs                         11G     0   11G   0% /dev/shm
+tmpfs                        5.0M     0  5.0M   0% /run/lock
+tmpfs                         11G     0   11G   0% /sys/fs/cgroup
+/dev/mapper/root_vg-tmp      9.1G   58M  8.6G   1% /tmp
+/dev/mapper/root_vg-Mineo     46G   61M   44G   1% /mineo
+/dev/mapper/root_vg-var       46G  8.8G   35G  21% /var
+/dev/mapper/root_vg-var_log  9.1G   51M  8.6G   1% /var/log
+tmpfs                        2.2G     0  2.2G   0% /run/user/1001
+pamuser@dockerserve-lpn-prd-0001:~$ docker ps
+CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                                            NAMES
+28a45f9ec467        3dsinteractive/nginx:1.12         "/app-entrypoint.sh …"   4 hours ago         Up 4 hours          8080/tcp, 8443/tcp                               pam-cms-prod
+988e99da1dc4        connectcmslpncoth_cms-phpfpm      "/app-entrypoint.sh …"   4 hours ago         Up 4 hours          9000/tcp                                         pam-cms-phpfpm-prod
+d042ff13bcce        3dsinteractive/nginx:1.12         "/app-entrypoint.sh …"   3 weeks ago         Up 3 weeks          8080/tcp, 8443/tcp                               pam-tracker-prod
+8d71d0f96a97        connectlpncoth_tracker-phpfpm2    "/app-entrypoint.sh …"   3 weeks ago         Up 3 weeks          9000/tcp                                         pam-tracker-phpfpm-prod2
+f6ebed02983a        connectlpncoth_tracker-phpfpm1    "/app-entrypoint.sh …"   3 weeks ago         Up 3 weeks          9000/tcp                                         pam-tracker-phpfpm-prod1
+3a0367c45c19        phpmyadmin/phpmyadmin             "/run.sh phpmyadmin"     2 months ago        Up 2 months         80/tcp, 9000/tcp                                 pam-phpmyadmin-prod
+dc5624605070        pamworkerlpncoth_worker-phpfpm1   "/app-entrypoint.sh …"   2 months ago        Up 2 months         9000/tcp                                         pam-pam-worker-phpfpm-prod1
+f71a8d2dff23        pamworkerlpncoth_worker-phpfpm2   "/app-entrypoint.sh …"   2 months ago        Up 2 months         9000/tcp                                         pam-pam-worker-phpfpm-prod2
+e6d20555cdf9        3dsinteractive/nginx:1.12         "/app-entrypoint.sh …"   2 months ago        Up 2 months         0.0.0.0:80->8080/tcp, 0.0.0.0:443->8443/tcp      pam-lb-prod
+31b944a5731d        3dsinteractive/nginx:1.12         "/app-entrypoint.sh …"   3 months ago        Up 2 months         0.0.0.0:8080->8080/tcp, 0.0.0.0:8443->8443/tcp   sourcemaster
+pamuser@dockerserve-lpn-prd-0001:~$ 
+pamuser@dockerserve-lpn-prd-0001:~$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pamuser@dockerserve-lpn-prd-0001:~$ docker ps
+CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                                            NAMES
+28a45f9ec467        3dsinteractive/nginx:1.12         "/app-entrypoint.sh …"   4 hours ago         Up 4 hours          8080/tcp, 8443/tcp                               pam-cms-prod
+988e99da1dc4        connectcmslpncoth_cms-phpfpm      "/app-entrypoint.sh …"   4 hours ago         Up 4 hours          9000/tcp                                         pam-cms-phpfpm-prod
+d042ff13bcce        3dsinteractive/nginx:1.12         "/app-entrypoint.sh …"   3 weeks ago         Up 3 weeks          8080/tcp, 8443/tcp                               pam-tracker-prod
+8d71d0f96a97        connectlpncoth_tracker-phpfpm2    "/app-entrypoint.sh …"   3 weeks ago         Up 3 weeks          9000/tcp                                         pam-tracker-phpfpm-prod2
+f6ebed02983a        connectlpncoth_tracker-phpfpm1    "/app-entrypoint.sh …"   3 weeks ago         Up 3 weeks          9000/tcp                                         pam-tracker-phpfpm-prod1
+3a0367c45c19        phpmyadmin/phpmyadmin             "/run.sh phpmyadmin"     2 months ago        Up 2 months         80/tcp, 9000/tcp                                 pam-phpmyadmin-prod
+dc5624605070        pamworkerlpncoth_worker-phpfpm1   "/app-entrypoint.sh …"   2 months ago        Up 2 months         9000/tcp                                         pam-pam-worker-phpfpm-prod1
+f71a8d2dff23        pamworkerlpncoth_worker-phpfpm2   "/app-entrypoint.sh …"   2 months ago        Up 2 months         9000/tcp                                         pam-pam-worker-phpfpm-prod2
+e6d20555cdf9        3dsinteractive/nginx:1.12         "/app-entrypoint.sh …"   2 months ago        Up 2 months         0.0.0.0:80->8080/tcp, 0.0.0.0:443->8443/tcp      pam-lb-prod
+31b944a5731d        3dsinteractive/nginx:1.12         "/app-entrypoint.sh …"   3 months ago        Up 2 months         0.0.0.0:8080->8080/tcp, 0.0.0.0:8443->8443/tcp   sourcemaster
+pamuser@dockerserve-lpn-prd-0001:~$ df -kh
+Filesystem                   Size  Used Avail Use% Mounted on
+udev                          11G     0   11G   0% /dev
+tmpfs                        2.2G  234M  2.0G  11% /run
+/dev/mapper/root_vg-root_lv  138G  9.5G  121G   8% /
+tmpfs                         11G     0   11G   0% /dev/shm
+tmpfs                        5.0M     0  5.0M   0% /run/lock
+tmpfs                         11G     0   11G   0% /sys/fs/cgroup
+/dev/mapper/root_vg-tmp      9.1G   58M  8.6G   1% /tmp
+/dev/mapper/root_vg-Mineo     46G   61M   44G   1% /mineo
+/dev/mapper/root_vg-var       46G  8.8G   35G  21% /var
+/dev/mapper/root_vg-var_log  9.1G   51M  8.6G   1% /var/log
+tmpfs                        2.2G     0  2.2G   0% /run/user/1001
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 993
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+^C
+
+
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 993
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+LOGIN noreply@lpn.co.th
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 993
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+LOGIN noreply noreply@lpn2018
+
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ 
+pamuser@dockerserve-lpn-prd-0001:~$ docker exec -it pam-pam-worker-phpfpm-prod1 sh
+# telnet webmail.lpn.co.th 993
+sh: 1: telnet: not found
+# exit
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 993
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+LOGIN noreply noreply@lpn2018
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ curl -v imap://noreply:noreply@2018;webmail.lpen.co.th
+* Rebuilt URL to: imap://noreply:noreply@2018/
+*   Trying 0.0.7.226...
+* Immediate connect fail for 0.0.7.226: Invalid argument
+* Closing connection 0
+curl: (7) Couldn't connect to server
+webmail.lpen.co.th: command not found
+pamuser@dockerserve-lpn-prd-0001:~$ curl -v imap://noreply:noreply@2018;webmail.lpn.co.th
+* Rebuilt URL to: imap://noreply:noreply@2018/
+*   Trying 0.0.7.226...
+* Immediate connect fail for 0.0.7.226: Invalid argument
+* Closing connection 0
+curl: (7) Couldn't connect to server
+webmail.lpn.co.th: command not found
+pamuser@dockerserve-lpn-prd-0001:~$ nslookup
+> webmail.lpn.co.th
+Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+Non-authoritative answer:
+Name:	webmail.lpn.co.th
+Address: 58.137.94.143
+> ^Cpamuser@dockerserve-lpn-prd-0001:~$ curl -v imap://noreply:noreply@2018;webmail.lpn.co.th
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpen.co.th 993
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpen.co.th 143
+telnet: could not resolve webmail.lpen.co.th/143: Name or service not known
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpen.co.th 993
+telnet: could not resolve webmail.lpen.co.th/993: Name or service not known
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 143
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+220 CAS.lpn.co.th Microsoft ESMTP MAIL Service ready at Tue, 5 Jun 2018 22:44:24 +0700
+LOGIN noreply
+500 5.3.3 Unrecognized command
+LOGIN noreply noreply@lpn2018
+500 5.3.3 Unrecognized command
+
+
+^C
+
+quit
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 143
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+220 CAS.lpn.co.th Microsoft ESMTP MAIL Service ready at Tue, 5 Jun 2018 22:47:23 +0700
+login noreply@lpn.co.th noreply@lpn2018
+500 5.3.3 Unrecognized command
+fetch
+500 5.3.3 Unrecognized command
+LOGIN noreply@lpn.co.th noreply@lpn2018
+500 5.3.3 Unrecognized command
+? LOGIN noreply@lpn.co.th noreply@lpn2018
+500 5.3.3 Unrecognized command
+FETCH
+500 5.3.3 Unrecognized command
+^Cquit
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 143
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+220 CAS.lpn.co.th Microsoft ESMTP MAIL Service ready at Tue, 5 Jun 2018 22:55:48 +0700
+helo
+250 CAS.lpn.co.th Hello [203.154.58.128]
+mail from: test@lpn.co.th
+530 5.7.1 Client was not authenticated
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 143
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+220 CAS.lpn.co.th Microsoft ESMTP MAIL Service ready at Tue, 5 Jun 2018 22:56:42 +0700
+helo
+250 CAS.lpn.co.th Hello [203.154.58.128]
+AUTH LOGIN
+504 5.7.4 Unrecognized authentication type
+login
+500 5.3.3 Unrecognized command
+mail from: test@test.com
+530 5.7.1 Client was not authenticated
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 143
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+220 CAS.lpn.co.th Microsoft ESMTP MAIL Service ready at Tue, 5 Jun 2018 22:58:41 +0700
+login
+500 5.3.3 Unrecognized command
+help
+214-This server supports the following commands:
+214 HELO EHLO STARTTLS RCPT DATA RSET MAIL QUIT HELP AUTH BDAT
+quit
+221 2.0.0 Service closing transmission channel
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 993
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+helo
+help
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ telnet webmail.lpn.co.th 993
+Trying 58.137.94.143...
+Connected to webmail.lpn.co.th.
+Escape character is '^]'.
+helo
+Connection closed by foreign host.
+pamuser@dockerserve-lpn-prd-0001:~$ packet_write_wait: Connection to 203.154.58.128 port 22: Broken pipe
+praparns-MacBook-Pro% docker-machine ls
+doNAME        ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
+labdocker   -        virtualbox   Stopped                 Unknown   
+praparns-MacBook-Pro% docker-machine start labdocker
+Starting "labdocker"...
+(labdocker) Check network to re-create if needed...
+(labdocker) Waiting for an IP...
+Machine "labdocker" was started.
+Waiting for SSH to be available...
+Detecting the provisioner...
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+praparns-MacBook-Pro% docker-machine ssh labdocker
+                        ##         .
+                  ## ## ##        ==
+               ## ## ## ## ##    ===
+           /"""""""""""""""""\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+           \______ o           __/
+             \    \         __/
+              \____\_______/
+ _                 _   ____     _            _
+| |__   ___   ___ | |_|___ \ __| | ___   ___| | _____ _ __
+| '_ \ / _ \ / _ \| __| __) / _` |/ _ \ / __| |/ / _ \ '__|
+| |_) | (_) | (_) | |_ / __/ (_| | (_) | (__|   <  __/ |
+|_.__/ \___/ \___/ \__|_____\__,_|\___/ \___|_|\_\___|_|
+Boot2Docker version 18.02.0-ce, build HEAD : 99245f4 - Thu Feb  8 17:43:39 UTC 2018
+Docker version 18.02.0-ce, build fc4de44
+docker@labdocker:~$ docker ps -a
+CONTAINER ID        IMAGE                              COMMAND                  CREATED             STATUS                     PORTS               NAMES
+c59b1d9e625b        httpd                              "httpd-foreground"       11 days ago         Exited (0) 11 days ago                         apache
+040c72361957        labdocker/nginx:fluentd_log        "nginx -c /etc/nginx…"   11 days ago         Exited (0) 11 days ago                         nginx
+ee1edec7748b        labdocker/cluster:webservicelite   "python mainlite.py"     11 days ago         Exited (0) 11 days ago                         python
+c757efc170d7        labdocker/alpineweb:fluentd_log    "node hello.js"          11 days ago         Exited (137) 11 days ago                       nodejs
+0214625477f0        kibana                             "/docker-entrypoint.…"   11 days ago         Exited (143) 11 days ago                       modulelog_kibana_1
+d19034d184f2        modulelog_fluentd                  "/bin/entrypoint.sh …"   11 days ago         Exited (0) 11 days ago                         modulelog_fluentd_1
+a7042c538e5d        elasticsearch                      "/docker-entrypoint.…"   11 days ago         Exited (143) 11 days ago                       modulelog_elasticsearch_1
+docker@labdocker:~$ docker run -dt --name test -p 80:80 -p 443:443 labdocker/php:php7.1.5 
+c3b4da3c85cc60ce3f388cfac0a467c122d7b68bae1df7fe5660d2b2d0722e2e
+docker@labdocker:~$ docker exec -it test bash
+root@c3b4da3c85cc:/var/www/html# ls
+phpinfo.php
+root@c3b4da3c85cc:/var/www/html# vi test.php
+root@c3b4da3c85cc:/var/www/html# vi test.php
+<?php
+echo "OK";
+$login=noreply@lpn.co.th;
+$password=noreply@lpn2018;
+$server = '{webmail.lpn.co.th:993/ssl}';
+$connection = imap_open($server, $login, $password);
+$count = imap_num_msg($connection);
+echo "TOTAL";
+echo $count;
+?>
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+-- INSERT --                                                  2,11          All
+
+
+
+
+
